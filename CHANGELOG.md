@@ -9,6 +9,7 @@
 Backward incompatible changes have been made
 
 - ReadMe updated
+- bs4 now selects lxml (if it available) once at startup
 
 - ### stream
 
