@@ -14,5 +14,5 @@ class AjaxFail(HDRezkaError):
 
 
 class EmptySearchPage(HDRezkaError):
-    """Empty search page"""
+    """Empty search post"""
     __slots__ = ()

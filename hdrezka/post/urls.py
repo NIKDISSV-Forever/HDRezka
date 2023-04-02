@@ -1,18 +1,49 @@
 from __future__ import annotations
 
 import re
+from functools import lru_cache
 from typing import Iterable, SupportsInt
 
 from .._antiobfuscation import clear_trash
 
-__all__ = ('URLs',)
+__all__ = ('short_url', 'long_url', 'URLs', 'Quality', 'URL')
 
 _findall_qualities = re.compile(r'\[([^]]+)](\S+)(?:\sor\s|$)').findall
 _match_quality_int = re.compile(r'(\d+)[pi]\s*($|\w+)').match
+_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag)?/?([^/]+/[^/]+)/(\d*)-?([^.]+)(?:\.html)?/?', re.I).match
+
+
+@lru_cache(1024)
+def short_url(url: str) -> str:
+    """
+    >>> short_url('https://rezka.ag/.../.../90909-any-name.html/')
+    '.../.../90909-90909'
+    >>> short_url('https://rezka.ag/.../.../any-name.html')
+    '.../.../any-name'
+    """
+    parts = _shorten_url_match(url)
+    if parts is None:
+        return url
+    path, id, name = parts.groups()
+    if id:
+        name = f'{id}-{id}'
+    return f'{path}/{name}'
+
+
+@lru_cache(1024)
+def long_url(url: str) -> str:
+    """
+    >>> long_url('rezka.ag/.../.../99999-any-name')
+    'https://rezka.ag/.../.../99999-99999.html'
+    >>> long_url('.../.../99999-99999')
+    'https://rezka.ag/.../.../99999-99999.html'
+    """
+    return f'https://rezka.ag/{short_url(url)}.html'
 
 
 class Quality(str):
     __slots__ = ('_i', 'addon')
+    addon: str  # can contain 'ultra'
 
     def __init__(self, *_, **__):
         _i = _match_quality_int(self)
@@ -23,6 +54,9 @@ class Quality(str):
         self._i = int(_i)
 
     def __int__(self):
+        """
+        returns pixels height
+        """
         return self._i
 
     def __lt__(self, other):

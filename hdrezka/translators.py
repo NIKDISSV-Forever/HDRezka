@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+__all__ = ('Translators',)
+
 
 class Translators:
     __slots__ = ('names', 'ids', 'name_id', 'id_name')

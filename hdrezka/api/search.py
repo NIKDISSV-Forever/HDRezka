@@ -3,14 +3,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable, Iterator, Sequence, SupportsIndex, TypeVar
 
-from bs4 import BeautifulSoup
-
 from . import get_response
+from .._bs4 import BeautifulSoup
 from ..errors import EmptySearchPage
+from ..stream.player import Player, PlayerType
 
 __all__ = ('Search', 'SearchResult')
-
-from ..stream.player import Player, PlayerType
 
 PageNumber = TypeVar('PageNumber', Iterable[int], slice, int)
 T = TypeVar('T')
