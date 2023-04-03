@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Iterable, Iterator, Sequence, SupportsIndex, TypeVar
 
 from .._bs4 import BeautifulSoup
 from ..api import get_response
 from ..errors import EmptyPage
-from ..stream.player import Player, PlayerType
+from ..stream.player import *
 
 __all__ = ('Page', 'PageNumber', 'InlineItem')
 

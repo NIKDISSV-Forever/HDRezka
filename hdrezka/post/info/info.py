@@ -13,16 +13,16 @@ from ..._bs4 import BeautifulSoup
 _find_any_digit = re.compile(r'\d+').findall
 
 
+def _dummy(_):
+    return NotImplemented
+
+
 def _force_int(value: Any, /, default: int = 0) -> int:
     if not isinstance(value, str):
         value = str(value)
     if digits := _find_any_digit(value):
         return int(''.join(digits))
     return default
-
-
-def _dummy(_):
-    raise NotImplemented
 
 
 class PostInfo:

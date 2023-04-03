@@ -10,18 +10,13 @@ __all__ = ('short_url', 'long_url', 'URLs', 'Quality', 'URL')
 
 _findall_qualities = re.compile(r'\[([^]]+)](\S+)(?:\sor\s|$)').findall
 _match_quality_int = re.compile(r'(\d+)[pi]\s*($|\w+)').match
-_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag)?/?(\d+)\D*(?:\.html)?', re.I).match
+_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag/)?\D*(\d+)\S*(?:\.html)?/?', re.I).match
 
 
 @lru_cache(1024)
 def short_url(url: str) -> str:
     """
-    >>> short_url('https://rezka.ag/.../.../90909-any-name.html/')
-    '90909-90909'
-    >>> short_url('https://rezka.ag/.../.../any-name.html')
-    '.../.../any-name'
-    >>> short_url('https://rezka.ag/90909-any-name')
-    '90909-90909'
+    Returns string rezka.ag post with format "{id}-{id}" (valid path)
     """
     parts = _shorten_url_match(url)
     if parts is None:
@@ -33,10 +28,7 @@ def short_url(url: str) -> str:
 @lru_cache(1024)
 def long_url(url: str) -> str:
     """
-    >>> long_url('rezka.ag/.../.../99999-any-name')
-    'https://rezka.ag/.../.../99999-99999.html'
-    >>> long_url('.../.../99999-99999')
-    'https://rezka.ag/.../.../99999-99999.html'
+    Returns full url of rezka.ag post
     """
     return f'https://rezka.ag/{short_url(url)}.html'
 

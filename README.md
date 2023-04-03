@@ -159,20 +159,14 @@ class Page:
 ```python
 def short_url(url: str) -> str:
     """
-    >>> short_url('https://rezka.ag/.../.../90909-any-name.html/')
-    '.../.../90909-90909'
-    >>> short_url('https://rezka.ag/.../.../any-name.html')
-    '.../.../any-name'
+    Returns string rezka.ag post with format "{id}-{id}" (valid path)
     """
     ...
 
 
 def long_url(url: str) -> str:
     """
-    >>> long_url('rezka.ag/.../.../99999-any-name')
-    'https://rezka.ag/.../.../99999-99999.html'
-    >>> long_url('.../.../99999-99999')
-    'https://rezka.ag/.../.../99999-99999.html'
+    Returns full url of rezka.ag post
     """
     ...
 

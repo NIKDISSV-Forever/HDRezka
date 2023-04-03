@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Iterator
 
 from ..errors import EmptyPage
-from ..post.page import InlineItem, Page
+from ..post.page import *
 
 __all__ = ('Search',)
 

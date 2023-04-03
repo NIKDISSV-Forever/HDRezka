@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.1
+
+- Fixed bug with importing `Post` <sub>stream</sub>
+- Fixed `url_short` function <sub>post.urls</sub>
+
 ## 1.1.0
 
 - ### errors
