@@ -29,8 +29,9 @@ class AjaxFail(HDRezkaError):
     """No success response"""
 
 
-class EmptySearchPage(HDRezkaError):
-    """Empty search post"""
+class EmptyPage(HDRezkaError):
+    """Asked page is empty (see Page class)"""
+
 ```
 
 </details>
@@ -101,6 +102,52 @@ class Post:
     __slots__ = ('url', 'translator_id', 'id', 'name', 'type', 'info', 'translators', 'other_parts_urls')
 
     def __init__(self, url: str):
+        ...
+```
+
+</details>
+
+<details>
+    <summary>hdrezka.post.page</summary>
+
+```python
+PageNumber = Iterable[int] | slice | int
+
+
+@dataclass(frozen=True)
+class InlineItem:
+    """Content Inline Item view"""
+    url: str
+    name: str
+    info: str
+    poster: str  # image url
+
+    @property
+    def player(self) -> PlayerType:
+        return Player(self.url)
+
+
+class Page:
+    """Ajax class for HDRezka search"""
+    page: str = property(..., ...)
+
+    def __init__(self, url: str = 'https://rezka.ag/'):
+        ...
+
+    def __iter__(self) -> Iterator[InlineItem]:
+        """
+        Returns the generator of all found articles
+        """
+        ...
+
+    def page_iter(self, page: PageNumber = 1) -> Iterator[InlineItem] | None:
+        ...
+
+    def get_pages(self, page: PageNumber = 1) -> tuple[InlineItem]:
+        ...
+
+    def __getitem__(self, item: PageNumber | Sequence[PageNumber | SupportsIndex | slice]
+                    ) -> tuple[InlineItem] | InlineItem:
         ...
 ```
 
@@ -215,6 +262,53 @@ class Duration:
 class Poster(NamedTuple):
     full: str
     preview: str
+```
+
+</details>
+
+<h2>API classes</h2>
+<details>
+    <summary>hdrezka.api.ajax</summary>
+
+```python
+class Ajax:
+    """HDRezka Ajax class"""
+
+    @classmethod
+    def get_cdn_series(cls, data: dict[str]):
+        ...
+
+    @classmethod
+    def get_episodes(cls, id: int | str, translator_id: int | str):
+        ...
+
+    @classmethod
+    def get_stream(cls, id: int | str, translator_id: int | str, season: int | str, episode: int | str):
+        ...
+
+    @classmethod
+    def get_movie(cls, id: int | str, translator_id: int | str):
+        ...
+```
+
+</details>
+
+<details>
+    <summary>hdrezka.api.search</summary>
+
+```python
+class Search(Page):
+    """Ajax class for HDRezka search"""
+    query: str = property(..., ...)
+
+    def __init__(self, query: str = ''):
+        ...
+
+    def __iter__(self) -> Iterator[InlineItem]:
+        """
+        Returns the generator of all found articles
+        """
+        ...
 ```
 
 </details>

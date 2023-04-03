@@ -1,14 +1,25 @@
 # CHANGELOG
 
-## 0.0.2
+## 1.1.0
 
-- Initial version
+- ### errors
+    - `EmptySearchPage` replaced with `EmptyPage`
+
+- #### New submodule `post.page`
+
+- ### post.page
+    - new `Page` class that will parse any page rezka.ag on `InlineItem` (new data class)
+
+- ### api.search
+    - `Search` now inherited from `Page`
+
+- ### post.urls
+    - `short_url` now even shorter
 
 ## 1.0.0
 
 Backward incompatible changes have been made
 
-- ReadMe updated
 - bs4 now selects lxml (if it available) once at startup
 
 - ### stream
@@ -35,3 +46,7 @@ Backward incompatible changes have been made
 - ### post.info.fields
 
     - classes `Rating`, `Place`, `Release`, `AgeRating`, `Duration`, `Poster` created
+
+## 0.0.2
+
+- Initial version

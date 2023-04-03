@@ -26,10 +26,10 @@ def _dummy(_):
 
 
 class PostInfo:
-    FILL_FIELDS = ('rating', 'places', 'slogan', 'release', 'country', 'director', 'genre',
-                   'quality', 'translator', 'age_rating', 'duration', 'from_', 'characters')
-    __slots__ = FILL_FIELDS + ('_view', 'fields', 'title', 'orig_title', 'poster', 'description')
-    translator: str
+    __slots__ = ('rating', 'places', 'slogan', 'release', 'country', 'director', 'genre',
+                 'quality', 'translator', 'age_rating', 'duration', 'from_', 'characters',
+                 '_view', 'fields', 'title', 'orig_title', 'poster', 'description')
+    FILL_FIELDS = __slots__[:13]
 
     def __init__(self, soup: BeautifulSoup):
         post_info = soup.find(class_='b-post__info')

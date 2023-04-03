@@ -61,7 +61,7 @@ PlayerType = TypeVar('PlayerType', PlayerBase, PlayerMovie, PlayerSeries)
 
 
 @lru_cache(512)
-def player(url_or_path: str) -> PlayerType:
+def player(url_or_path: Any) -> PlayerType:
     """
     Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType
     """

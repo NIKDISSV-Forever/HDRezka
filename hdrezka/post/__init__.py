@@ -1,3 +1,4 @@
-from .info import PostInfo
-from .post import Post
+from .info import *
+from .page import *
+from .post import *
 from .urls import *

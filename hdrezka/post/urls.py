@@ -10,24 +10,24 @@ __all__ = ('short_url', 'long_url', 'URLs', 'Quality', 'URL')
 
 _findall_qualities = re.compile(r'\[([^]]+)](\S+)(?:\sor\s|$)').findall
 _match_quality_int = re.compile(r'(\d+)[pi]\s*($|\w+)').match
-_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag)?/?([^/]+/[^/]+)/(\d*)-?([^.]+)(?:\.html)?/?', re.I).match
+_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag)?/?(\d+)\D*(?:\.html)?', re.I).match
 
 
 @lru_cache(1024)
 def short_url(url: str) -> str:
     """
     >>> short_url('https://rezka.ag/.../.../90909-any-name.html/')
-    '.../.../90909-90909'
+    '90909-90909'
     >>> short_url('https://rezka.ag/.../.../any-name.html')
     '.../.../any-name'
+    >>> short_url('https://rezka.ag/90909-any-name')
+    '90909-90909'
     """
     parts = _shorten_url_match(url)
     if parts is None:
         return url
-    path, id, name = parts.groups()
-    if id:
-        name = f'{id}-{id}'
-    return f'{path}/{name}'
+    id = parts.group(1)
+    return f'{id}-{id}'
 
 
 @lru_cache(1024)
