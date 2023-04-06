@@ -21,7 +21,10 @@ setuptools.setup(
     long_description_content_type='text/markdown',
 
     url='https://github.com/NIKDISSV-Forever/HDRezka',
-
+    project_urls={
+        'GitHub': 'https://github.com/NIKDISSV-Forever/HDRezka',
+        'Documentation': 'https://nikdissv-forever.github.io/HDRezka/hdrezka'
+    },
     packages=setuptools.find_packages(),
     install_requires=install_requires,
 
