@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from collections import defaultdict
 from functools import lru_cache
 from typing import Any, SupportsInt, TypeVar
@@ -9,7 +7,7 @@ from ..api.ajax import Ajax
 from ..errors import UnknownContentType
 from ..post import *
 
-__all__ = ('Player', 'PlayerType')
+__all__ = ('Player', 'PlayerType', 'PlayerBase', 'PlayerMovie', 'PlayerSeries')
 
 
 class PlayerBase:
@@ -23,7 +21,7 @@ class PlayerBase:
             url_or_cast = str(url_or_cast)
         self.post = Post(url_or_cast)
 
-    def _translator(self, translator_id: SupportsInt = None):
+    def _translator(self, translator_id: SupportsInt = None) -> int:
         if translator_id is None:
             return self.post.translator_id
         translator_id = int(translator_id)
@@ -65,12 +63,13 @@ def player(url_or_path: Any) -> PlayerType:
     """
     Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType
     """
-    p = PlayerBase(url_or_path)
-    type = p.post.type
-    if type == 'tv_series':
-        return PlayerSeries(p)
-    if type == 'movie':
-        return PlayerMovie(p)
+    cast = PlayerBase(url_or_path)
+    type = cast.post.type
+    match type:
+        case 'tv_series':
+            return PlayerSeries(cast)
+        case 'movie':
+            return PlayerMovie(cast)
     raise UnknownContentType(type)
 
 

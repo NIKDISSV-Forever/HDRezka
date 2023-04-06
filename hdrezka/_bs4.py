@@ -7,4 +7,4 @@ try:
     BeautifulSoup(features='lxml')
     BeautifulSoup = partial(BeautifulSoup, features='lxml')
 except FeatureNotFound:
-    BeautifulSoup = partial(BeautifulSoup, features='html.parser')
+    BeautifulSoup = partial(BeautifulSoup, features='docs.parser')

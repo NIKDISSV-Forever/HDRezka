@@ -1,47 +1,40 @@
-from __future__ import annotations
-
-from dataclasses import dataclass
-from typing import NamedTuple
+from .._dataclass import frozen_slots_dataclass
 
 __all__ = ('Rating', 'Place', 'Release', 'AgeRating', 'Duration', 'Poster')
 
 
-@dataclass(frozen=True)
+@frozen_slots_dataclass
 class Rating:
-    __slots__ = ('service', 'rating', 'votes')
     service: str
     rating: int | float
-    votes: int
+    votes: int = 0
 
 
-@dataclass(frozen=True)
+@frozen_slots_dataclass
 class Place:
-    __slots__ = ('name', 'place')
     name: str
     place: int
 
 
-@dataclass(frozen=True)
+@frozen_slots_dataclass
 class Release:
-    __slots__ = ('day', 'year')
     year: int
     day: str
 
 
-@dataclass(frozen=True)
+@frozen_slots_dataclass
 class AgeRating:
-    __slots__ = ('age', 'description')
     age: int
     description: str
 
 
-@dataclass(frozen=True)
+@frozen_slots_dataclass
 class Duration:
-    __slots__ = ('number', 'units')
     number: int
     units: str
 
 
-class Poster(NamedTuple):
+@frozen_slots_dataclass
+class Poster:
     full: str
     preview: str

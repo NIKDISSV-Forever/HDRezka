@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import re
 from inspect import getdoc
 from typing import Any
@@ -10,14 +8,11 @@ from .fields import AgeRating, Duration, Place, Poster, Rating, Release
 from ..urls import Quality
 from ..._bs4 import BeautifulSoup
 
+__all__ = ('PostInfo',)
 _find_any_digit = re.compile(r'\d+').findall
 
 
-def _dummy(_):
-    return NotImplemented
-
-
-def _force_int(value: Any, /, default: int = 0) -> int:
+def _get_int(value: Any, /, default: int = 0) -> int:
     if not isinstance(value, str):
         value = str(value)
     if digits := _find_any_digit(value):
@@ -29,7 +24,7 @@ class PostInfo:
     __slots__ = ('rating', 'places', 'slogan', 'release', 'country', 'director', 'genre',
                  'quality', 'translator', 'age_rating', 'duration', 'from_', 'characters',
                  '_view', 'fields', 'title', 'orig_title', 'poster', 'description')
-    FILL_FIELDS = __slots__[:13]
+    FILL_FIELDS: tuple[str] = __slots__[:13]
 
     def __init__(self, soup: BeautifulSoup):
         post_info = soup.find(class_='b-post__info')
@@ -48,8 +43,8 @@ class PostInfo:
         fields = {raw_fields[i].find('h2').text.strip().removesuffix(':'): raw_fields[-~i]
                   for i in range(0, len(raw_fields), 2)}
         for field in self.FILL_FIELDS:
-            meth = getattr(self, f'_get_field_{field}', _dummy)
-            field_name = (getdoc(meth) or '').strip()
+            meth = getattr(self, f'_get_field_{field}', None)
+            field_name = '' if meth is None else (getdoc(meth) or '').strip()
             item = fields.get(field_name)
             if not item:
                 setattr(self, field, None)
@@ -67,17 +62,17 @@ class PostInfo:
             classes: list[str] = span.get('class')
             classes.remove('b-post__info_rates')
             service = span.find('a').text
-            votes = span.find('text')
+            votes = span.find('i')
             if votes:
-                votes = int(votes.text.strip('()'))
+                votes = _get_int(votes.text)
             result[classes[0] if classes else service] = Rating(
-                service=service, rating=float(span.find('span').text), votes=_force_int(votes))
+                service=service, rating=float(span.find('span').text), votes=votes)
         return result
 
     @staticmethod
     def _get_field_places(tag: Tag) -> tuple[Place]:
         """Входит в списки"""
-        return *(Place(a.text, _force_int(a.next_element.next_element)) for a in tag.find_all('a')),
+        return *(Place(a.text, _get_int(a.next_element.next_element)) for a in tag.find_all('a')),
 
     @staticmethod
     def _get_field_slogan(tag: Tag) -> str:
@@ -87,7 +82,7 @@ class PostInfo:
     @staticmethod
     def _get_field_release(tag: Tag) -> Release:
         """Дата выхода"""
-        return Release(day=tag.next_element.text.strip(), year=_force_int(tag.find('a').text))
+        return Release(day=tag.next_element.text.strip(), year=_get_int(tag.find('a').text))
 
     @staticmethod
     def _get_field_country(tag: Tag) -> tuple[str]:
@@ -117,13 +112,12 @@ class PostInfo:
     @staticmethod
     def _get_field_age_rating(tag: Tag) -> AgeRating:
         """Возраст"""
-        return AgeRating(_force_int(span := tag.find('span').next_element), span.next_element.get_text(strip=True))
+        return AgeRating(_get_int(span := tag.find('span').next_element), span.next_element.get_text(strip=True))
 
     @staticmethod
     def _get_field_duration(tag: Tag) -> Duration:
         """Время"""
-        parts = tag.text.split(' ', 1) + [-1, '']
-        return Duration(int(parts[0]), parts[1])
+        return Duration(*tag.text.split(' ', 1))
 
     @staticmethod
     def _get_field_from_(tag: Tag) -> tuple[str]:

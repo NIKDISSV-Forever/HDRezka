@@ -1,9 +1,11 @@
-from __future__ import annotations
+from typing import TypeVar
 
-from . import get_response
+from .http import get_response
 from ..errors import AjaxFail
 
-__all__ = ('Ajax',)
+__all__ = ('Ajax', 'AnyID')
+
+AnyID = TypeVar('AnyID', int, str)
 
 
 class Ajax:
@@ -11,7 +13,7 @@ class Ajax:
     __slots__ = ()
 
     @classmethod
-    def _send_data(cls, action: str, data: dict[str]) -> dict:
+    def _send_data(cls, action: str, data: dict[str]) -> dict[str]:
         answer: dict = get_response('POST', f'https://rezka.ag/ajax/{action}/', data=data).json()
         if not answer.get('success', True):
             raise AjaxFail(answer.get('message', answer))
@@ -22,14 +24,14 @@ class Ajax:
         return cls._send_data('get_cdn_series', data)
 
     @classmethod
-    def get_episodes(cls, id: int | str, translator_id: int | str):
+    def get_episodes(cls, id: AnyID, translator_id: AnyID):
         return cls.get_cdn_series(
             {'action': 'get_episodes',
              'id': id,
              'translator_id': translator_id})
 
     @classmethod
-    def get_stream(cls, id: int | str, translator_id: int | str, season: int | str, episode: int | str):
+    def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
         return cls.get_cdn_series(
             {'action': 'get_stream',
              'id': id,
@@ -39,7 +41,7 @@ class Ajax:
         )
 
     @classmethod
-    def get_movie(cls, id: int | str, translator_id: int | str):
+    def get_movie(cls, id: AnyID, translator_id: AnyID):
         return cls.get_cdn_series(
             {'action': 'get_movie',
              'id': id,

@@ -1,9 +1,7 @@
-from __future__ import annotations
-
 from .info import PostInfo
 from .urls import long_url, short_url
 from .._bs4 import BeautifulSoup
-from ..api import get_response
+from ..api.http import get_response
 from ..translators import Translators
 
 __all__ = ('Post',)
@@ -34,19 +32,19 @@ class Post:
         self.name = self._get_name()
         self.other_parts_urls = self._parts_urls
 
-    def _extract_id(self):
+    def _extract_id(self) -> int:
         return int(self._soup_inst.find(id='post_id')['value'])
 
-    def _get_name(self):
-        return self._soup_inst.find(class_='b-post__title').get_text().strip()
+    def _get_name(self) -> str:
+        return self._soup_inst.find(class_='b-post__title').text.strip()
 
-    def _get_type(self):
+    def _get_type(self) -> str:
         return self._soup_inst.find('meta', property='og:type')['content'].removeprefix('video.')
 
     def _get_post_info(self) -> PostInfo:
         return PostInfo(self._soup_inst)
 
-    def _get_translators(self):
+    def _get_translators(self) -> Translators:
         translators_list = self._soup_inst.find(id='translators-list')
         arr = {child.text.strip(): int(child['data-translator_id']) for child in
                translators_list.find_all(recursive=False) if child.text} if translators_list else {}

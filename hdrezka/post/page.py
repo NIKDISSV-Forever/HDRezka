@@ -1,16 +1,14 @@
-from __future__ import annotations
-
-from dataclasses import dataclass
 from typing import Iterable, Iterator, Sequence, SupportsIndex, TypeVar
 
+from ._dataclass import frozen_slots_dataclass
 from .._bs4 import BeautifulSoup
-from ..api import get_response
+from ..api.http import get_response
 from ..errors import EmptyPage
 from ..stream.player import *
 
 __all__ = ('Page', 'PageNumber', 'InlineItem')
 
-PageNumber = TypeVar('PageNumber', Iterable[int], slice, int)
+PageNumber = TypeVar('PageNumber', int, slice, Iterable[int])
 T = TypeVar('T')
 
 
@@ -20,17 +18,18 @@ def _range_from_slice(obj: slice | T) -> range | T:
     return obj
 
 
-@dataclass(frozen=True)
+@frozen_slots_dataclass
 class InlineItem:
     """Content Inline Item view"""
-    __slots__ = ('url', 'name', 'info', 'poster')
     url: str
     name: str
     info: str
-    poster: str  # image url
+    poster: str
+    'Image url'
 
     @property
     def player(self) -> PlayerType:
+        """Return a Player Instance"""
         return Player(self.url)
 
 

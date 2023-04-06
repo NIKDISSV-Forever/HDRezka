@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import re
 from functools import lru_cache
 from typing import Iterable, SupportsInt
@@ -10,7 +8,7 @@ __all__ = ('short_url', 'long_url', 'URLs', 'Quality', 'URL')
 
 _findall_qualities = re.compile(r'\[([^]]+)](\S+)(?:\sor\s|$)').findall
 _match_quality_int = re.compile(r'(\d+)[pi]\s*($|\w+)').match
-_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag/)?\D*(\d+)\S*(?:\.html)?/?', re.I).match
+_shorten_url_match = re.compile(r'(?:(?:https?://)?rezka\.ag/)?\D*(\d+)\S*(?:\.docs)?/?', re.I).match
 
 
 @lru_cache(1024)
@@ -30,7 +28,7 @@ def long_url(url: str) -> str:
     """
     Returns full url of rezka.ag post
     """
-    return f'https://rezka.ag/{short_url(url)}.html'
+    return f'https://rezka.ag/{short_url(url)}.docs'
 
 
 class Quality(str):

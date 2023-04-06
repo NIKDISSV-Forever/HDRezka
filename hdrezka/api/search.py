@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Iterator
 
 from ..errors import EmptyPage
@@ -28,7 +26,7 @@ class Search(Page):
         self.page = _SEARCH_TEMPLATE % self.query
 
     @staticmethod
-    def _concat_paginator(url: str):
+    def _concat_paginator(url: str) -> str:
         return f'{url}&page={{0}}'
 
     def __iter__(self) -> Iterator[InlineItem]:

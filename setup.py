@@ -11,7 +11,7 @@ with open('CHANGELOG.md', encoding='UTF-8') as f:
 
 setuptools.setup(
     name='HDRezka',
-    version='1.1.1',
+    version='1.1.2',
 
     author='Nikita (NIKDISSV)',
     author_email='nikdissv@proton.me',
@@ -50,6 +50,6 @@ setuptools.setup(
 
     ],
 
-    python_requires='>=3.9',
+    python_requires='>=3.10',
     keywords=['HDRezka', 'rezka.ag', 'watch online', 'api', 'stream']
 )

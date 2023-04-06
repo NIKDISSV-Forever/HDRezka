@@ -1,6 +1,20 @@
-from .api.ajax import Ajax
-from .api.search import Search
-from .post.page import Page
-from .stream import Player
+"""
+[HDRezka](https://rezka.ag/) site API.
 
-__all__ = ('Player', 'Search', 'Page', 'Ajax')
+# Install
+
+> `pip install HDRezka`
+
+# Example
+
+```python
+from hdrezka import *
+
+player = Search('Avatar')[1, 0].player
+print(player.post.info)
+print(player.get_stream().best_url)
+```
+"""
+from .api import *
+from .post import *
+from .stream import *

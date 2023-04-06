@@ -1,11 +1,24 @@
 # CHANGELOG
 
+## 1.1.2
+
+- added pdoc documentation
+- now Python **3.10** has become the minimum compatible version.
+- removed all `from __future__ import annotations` statements
+- used `match...case` statements
+- optimization
+
+- new submodule `api.http`
+- `get_response` moved to `api.http` submodule
+
 ## 1.1.1
 
-- Fixed bug with importing `Post` <sub>stream</sub>
-- Fixed `url_short` function <sub>post.urls</sub>
+- fixed bug with importing `stream.Post`
+- fixed `post.urls.url_short` function
 
 ## 1.1.0
+
+- `post.urls.short_url` now even shorter
 
 - ### errors
     - `EmptySearchPage` replaced with `EmptyPage`
@@ -18,35 +31,29 @@
 - ### api.search
     - `Search` now inherited from `Page`
 
-- ### post.urls
-    - `short_url` now even shorter
-
 ## 1.0.0
 
 Backward incompatible changes have been made
 
 - bs4 now selects lxml (if it available) once at startup
+- new submodule `post`, `post.info`, `post.info.fields`
+- class `post.Post` created
+- class `post.info.PostInfo` created
 
 - ### stream
 
-    - Hint typing fixes
+    - hint typing fixes
     - `Player` now caching
 
-- #### New submodule `post`, `post.info`, `post.info.fields`
 
 - ##### `urls` submodule now is `post.urls`
 
-- ### post
-    - class `Post` created
 
 - ### post.urls
 
     - `short_url` and `long_url` functions added (caching)
     - `short_url`, `long_url`, `Quality`, `URL` now in `__all__`
 
-- ### post.info
-
-    - class `PostInfo` created
 
 - ### post.info.fields
 
@@ -54,4 +61,4 @@ Backward incompatible changes have been made
 
 ## 0.0.2
 
-- Initial version
+- initial version
