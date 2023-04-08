@@ -1,8 +1,8 @@
-[HDRezka](https://rezka.ag/) site API.
+# [HDRezka](https://rezka.ag/) site API.
 
 # Install
 
-> `pip install HDRezka`
+`pip install HDRezka`
 
 # Example
 
@@ -16,4 +16,6 @@ print(player.get_stream().best_url)
 
 # [Documentation](https://nikdissv-forever.github.io/HDRezka/hdrezka)
 
+<!--
 # [GitHub](https://github.com/NIKDISSV-Forever/HDRezka)
+-->

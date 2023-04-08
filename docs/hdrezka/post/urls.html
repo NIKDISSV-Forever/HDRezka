@@ -36,7 +36,7 @@ __all__ = (&#39;short_url&#39;, &#39;long_url&#39;, &#39;URLs&#39;, &#39;Quality
 
 _findall_qualities = re.compile(r&#39;\[([^]]+)](\S+)(?:\sor\s|$)&#39;).findall
 _match_quality_int = re.compile(r&#39;(\d+)[pi]\s*($|\w+)&#39;).match
-_shorten_url_match = re.compile(r&#39;(?:(?:https?://)?rezka\.ag/)?\D*(\d+)\S*(?:\.docs)?/?&#39;, re.I).match
+_shorten_url_match = re.compile(r&#39;(?:(?:https?://)?rezka\.ag/)?\D*(\d+)\S*(?:\.html)?/?&#39;, re.I).match
 
 
 @lru_cache(1024)
@@ -56,7 +56,7 @@ def long_url(url: str) -&gt; str:
     &#34;&#34;&#34;
     Returns full url of rezka.ag post
     &#34;&#34;&#34;
-    return f&#39;https://rezka.ag/{short_url(url)}.docs&#39;
+    return f&#39;https://rezka.ag/{short_url(url)}.html&#39;
 
 
 class Quality(str):
@@ -109,7 +109,7 @@ class URLs:
         if not isinstance(item, str):
             if isinstance(item, slice):
                 item = item.start, item.stop, item.step
-            isiter = not not isinstance(item, Iterable) and item
+            isiter = isinstance(item, Iterable) and item
         if isiter:
             result = self
             for part in item:
@@ -154,7 +154,7 @@ def long_url(url: str) -&gt; str:
     &#34;&#34;&#34;
     Returns full url of rezka.ag post
     &#34;&#34;&#34;
-    return f&#39;https://rezka.ag/{short_url(url)}.docs&#39;</code></pre>
+    return f&#39;https://rezka.ag/{short_url(url)}.html&#39;</code></pre>
 </details>
 </dd>
 <dt id="hdrezka.post.urls.short_url"><code class="name flex">
@@ -301,7 +301,7 @@ errors defaults to 'strict'.</p></div>
         if not isinstance(item, str):
             if isinstance(item, slice):
                 item = item.start, item.stop, item.step
-            isiter = not not isinstance(item, Iterable) and item
+            isiter = isinstance(item, Iterable) and item
         if isiter:
             result = self
             for part in item:

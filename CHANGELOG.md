@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.3
+
+- bugfixes
+
 ## 1.1.2
 
 - added pdoc documentation

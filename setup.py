@@ -11,7 +11,7 @@ with open('CHANGELOG.md', encoding='UTF-8') as f:
 
 setuptools.setup(
     name='HDRezka',
-    version='1.1.2',
+    version='1.1.3',
 
     author='Nikita (NIKDISSV)',
     author_email='nikdissv@proton.me',
@@ -25,7 +25,7 @@ setuptools.setup(
         'GitHub': 'https://github.com/NIKDISSV-Forever/HDRezka',
         'Documentation': 'https://nikdissv-forever.github.io/HDRezka/hdrezka'
     },
-    packages=setuptools.find_packages(),
+    packages=['hdrezka'],
     install_requires=install_requires,
 
     license='MIT',

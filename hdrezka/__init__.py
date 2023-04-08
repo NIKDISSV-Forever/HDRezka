@@ -1,9 +1,9 @@
 """
-[HDRezka](https://rezka.ag/) site API.
+# [HDRezka](https://rezka.ag/) site API.
 
 # Install
 
-> `pip install HDRezka`
+`pip install HDRezka`
 
 # Example
 
