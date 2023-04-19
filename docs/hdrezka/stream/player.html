@@ -31,7 +31,7 @@ from functools import lru_cache
 from typing import Any, SupportsInt, TypeVar
 
 from .._bs4 import BeautifulSoup
-from ..api.ajax import Ajax
+from ..api.ajax import AJAX
 from ..errors import UnknownContentType
 from ..post import *
 
@@ -63,24 +63,21 @@ class PlayerMovie(PlayerBase):
     __slots__ = ()
 
     def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
-        return URLs(Ajax.get_movie(self.post.id, self._translator(translator_id))[&#39;url&#39;])
+        return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))
 
 
 class PlayerSeries(PlayerBase):
     __slots__ = ()
 
     def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
-        episodes = BeautifulSoup(Ajax.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
+        episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
         result: defaultdict[int, tuple[int]] = defaultdict(tuple)
         for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
             result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
         return result
 
     def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
-        return URLs(Ajax.get_stream(
-            self.post.id,
-            self._translator(translator_id),
-            season, episode)[&#39;url&#39;])
+        return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))
 
 
 PlayerType = TypeVar(&#39;PlayerType&#39;, PlayerBase, PlayerMovie, PlayerSeries)
@@ -197,7 +194,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
     __slots__ = ()
 
     def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
-        return URLs(Ajax.get_movie(self.post.id, self._translator(translator_id))[&#39;url&#39;])</code></pre>
+        return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -206,7 +203,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <h3>Methods</h3>
 <dl>
 <dt id="hdrezka.stream.player.PlayerMovie.get_stream"><code class="name flex">
-<span>def <span class="ident">get_stream</span></span>(<span>self, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.URLs" href="../post/urls.html#hdrezka.post.urls.URLs">URLs</a></span>
+<span>def <span class="ident">get_stream</span></span>(<span>self, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -215,7 +212,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
-    return URLs(Ajax.get_movie(self.post.id, self._translator(translator_id))[&#39;url&#39;])</code></pre>
+    return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
 </details>
 </dd>
 </dl>
@@ -242,17 +239,14 @@ def player(url_or_path: Any) -&gt; PlayerType:
     __slots__ = ()
 
     def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
-        episodes = BeautifulSoup(Ajax.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
+        episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
         result: defaultdict[int, tuple[int]] = defaultdict(tuple)
         for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
             result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
         return result
 
     def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
-        return URLs(Ajax.get_stream(
-            self.post.id,
-            self._translator(translator_id),
-            season, episode)[&#39;url&#39;])</code></pre>
+        return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -270,7 +264,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
-    episodes = BeautifulSoup(Ajax.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
+    episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
     result: defaultdict[int, tuple[int]] = defaultdict(tuple)
     for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
         result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
@@ -278,7 +272,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 </details>
 </dd>
 <dt id="hdrezka.stream.player.PlayerSeries.get_stream"><code class="name flex">
-<span>def <span class="ident">get_stream</span></span>(<span>self, season: int, episode: int, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.URLs" href="../post/urls.html#hdrezka.post.urls.URLs">URLs</a></span>
+<span>def <span class="ident">get_stream</span></span>(<span>self, season: int, episode: int, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -287,10 +281,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
-    return URLs(Ajax.get_stream(
-        self.post.id,
-        self._translator(translator_id),
-        season, episode)[&#39;url&#39;])</code></pre>
+    return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
 </details>
 </dd>
 </dl>

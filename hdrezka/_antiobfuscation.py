@@ -1,5 +1,5 @@
 import re
-from base64 import b64decode
+from binascii import a2b_base64
 
 __all__ = ('clear_trash',)
 
@@ -14,4 +14,4 @@ _sub_trash = re.compile(
 
 
 def clear_trash(trash_string: str) -> str:
-    return b64decode(_sub_trash('', trash_string) + '==').decode()
+    return a2b_base64(b'%b==' % _sub_trash('', trash_string).encode('ASCII')).decode('ASCII')

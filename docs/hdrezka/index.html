@@ -26,18 +26,29 @@
 <h1 id="install">Install</h1>
 <p><code>pip install HDRezka</code></p>
 <h1 id="example">Example</h1>
-<pre><code class="language-python">from hdrezka import *
+<pre><code class="language-python">from hdrezka import Search
 
-player = Search('Avatar')[1, 0].player
-print(player.post.info)
-print(player.get_stream().best_url)
+player = Search('Breaking Bad')[1, 0].player  # page 1 element 0; or just use Player(646)
+print(player.post.info, end='\n\n')
+
+translator_id = None  # default
+for name, id_ in player.post.translators.name_id.items():
+    if 'субтитры' in name.casefold(): translator_id = id_; break
+
+stream = player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
+video = stream.video
+print(video.last_url)  # best quality
+print(video[video.min].last_url.mp4, end='\n\n')
+
+subtitles = stream.subtitles
+print(subtitles.default.url)  # subtitles.ru.url or subtitles['Русский'].url
 </code></pre>
 <h1 id="github"><a href="https://github.com/NIKDISSV-Forever/HDRezka">GitHub</a></h1>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
+<pre><code class="python">r&#34;&#34;&#34;
 # [HDRezka](https://rezka.ag/) site API.
 
 # Install
@@ -47,11 +58,22 @@ print(player.get_stream().best_url)
 # Example
 
 ```python
-from hdrezka import *
+from hdrezka import Search
 
-player = Search(&#39;Avatar&#39;)[1, 0].player
-print(player.post.info)
-print(player.get_stream().best_url)
+player = Search(&#39;Breaking Bad&#39;)[1, 0].player  # page 1 element 0; or just use Player(646)
+print(player.post.info, end=&#39;\n\n&#39;)
+
+translator_id = None  # default
+for name, id_ in player.post.translators.name_id.items():
+    if &#39;субтитры&#39; in name.casefold(): translator_id = id_; break
+
+stream = player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
+video = stream.video
+print(video.last_url)  # best quality
+print(video[video.min].last_url.mp4, end=&#39;\n\n&#39;)
+
+subtitles = stream.subtitles
+print(subtitles.default.url)  # subtitles.ru.url or subtitles[&#39;Русский&#39;].url
 ```
 
 # [GitHub](https://github.com/NIKDISSV-Forever/HDRezka)

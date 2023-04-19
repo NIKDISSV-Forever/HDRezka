@@ -1,22 +1,20 @@
-from typing import TypeVar
-
 from .http import get_response
-from ..errors import AjaxFail
+from ..errors import AJAXFail
 
-__all__ = ('Ajax', 'AnyID')
+__all__ = ('AJAX', 'AnyID')
 
-AnyID = TypeVar('AnyID', int, str)
+AnyID = int | str
 
 
-class Ajax:
-    """HDRezka Ajax class"""
+class AJAX:
+    """HDRezka AJAX class"""
     __slots__ = ()
 
     @classmethod
     def _send_data(cls, action: str, data: dict[str]) -> dict[str]:
         answer: dict = get_response('POST', f'https://rezka.ag/ajax/{action}/', data=data).json()
         if not answer.get('success', True):
-            raise AjaxFail(answer.get('message', answer))
+            raise AJAXFail(answer.get('message', answer))
         return answer
 
     @classmethod

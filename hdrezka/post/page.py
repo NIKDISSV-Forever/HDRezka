@@ -8,8 +8,8 @@ from ..stream.player import *
 
 __all__ = ('Page', 'PageNumber', 'InlineItem')
 
-PageNumber = TypeVar('PageNumber', int, slice, Iterable[int])
 T = TypeVar('T')
+PageNumber = TypeVar('PageNumber', int, slice, Iterable[int])
 
 
 def _range_from_slice(obj: slice | T) -> range | T:
@@ -34,7 +34,7 @@ class InlineItem:
 
 
 class Page:
-    """Ajax class for HDRezka search"""
+    """AJAX class for HDRezka search"""
     __slots__ = ('_page', '_page_format')
 
     def __init__(self, url: str = 'https://rezka.ag/'):

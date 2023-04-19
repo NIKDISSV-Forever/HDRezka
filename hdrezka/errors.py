@@ -8,7 +8,7 @@ class UnknownContentType(HDRezkaError, TypeError):
     __slots__ = ()
 
 
-class AjaxFail(HDRezkaError):
+class AJAXFail(HDRezkaError):
     """No success response"""
     __slots__ = ()
 

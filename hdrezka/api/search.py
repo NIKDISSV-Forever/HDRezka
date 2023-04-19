@@ -9,7 +9,7 @@ _SEARCH_TEMPLATE = 'https://rezka.ag/search/?do=search&subaction=search&q=%s'
 
 
 class Search(Page):
-    """Ajax class for HDRezka search"""
+    """AJAX class for HDRezka search"""
     __slots__ = ('_query',)
 
     def __init__(self, query: str = ''):

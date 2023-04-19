@@ -4,7 +4,7 @@ from typing import Any
 
 from bs4 import Tag
 
-from .fields import AgeRating, Duration, Place, Poster, Rating, Release
+from .fields import *
 from ..urls import Quality
 from ..._bs4 import BeautifulSoup
 

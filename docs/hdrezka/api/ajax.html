@@ -26,25 +26,23 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from typing import TypeVar
+<pre><code class="python">from .http import get_response
+from ..errors import AJAXFail
 
-from .http import get_response
-from ..errors import AjaxFail
+__all__ = (&#39;AJAX&#39;, &#39;AnyID&#39;)
 
-__all__ = (&#39;Ajax&#39;, &#39;AnyID&#39;)
-
-AnyID = TypeVar(&#39;AnyID&#39;, int, str)
+AnyID = int | str
 
 
-class Ajax:
-    &#34;&#34;&#34;HDRezka Ajax class&#34;&#34;&#34;
+class AJAX:
+    &#34;&#34;&#34;HDRezka AJAX class&#34;&#34;&#34;
     __slots__ = ()
 
     @classmethod
     def _send_data(cls, action: str, data: dict[str]) -&gt; dict[str]:
         answer: dict = get_response(&#39;POST&#39;, f&#39;https://rezka.ag/ajax/{action}/&#39;, data=data).json()
         if not answer.get(&#39;success&#39;, True):
-            raise AjaxFail(answer.get(&#39;message&#39;, answer))
+            raise AJAXFail(answer.get(&#39;message&#39;, answer))
         return answer
 
     @classmethod
@@ -86,24 +84,24 @@ class Ajax:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="hdrezka.api.ajax.Ajax"><code class="flex name class">
-<span>class <span class="ident">Ajax</span></span>
+<dt id="hdrezka.api.ajax.AJAX"><code class="flex name class">
+<span>class <span class="ident">AJAX</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>HDRezka Ajax class</p></div>
+<div class="desc"><p>HDRezka AJAX class</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Ajax:
-    &#34;&#34;&#34;HDRezka Ajax class&#34;&#34;&#34;
+<pre><code class="python">class AJAX:
+    &#34;&#34;&#34;HDRezka AJAX class&#34;&#34;&#34;
     __slots__ = ()
 
     @classmethod
     def _send_data(cls, action: str, data: dict[str]) -&gt; dict[str]:
         answer: dict = get_response(&#39;POST&#39;, f&#39;https://rezka.ag/ajax/{action}/&#39;, data=data).json()
         if not answer.get(&#39;success&#39;, True):
-            raise AjaxFail(answer.get(&#39;message&#39;, answer))
+            raise AJAXFail(answer.get(&#39;message&#39;, answer))
         return answer
 
     @classmethod
@@ -137,7 +135,7 @@ class Ajax:
 </details>
 <h3>Static methods</h3>
 <dl>
-<dt id="hdrezka.api.ajax.Ajax.get_cdn_series"><code class="name flex">
+<dt id="hdrezka.api.ajax.AJAX.get_cdn_series"><code class="name flex">
 <span>def <span class="ident">get_cdn_series</span></span>(<span>data: dict[str])</span>
 </code></dt>
 <dd>
@@ -151,8 +149,8 @@ def get_cdn_series(cls, data: dict[str]):
     return cls._send_data(&#39;get_cdn_series&#39;, data)</code></pre>
 </details>
 </dd>
-<dt id="hdrezka.api.ajax.Ajax.get_episodes"><code class="name flex">
-<span>def <span class="ident">get_episodes</span></span>(<span>id: ~AnyID, translator_id: ~AnyID)</span>
+<dt id="hdrezka.api.ajax.AJAX.get_episodes"><code class="name flex">
+<span>def <span class="ident">get_episodes</span></span>(<span>id: int | str, translator_id: int | str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -168,8 +166,8 @@ def get_episodes(cls, id: AnyID, translator_id: AnyID):
          &#39;translator_id&#39;: translator_id})</code></pre>
 </details>
 </dd>
-<dt id="hdrezka.api.ajax.Ajax.get_movie"><code class="name flex">
-<span>def <span class="ident">get_movie</span></span>(<span>id: ~AnyID, translator_id: ~AnyID)</span>
+<dt id="hdrezka.api.ajax.AJAX.get_movie"><code class="name flex">
+<span>def <span class="ident">get_movie</span></span>(<span>id: int | str, translator_id: int | str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -186,8 +184,8 @@ def get_movie(cls, id: AnyID, translator_id: AnyID):
     )</code></pre>
 </details>
 </dd>
-<dt id="hdrezka.api.ajax.Ajax.get_stream"><code class="name flex">
-<span>def <span class="ident">get_stream</span></span>(<span>id: ~AnyID, translator_id: ~AnyID, season: ~AnyID, episode: ~AnyID)</span>
+<dt id="hdrezka.api.ajax.AJAX.get_stream"><code class="name flex">
+<span>def <span class="ident">get_stream</span></span>(<span>id: int | str, translator_id: int | str, season: int | str, episode: int | str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -225,12 +223,12 @@ def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: Any
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="hdrezka.api.ajax.Ajax" href="#hdrezka.api.ajax.Ajax">Ajax</a></code></h4>
+<h4><code><a title="hdrezka.api.ajax.AJAX" href="#hdrezka.api.ajax.AJAX">AJAX</a></code></h4>
 <ul class="">
-<li><code><a title="hdrezka.api.ajax.Ajax.get_cdn_series" href="#hdrezka.api.ajax.Ajax.get_cdn_series">get_cdn_series</a></code></li>
-<li><code><a title="hdrezka.api.ajax.Ajax.get_episodes" href="#hdrezka.api.ajax.Ajax.get_episodes">get_episodes</a></code></li>
-<li><code><a title="hdrezka.api.ajax.Ajax.get_movie" href="#hdrezka.api.ajax.Ajax.get_movie">get_movie</a></code></li>
-<li><code><a title="hdrezka.api.ajax.Ajax.get_stream" href="#hdrezka.api.ajax.Ajax.get_stream">get_stream</a></code></li>
+<li><code><a title="hdrezka.api.ajax.AJAX.get_cdn_series" href="#hdrezka.api.ajax.AJAX.get_cdn_series">get_cdn_series</a></code></li>
+<li><code><a title="hdrezka.api.ajax.AJAX.get_episodes" href="#hdrezka.api.ajax.AJAX.get_episodes">get_episodes</a></code></li>
+<li><code><a title="hdrezka.api.ajax.AJAX.get_movie" href="#hdrezka.api.ajax.AJAX.get_movie">get_movie</a></code></li>
+<li><code><a title="hdrezka.api.ajax.AJAX.get_stream" href="#hdrezka.api.ajax.AJAX.get_stream">get_stream</a></code></li>
 </ul>
 </li>
 </ul>

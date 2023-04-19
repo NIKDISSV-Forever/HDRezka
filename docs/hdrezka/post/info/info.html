@@ -32,7 +32,7 @@ from typing import Any
 
 from bs4 import Tag
 
-from .fields import AgeRating, Duration, Place, Poster, Rating, Release
+from .fields import *
 from ..urls import Quality
 from ..._bs4 import BeautifulSoup
 
@@ -185,7 +185,7 @@ class PostInfo:
 <dl>
 <dt id="hdrezka.post.info.info.PostInfo"><code class="flex name class">
 <span>class <span class="ident">PostInfo</span></span>
-<span>(</span><span>soup: functools.partial(<class 'bs4.BeautifulSoup'>, features='lxml'))</span>
+<span>(</span><span>soup: functools.partial(<class 'bs4.BeautifulSoup'>, features='html.parser'))</span>
 </code></dt>
 <dd>
 <div class="desc"></div>

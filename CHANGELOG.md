@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2.0.0
+
+Backward incompatible changes have been made
+
+- #### New submodules `urls.short`, `urls.kind`, `urls.kind.quality`, `urls.kind.subtitles`, `urls.kind.video`
+- Optimizations
+- `Ajax` renamed to `AJAX` (PEP-8)
+- the `get_stream` method now contains the `video` attribute and the `subtitle` attribute
+
+- ### urls
+    - New function `urls_from_ajax_response -> URLs`
+- ### urls.short
+    - `short_url`, `long_url`
+- ### urls.kind
+    - class `Quality` now in `urls.king.quality` (also in \_\_init__)
+- ### urls.kind.video
+    - classes `VideoURL`, `VideoURLs`
+- ### urls.kind.subtitle
+    - classes `SubtitleURL`, `SubtitleURLs`
+
 ## 1.1.3
 
 - bugfixes

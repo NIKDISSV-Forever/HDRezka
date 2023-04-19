@@ -3,7 +3,7 @@ from functools import lru_cache
 from typing import Any, SupportsInt, TypeVar
 
 from .._bs4 import BeautifulSoup
-from ..api.ajax import Ajax
+from ..api.ajax import AJAX
 from ..errors import UnknownContentType
 from ..post import *
 
@@ -35,24 +35,21 @@ class PlayerMovie(PlayerBase):
     __slots__ = ()
 
     def get_stream(self, translator_id: SupportsInt = None) -> URLs:
-        return URLs(Ajax.get_movie(self.post.id, self._translator(translator_id))['url'])
+        return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))
 
 
 class PlayerSeries(PlayerBase):
     __slots__ = ()
 
     def get_episodes(self, translator_id: SupportsInt = None) -> defaultdict[int, tuple[int]]:
-        episodes = BeautifulSoup(Ajax.get_episodes(self.post.id, self._translator(translator_id))['episodes'])
+        episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))['episodes'])
         result: defaultdict[int, tuple[int]] = defaultdict(tuple)
         for i in episodes.find_all(class_='b-simple_episode__item', attrs=('data-season_id', 'data-episode_id')):
             result[int(i.get('data-season_id'))] += int(i.get('data-episode_id')),
         return result
 
     def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -> URLs:
-        return URLs(Ajax.get_stream(
-            self.post.id,
-            self._translator(translator_id),
-            season, episode)['url'])
+        return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))
 
 
 PlayerType = TypeVar('PlayerType', PlayerBase, PlayerMovie, PlayerSeries)
