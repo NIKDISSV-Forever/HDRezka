@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+- Fixed bug with PIP
+
 ## 2.0.0
 
 Backward incompatible changes have been made
