@@ -26,17 +26,18 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from httpx import request as _request
+<pre><code class="python">import httpx
 
 __all__ = (&#39;get_response&#39;, &#39;DEFAULT_REQUEST_KWARGS&#39;)
 
 DEFAULT_REQUEST_KWARGS = {&#39;headers&#39;: {&#39;user-agent&#39;: &#39;Mozilla/5.0&#39;}}
 
 
-def get_response(*args, **kwargs):
+async def get_response(*args, **kwargs):
     for k, v in DEFAULT_REQUEST_KWARGS.items():
         kwargs.setdefault(k, v)
-    return _request(*args, **kwargs)</code></pre>
+    async with httpx.AsyncClient() as client:
+        return await client.request(*args, **kwargs)</code></pre>
 </details>
 </section>
 <section>
@@ -47,7 +48,7 @@ def get_response(*args, **kwargs):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="hdrezka.api.http.get_response"><code class="name flex">
-<span>def <span class="ident">get_response</span></span>(<span>*args, **kwargs)</span>
+<span>async def <span class="ident">get_response</span></span>(<span>*args, **kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -55,10 +56,11 @@ def get_response(*args, **kwargs):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_response(*args, **kwargs):
+<pre><code class="python">async def get_response(*args, **kwargs):
     for k, v in DEFAULT_REQUEST_KWARGS.items():
         kwargs.setdefault(k, v)
-    return _request(*args, **kwargs)</code></pre>
+    async with httpx.AsyncClient() as client:
+        return await client.request(*args, **kwargs)</code></pre>
 </details>
 </dd>
 </dl>

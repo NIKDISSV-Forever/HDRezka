@@ -1,6 +1,3 @@
-from typing import Iterator
-
-from ..errors import EmptyPage
 from ..post.page import *
 
 __all__ = ('Search',)
@@ -28,18 +25,6 @@ class Search(Page):
     @staticmethod
     def _concat_paginator(url: str) -> str:
         return f'{url}&page={{0}}'
-
-    def __iter__(self) -> Iterator[InlineItem]:
-        """
-        Returns the generator of all found articles
-        """
-        page = 1
-        while True:
-            try:
-                yield from self.page_iter(page)
-            except EmptyPage:
-                return
-            page += 1
 
     def __repr__(self):
         return f"{self.__class__.__qualname__}({f'{self.query!r}' if self.query else ''})"

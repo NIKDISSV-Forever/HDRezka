@@ -26,8 +26,8 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from collections import defaultdict
-from functools import lru_cache
+<pre><code class="python">import sys
+from collections import defaultdict
 from typing import Any, SupportsInt, TypeVar
 
 from .._bs4 import BeautifulSoup
@@ -38,16 +38,41 @@ from ..post import *
 __all__ = (&#39;Player&#39;, &#39;PlayerType&#39;, &#39;PlayerBase&#39;, &#39;PlayerMovie&#39;, &#39;PlayerSeries&#39;)
 
 
+class _CacheStorage:
+    __slots__ = (&#39;max_size&#39;, &#39;__storage&#39;)
+
+    def __init__(self, max_size: int = 256):
+        self.max_size = max_size
+        self.__storage = {}
+
+    def get(self, key):
+        return self.__storage.get(key)
+
+    def set(self, key, value):
+        self.__storage[key] = value
+        for k in self.__storage.keys():
+            if sys.getsizeof(self.__storage) &lt;= self.max_size:
+                break
+            del self.__storage[k]
+
+
+__CACHE = _CacheStorage()
+
+
 class PlayerBase:
     __slots__ = (&#39;post&#39;,)
 
     def __init__(self, url_or_cast: Any):
+        &#34;&#34;&#34;Also you should call the `ainit` method&#34;&#34;&#34;
         if isinstance(url_or_cast, PlayerBase):
             self.post = url_or_cast.post
             return
         elif not isinstance(url_or_cast, str):
             url_or_cast = str(url_or_cast)
         self.post = Post(url_or_cast)
+
+    async def ainit(self):
+        await self.post.ainit()
 
     def _translator(self, translator_id: SupportsInt = None) -&gt; int:
         if translator_id is None:
@@ -62,40 +87,47 @@ class PlayerBase:
 class PlayerMovie(PlayerBase):
     __slots__ = ()
 
-    def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
-        return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))
+    async def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
+        return urls_from_ajax_response(await AJAX.get_movie(self.post.id, self._translator(translator_id)))
 
 
 class PlayerSeries(PlayerBase):
     __slots__ = ()
 
-    def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
-        episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
+    async def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
+        episodes = BeautifulSoup((await AJAX.get_episodes(self.post.id, self._translator(translator_id)))[&#39;episodes&#39;])
         result: defaultdict[int, tuple[int]] = defaultdict(tuple)
         for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
             result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
         return result
 
-    def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
-        return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))
+    async def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
+        return urls_from_ajax_response(
+            await AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))
 
 
 PlayerType = TypeVar(&#39;PlayerType&#39;, PlayerBase, PlayerMovie, PlayerSeries)
 
 
-@lru_cache(512)
-def player(url_or_path: Any) -&gt; PlayerType:
+async def player(url_or_path: Any) -&gt; PlayerType:
     &#34;&#34;&#34;
     Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType
     &#34;&#34;&#34;
     cast = PlayerBase(url_or_path)
+    cached = __CACHE.get(cast.post.url)
+    if cached is not None:
+        return cached
+    await cast.ainit()
     type = cast.post.type
     match type:
         case &#39;tv_series&#39;:
-            return PlayerSeries(cast)
+            value = PlayerSeries(cast)
         case &#39;movie&#39;:
-            return PlayerMovie(cast)
-    raise UnknownContentType(type)
+            value = PlayerMovie(cast)
+        case _:
+            raise UnknownContentType(type)
+    __CACHE.set(cast.post.url, value)
+    return value
 
 
 Player = player</code></pre>
@@ -109,7 +141,7 @@ Player = player</code></pre>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="hdrezka.stream.player.Player"><code class="name flex">
-<span>def <span class="ident">Player</span></span>(<span>url_or_path: Any) ‑> ~PlayerType</span>
+<span>async def <span class="ident">Player</span></span>(<span>url_or_path: Any) ‑> ~PlayerType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType</p></div>
@@ -117,19 +149,25 @@ Player = player</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@lru_cache(512)
-def player(url_or_path: Any) -&gt; PlayerType:
+<pre><code class="python">async def player(url_or_path: Any) -&gt; PlayerType:
     &#34;&#34;&#34;
     Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType
     &#34;&#34;&#34;
     cast = PlayerBase(url_or_path)
+    cached = __CACHE.get(cast.post.url)
+    if cached is not None:
+        return cached
+    await cast.ainit()
     type = cast.post.type
     match type:
         case &#39;tv_series&#39;:
-            return PlayerSeries(cast)
+            value = PlayerSeries(cast)
         case &#39;movie&#39;:
-            return PlayerMovie(cast)
-    raise UnknownContentType(type)</code></pre>
+            value = PlayerMovie(cast)
+        case _:
+            raise UnknownContentType(type)
+    __CACHE.set(cast.post.url, value)
+    return value</code></pre>
 </details>
 </dd>
 </dl>
@@ -142,7 +180,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Also you should call the <code>ainit</code> method</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -151,12 +189,16 @@ def player(url_or_path: Any) -&gt; PlayerType:
     __slots__ = (&#39;post&#39;,)
 
     def __init__(self, url_or_cast: Any):
+        &#34;&#34;&#34;Also you should call the `ainit` method&#34;&#34;&#34;
         if isinstance(url_or_cast, PlayerBase):
             self.post = url_or_cast.post
             return
         elif not isinstance(url_or_cast, str):
             url_or_cast = str(url_or_cast)
         self.post = Post(url_or_cast)
+
+    async def ainit(self):
+        await self.post.ainit()
 
     def _translator(self, translator_id: SupportsInt = None) -&gt; int:
         if translator_id is None:
@@ -179,10 +221,10 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 </dl>
-</dd>
-<dt id="hdrezka.stream.player.PlayerMovie"><code class="flex name class">
-<span>class <span class="ident">PlayerMovie</span></span>
-<span>(</span><span>url_or_cast: Any)</span>
+<h3>Methods</h3>
+<dl>
+<dt id="hdrezka.stream.player.PlayerBase.ainit"><code class="name flex">
+<span>async def <span class="ident">ainit</span></span>(<span>self)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -190,11 +232,27 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <summary>
 <span>Expand source code</span>
 </summary>
+<pre><code class="python">async def ainit(self):
+    await self.post.ainit()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="hdrezka.stream.player.PlayerMovie"><code class="flex name class">
+<span>class <span class="ident">PlayerMovie</span></span>
+<span>(</span><span>url_or_cast: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Also you should call the <code>ainit</code> method</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">class PlayerMovie(PlayerBase):
     __slots__ = ()
 
-    def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
-        return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
+    async def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
+        return urls_from_ajax_response(await AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -203,7 +261,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <h3>Methods</h3>
 <dl>
 <dt id="hdrezka.stream.player.PlayerMovie.get_stream"><code class="name flex">
-<span>def <span class="ident">get_stream</span></span>(<span>self, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
+<span>async def <span class="ident">get_stream</span></span>(<span>self, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -211,8 +269,8 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
-    return urls_from_ajax_response(AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
+<pre><code class="python">async def get_stream(self, translator_id: SupportsInt = None) -&gt; URLs:
+    return urls_from_ajax_response(await AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
 </details>
 </dd>
 </dl>
@@ -230,7 +288,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Also you should call the <code>ainit</code> method</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -238,15 +296,16 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <pre><code class="python">class PlayerSeries(PlayerBase):
     __slots__ = ()
 
-    def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
-        episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
+    async def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
+        episodes = BeautifulSoup((await AJAX.get_episodes(self.post.id, self._translator(translator_id)))[&#39;episodes&#39;])
         result: defaultdict[int, tuple[int]] = defaultdict(tuple)
         for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
             result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
         return result
 
-    def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
-        return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
+    async def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
+        return urls_from_ajax_response(
+            await AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -255,7 +314,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <h3>Methods</h3>
 <dl>
 <dt id="hdrezka.stream.player.PlayerSeries.get_episodes"><code class="name flex">
-<span>def <span class="ident">get_episodes</span></span>(<span>self, translator_id: <class 'SupportsInt'> = None) ‑> collections.defaultdict[int, tuple[int]]</span>
+<span>async def <span class="ident">get_episodes</span></span>(<span>self, translator_id: <class 'SupportsInt'> = None) ‑> collections.defaultdict[int, tuple[int]]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -263,8 +322,8 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
-    episodes = BeautifulSoup(AJAX.get_episodes(self.post.id, self._translator(translator_id))[&#39;episodes&#39;])
+<pre><code class="python">async def get_episodes(self, translator_id: SupportsInt = None) -&gt; defaultdict[int, tuple[int]]:
+    episodes = BeautifulSoup((await AJAX.get_episodes(self.post.id, self._translator(translator_id)))[&#39;episodes&#39;])
     result: defaultdict[int, tuple[int]] = defaultdict(tuple)
     for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
         result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
@@ -272,7 +331,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 </details>
 </dd>
 <dt id="hdrezka.stream.player.PlayerSeries.get_stream"><code class="name flex">
-<span>def <span class="ident">get_stream</span></span>(<span>self, season: int, episode: int, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
+<span>async def <span class="ident">get_stream</span></span>(<span>self, season: int, episode: int, translator_id: <class 'SupportsInt'> = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -280,8 +339,9 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
-    return urls_from_ajax_response(AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
+<pre><code class="python">async def get_stream(self, season: int, episode: int, translator_id: SupportsInt = None) -&gt; URLs:
+    return urls_from_ajax_response(
+        await AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
 </details>
 </dd>
 </dl>
@@ -318,6 +378,7 @@ def player(url_or_path: Any) -&gt; PlayerType:
 <li>
 <h4><code><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></code></h4>
 <ul class="">
+<li><code><a title="hdrezka.stream.player.PlayerBase.ainit" href="#hdrezka.stream.player.PlayerBase.ainit">ainit</a></code></li>
 <li><code><a title="hdrezka.stream.player.PlayerBase.post" href="#hdrezka.stream.player.PlayerBase.post">post</a></code></li>
 </ul>
 </li>

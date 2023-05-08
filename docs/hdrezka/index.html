@@ -28,7 +28,7 @@
 <h1 id="example">Example</h1>
 <pre><code class="language-python">from hdrezka import Search
 
-player = Search('Breaking Bad')[1, 0].player  # page 1 element 0; or just use Player(646)
+player = Search('Breaking Bad').get_page(1)[0].player  # page 1 element 0; or just use Player(646)
 print(player.post.info, end='\n\n')
 
 translator_id = None  # default
@@ -60,7 +60,7 @@ print(subtitles.default.url)  # subtitles.ru.url or subtitles['Русский'].
 ```python
 from hdrezka import Search
 
-player = Search(&#39;Breaking Bad&#39;)[1, 0].player  # page 1 element 0; or just use Player(646)
+player = Search(&#39;Breaking Bad&#39;).get_page(1)[0].player  # page 1 element 0; or just use Player(646)
 print(player.post.info, end=&#39;\n\n&#39;)
 
 translator_id = None  # default

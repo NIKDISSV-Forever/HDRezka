@@ -41,12 +41,15 @@ class Post:
                  &#39;_soup_inst&#39;)
 
     def __init__(self, url: str):
+        &#34;&#34;&#34;Also you should call the `ainit` method&#34;&#34;&#34;
         url = long_url(url)
-        _response = get_response(&#39;GET&#39;, url)
-        if _response.status_code in {301, 302}:  # redirect
-            _response = get_response(&#39;GET&#39;, _response.url.join(_response.headers[&#39;location&#39;]))
-        _response = _response.text
         self.url = url
+
+    async def ainit(self):
+        _response = await get_response(&#39;GET&#39;, self.url)
+        if _response.status_code in {301, 302}:  # redirect
+            _response = await get_response(&#39;GET&#39;, _response.url.join(_response.headers[&#39;location&#39;]))
+        _response = _response.text
         self._soup_inst = BeautifulSoup(_response)
         self.type = self._get_type()
 
@@ -105,7 +108,8 @@ class Post:
 <span>(</span><span>url: str)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Stores information about the post</p></div>
+<div class="desc"><p>Stores information about the post</p>
+<p>Also you should call the <code>ainit</code> method</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -116,12 +120,15 @@ class Post:
                  &#39;_soup_inst&#39;)
 
     def __init__(self, url: str):
+        &#34;&#34;&#34;Also you should call the `ainit` method&#34;&#34;&#34;
         url = long_url(url)
-        _response = get_response(&#39;GET&#39;, url)
-        if _response.status_code in {301, 302}:  # redirect
-            _response = get_response(&#39;GET&#39;, _response.url.join(_response.headers[&#39;location&#39;]))
-        _response = _response.text
         self.url = url
+
+    async def ainit(self):
+        _response = await get_response(&#39;GET&#39;, self.url)
+        if _response.status_code in {301, 302}:  # redirect
+            _response = await get_response(&#39;GET&#39;, _response.url.join(_response.headers[&#39;location&#39;]))
+        _response = _response.text
         self._soup_inst = BeautifulSoup(_response)
         self.type = self._get_type()
 
@@ -200,6 +207,37 @@ class Post:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 </dl>
+<h3>Methods</h3>
+<dl>
+<dt id="hdrezka.post.post.Post.ainit"><code class="name flex">
+<span>async def <span class="ident">ainit</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def ainit(self):
+    _response = await get_response(&#39;GET&#39;, self.url)
+    if _response.status_code in {301, 302}:  # redirect
+        _response = await get_response(&#39;GET&#39;, _response.url.join(_response.headers[&#39;location&#39;]))
+    _response = _response.text
+    self._soup_inst = BeautifulSoup(_response)
+    self.type = self._get_type()
+
+    self.translator_id = int(i) if (i := _response.split(
+        &#39;sof.tv.&#39; + {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type],
+        1)[-1].split(&#39;,&#39;)[1].strip()).isnumeric() else None
+    self.info = self._get_post_info()
+    self.translators = self._get_translators()
+
+    self.id = self._extract_id()
+    self.name = self._get_name()
+    self.other_parts_urls = self._parts_urls</code></pre>
+</details>
+</dd>
+</dl>
 </dd>
 </dl>
 </section>
@@ -220,6 +258,7 @@ class Post:
 <li>
 <h4><code><a title="hdrezka.post.post.Post" href="#hdrezka.post.post.Post">Post</a></code></h4>
 <ul class="two-column">
+<li><code><a title="hdrezka.post.post.Post.ainit" href="#hdrezka.post.post.Post.ainit">ainit</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.id" href="#hdrezka.post.post.Post.id">id</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.info" href="#hdrezka.post.post.Post.info">info</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.name" href="#hdrezka.post.post.Post.name">name</a></code></li>

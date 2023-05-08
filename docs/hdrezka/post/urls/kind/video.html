@@ -39,7 +39,7 @@ class VideoURL(str):
     __slots__ = (&#39;mp4&#39;,)
 
     def __init__(self, *_, **__):
-        self.mp4 = self.removesuffix(&#39;8&#39;).removesuffix(&#39;:hls:manifest.m3u&#39;)
+        self.mp4 = str(self.removesuffix(&#39;8&#39;).removesuffix(&#39;:hls:manifest.m3u&#39;))
 
 
 class VideoURLs:
@@ -116,7 +116,7 @@ errors defaults to 'strict'.</p></div>
     __slots__ = (&#39;mp4&#39;,)
 
     def __init__(self, *_, **__):
-        self.mp4 = self.removesuffix(&#39;8&#39;).removesuffix(&#39;:hls:manifest.m3u&#39;)</code></pre>
+        self.mp4 = str(self.removesuffix(&#39;8&#39;).removesuffix(&#39;:hls:manifest.m3u&#39;))</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">

@@ -11,7 +11,7 @@ class VideoURL(str):
     __slots__ = ('mp4',)
 
     def __init__(self, *_, **__):
-        self.mp4 = self.removesuffix('8').removesuffix(':hls:manifest.m3u')
+        self.mp4 = str(self.removesuffix('8').removesuffix(':hls:manifest.m3u'))
 
 
 class VideoURLs:

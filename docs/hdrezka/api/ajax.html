@@ -39,26 +39,26 @@ class AJAX:
     __slots__ = ()
 
     @classmethod
-    def _send_data(cls, action: str, data: dict[str]) -&gt; dict[str]:
-        answer: dict = get_response(&#39;POST&#39;, f&#39;https://rezka.ag/ajax/{action}/&#39;, data=data).json()
+    async def _send_data(cls, action: str, data: dict[str]) -&gt; dict[str]:
+        answer: dict = (await get_response(&#39;POST&#39;, f&#39;https://rezka.ag/ajax/{action}/&#39;, data=data)).json()
         if not answer.get(&#39;success&#39;, True):
             raise AJAXFail(answer.get(&#39;message&#39;, answer))
         return answer
 
     @classmethod
-    def get_cdn_series(cls, data: dict[str]):
-        return cls._send_data(&#39;get_cdn_series&#39;, data)
+    async def get_cdn_series(cls, data: dict[str]):
+        return await cls._send_data(&#39;get_cdn_series&#39;, data)
 
     @classmethod
-    def get_episodes(cls, id: AnyID, translator_id: AnyID):
-        return cls.get_cdn_series(
+    async def get_episodes(cls, id: AnyID, translator_id: AnyID):
+        return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_episodes&#39;,
              &#39;id&#39;: id,
              &#39;translator_id&#39;: translator_id})
 
     @classmethod
-    def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
-        return cls.get_cdn_series(
+    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+        return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_stream&#39;,
              &#39;id&#39;: id,
              &#39;translator_id&#39;: translator_id,
@@ -67,8 +67,8 @@ class AJAX:
         )
 
     @classmethod
-    def get_movie(cls, id: AnyID, translator_id: AnyID):
-        return cls.get_cdn_series(
+    async def get_movie(cls, id: AnyID, translator_id: AnyID):
+        return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_movie&#39;,
              &#39;id&#39;: id,
              &#39;translator_id&#39;: translator_id}
@@ -98,26 +98,26 @@ class AJAX:
     __slots__ = ()
 
     @classmethod
-    def _send_data(cls, action: str, data: dict[str]) -&gt; dict[str]:
-        answer: dict = get_response(&#39;POST&#39;, f&#39;https://rezka.ag/ajax/{action}/&#39;, data=data).json()
+    async def _send_data(cls, action: str, data: dict[str]) -&gt; dict[str]:
+        answer: dict = (await get_response(&#39;POST&#39;, f&#39;https://rezka.ag/ajax/{action}/&#39;, data=data)).json()
         if not answer.get(&#39;success&#39;, True):
             raise AJAXFail(answer.get(&#39;message&#39;, answer))
         return answer
 
     @classmethod
-    def get_cdn_series(cls, data: dict[str]):
-        return cls._send_data(&#39;get_cdn_series&#39;, data)
+    async def get_cdn_series(cls, data: dict[str]):
+        return await cls._send_data(&#39;get_cdn_series&#39;, data)
 
     @classmethod
-    def get_episodes(cls, id: AnyID, translator_id: AnyID):
-        return cls.get_cdn_series(
+    async def get_episodes(cls, id: AnyID, translator_id: AnyID):
+        return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_episodes&#39;,
              &#39;id&#39;: id,
              &#39;translator_id&#39;: translator_id})
 
     @classmethod
-    def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
-        return cls.get_cdn_series(
+    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+        return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_stream&#39;,
              &#39;id&#39;: id,
              &#39;translator_id&#39;: translator_id,
@@ -126,8 +126,8 @@ class AJAX:
         )
 
     @classmethod
-    def get_movie(cls, id: AnyID, translator_id: AnyID):
-        return cls.get_cdn_series(
+    async def get_movie(cls, id: AnyID, translator_id: AnyID):
+        return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_movie&#39;,
              &#39;id&#39;: id,
              &#39;translator_id&#39;: translator_id}
@@ -136,7 +136,7 @@ class AJAX:
 <h3>Static methods</h3>
 <dl>
 <dt id="hdrezka.api.ajax.AJAX.get_cdn_series"><code class="name flex">
-<span>def <span class="ident">get_cdn_series</span></span>(<span>data: dict[str])</span>
+<span>async def <span class="ident">get_cdn_series</span></span>(<span>data: dict[str])</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -145,12 +145,12 @@ class AJAX:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def get_cdn_series(cls, data: dict[str]):
-    return cls._send_data(&#39;get_cdn_series&#39;, data)</code></pre>
+async def get_cdn_series(cls, data: dict[str]):
+    return await cls._send_data(&#39;get_cdn_series&#39;, data)</code></pre>
 </details>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_episodes"><code class="name flex">
-<span>def <span class="ident">get_episodes</span></span>(<span>id: int | str, translator_id: int | str)</span>
+<span>async def <span class="ident">get_episodes</span></span>(<span>id: int | str, translator_id: int | str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -159,15 +159,15 @@ def get_cdn_series(cls, data: dict[str]):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def get_episodes(cls, id: AnyID, translator_id: AnyID):
-    return cls.get_cdn_series(
+async def get_episodes(cls, id: AnyID, translator_id: AnyID):
+    return await cls.get_cdn_series(
         {&#39;action&#39;: &#39;get_episodes&#39;,
          &#39;id&#39;: id,
          &#39;translator_id&#39;: translator_id})</code></pre>
 </details>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_movie"><code class="name flex">
-<span>def <span class="ident">get_movie</span></span>(<span>id: int | str, translator_id: int | str)</span>
+<span>async def <span class="ident">get_movie</span></span>(<span>id: int | str, translator_id: int | str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -176,8 +176,8 @@ def get_episodes(cls, id: AnyID, translator_id: AnyID):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def get_movie(cls, id: AnyID, translator_id: AnyID):
-    return cls.get_cdn_series(
+async def get_movie(cls, id: AnyID, translator_id: AnyID):
+    return await cls.get_cdn_series(
         {&#39;action&#39;: &#39;get_movie&#39;,
          &#39;id&#39;: id,
          &#39;translator_id&#39;: translator_id}
@@ -185,7 +185,7 @@ def get_movie(cls, id: AnyID, translator_id: AnyID):
 </details>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_stream"><code class="name flex">
-<span>def <span class="ident">get_stream</span></span>(<span>id: int | str, translator_id: int | str, season: int | str, episode: int | str)</span>
+<span>async def <span class="ident">get_stream</span></span>(<span>id: int | str, translator_id: int | str, season: int | str, episode: int | str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -194,8 +194,8 @@ def get_movie(cls, id: AnyID, translator_id: AnyID):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
-    return cls.get_cdn_series(
+async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+    return await cls.get_cdn_series(
         {&#39;action&#39;: &#39;get_stream&#39;,
          &#39;id&#39;: id,
          &#39;translator_id&#39;: translator_id,

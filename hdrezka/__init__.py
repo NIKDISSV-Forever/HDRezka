@@ -10,7 +10,7 @@ r"""
 ```python
 from hdrezka import Search
 
-player = Search('Breaking Bad')[1, 0].player  # page 1 element 0; or just use Player(646)
+player = Search('Breaking Bad').get_page(1)[0].player  # page 1 element 0; or just use Player(646)
 print(player.post.info, end='\n\n')
 
 translator_id = None  # default

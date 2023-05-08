@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 3.0.0
+
+- **Now a fully asynchronous package.**
+
+- ### post.page.Page
+    - Implements `__aiter__` and `__anext__` methods that list all the pages found.
+    - Instead of `get_pages`, now only the `get_page` method
+
 ## 2.0.1
 
 - Fixed bug with PIP
