@@ -11,7 +11,7 @@ with open('CHANGELOG.md', encoding='UTF-8') as f:
 
 setuptools.setup(
     name='HDRezka',
-    version='3.0.0',
+    version='3.0.1',
 
     author='Nikita (NIKDISSV)',
     author_email='nikdissv@proton.me',
