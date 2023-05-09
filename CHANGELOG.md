@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.1
+
+- Now `__await__` method (need `await ...` expression) instead `ainit` method
+
 ## 3.0.0
 
 - **Now a fully asynchronous package.**

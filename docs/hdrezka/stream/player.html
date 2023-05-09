@@ -63,7 +63,7 @@ class PlayerBase:
     __slots__ = (&#39;post&#39;,)
 
     def __init__(self, url_or_cast: Any):
-        &#34;&#34;&#34;Also you should call the `ainit` method&#34;&#34;&#34;
+        &#34;&#34;&#34;Need await&#34;&#34;&#34;
         if isinstance(url_or_cast, PlayerBase):
             self.post = url_or_cast.post
             return
@@ -71,8 +71,8 @@ class PlayerBase:
             url_or_cast = str(url_or_cast)
         self.post = Post(url_or_cast)
 
-    async def ainit(self):
-        await self.post.ainit()
+    def __await__(self):
+        yield from self.post.__await__()
 
     def _translator(self, translator_id: SupportsInt = None) -&gt; int:
         if translator_id is None:
@@ -117,7 +117,7 @@ async def player(url_or_path: Any) -&gt; PlayerType:
     cached = __CACHE.get(cast.post.url)
     if cached is not None:
         return cached
-    await cast.ainit()
+    await cast
     type = cast.post.type
     match type:
         case &#39;tv_series&#39;:
@@ -157,7 +157,7 @@ Player = player</code></pre>
     cached = __CACHE.get(cast.post.url)
     if cached is not None:
         return cached
-    await cast.ainit()
+    await cast
     type = cast.post.type
     match type:
         case &#39;tv_series&#39;:
@@ -180,7 +180,7 @@ Player = player</code></pre>
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Also you should call the <code>ainit</code> method</p></div>
+<div class="desc"><p>Need await</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -189,7 +189,7 @@ Player = player</code></pre>
     __slots__ = (&#39;post&#39;,)
 
     def __init__(self, url_or_cast: Any):
-        &#34;&#34;&#34;Also you should call the `ainit` method&#34;&#34;&#34;
+        &#34;&#34;&#34;Need await&#34;&#34;&#34;
         if isinstance(url_or_cast, PlayerBase):
             self.post = url_or_cast.post
             return
@@ -197,8 +197,8 @@ Player = player</code></pre>
             url_or_cast = str(url_or_cast)
         self.post = Post(url_or_cast)
 
-    async def ainit(self):
-        await self.post.ainit()
+    def __await__(self):
+        yield from self.post.__await__()
 
     def _translator(self, translator_id: SupportsInt = None) -&gt; int:
         if translator_id is None:
@@ -221,29 +221,13 @@ Player = player</code></pre>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 </dl>
-<h3>Methods</h3>
-<dl>
-<dt id="hdrezka.stream.player.PlayerBase.ainit"><code class="name flex">
-<span>async def <span class="ident">ainit</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">async def ainit(self):
-    await self.post.ainit()</code></pre>
-</details>
-</dd>
-</dl>
 </dd>
 <dt id="hdrezka.stream.player.PlayerMovie"><code class="flex name class">
 <span>class <span class="ident">PlayerMovie</span></span>
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Also you should call the <code>ainit</code> method</p></div>
+<div class="desc"><p>Need await</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -288,7 +272,7 @@ Player = player</code></pre>
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Also you should call the <code>ainit</code> method</p></div>
+<div class="desc"><p>Need await</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -378,7 +362,6 @@ Player = player</code></pre>
 <li>
 <h4><code><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></code></h4>
 <ul class="">
-<li><code><a title="hdrezka.stream.player.PlayerBase.ainit" href="#hdrezka.stream.player.PlayerBase.ainit">ainit</a></code></li>
 <li><code><a title="hdrezka.stream.player.PlayerBase.post" href="#hdrezka.stream.player.PlayerBase.post">post</a></code></li>
 </ul>
 </li>

@@ -13,14 +13,14 @@ class Post:
                  '_soup_inst')
 
     def __init__(self, url: str):
-        """Also you should call the `ainit` method"""
+        """Need await"""
         url = long_url(url)
         self.url = url
 
-    async def ainit(self):
-        _response = await get_response('GET', self.url)
+    def __await__(self):
+        _response = yield from get_response('GET', self.url).__await__()
         if _response.status_code in {301, 302}:  # redirect
-            _response = await get_response('GET', _response.url.join(_response.headers['location']))
+            _response = yield from get_response('GET', _response.url.join(_response.headers['location'])).__await__()
         _response = _response.text
         self._soup_inst = BeautifulSoup(_response)
         self.type = self._get_type()

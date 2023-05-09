@@ -35,7 +35,7 @@ class PlayerBase:
     __slots__ = ('post',)
 
     def __init__(self, url_or_cast: Any):
-        """Also you should call the `ainit` method"""
+        """Need await"""
         if isinstance(url_or_cast, PlayerBase):
             self.post = url_or_cast.post
             return
@@ -43,8 +43,8 @@ class PlayerBase:
             url_or_cast = str(url_or_cast)
         self.post = Post(url_or_cast)
 
-    async def ainit(self):
-        await self.post.ainit()
+    def __await__(self):
+        yield from self.post.__await__()
 
     def _translator(self, translator_id: SupportsInt = None) -> int:
         if translator_id is None:
@@ -89,7 +89,7 @@ async def player(url_or_path: Any) -> PlayerType:
     cached = __CACHE.get(cast.post.url)
     if cached is not None:
         return cached
-    await cast.ainit()
+    await cast
     type = cast.post.type
     match type:
         case 'tv_series':

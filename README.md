@@ -11,7 +11,7 @@ import asyncio
 from hdrezka import Search
 
 async def main():
-    player = await (await Search('Breaking Bad').get_page(1))[0].player  # or just use Player(646)
+    player = await (await Search('Breaking Bad').get_page(1))[0].player  # or just use await Player(646)
     print(player.post.info, end='\n\n')
 
     translator_id = None  # default
