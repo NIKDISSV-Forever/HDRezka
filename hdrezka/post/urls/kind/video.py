@@ -18,9 +18,13 @@ class VideoURLs:
     __slots__ = ('raw_data', 'qualities', 'min')
 
     def __init__(self, data: str | dict):
-        self.raw_data: dict[Quality, VideoURL] = (
-            {Quality(q): VideoURL(u) for q, u in findall_qualities(clear_trash(data))}
-            if isinstance(data, str) else data)
+        if isinstance(data, str):
+            self.raw_data: dict[Quality, VideoURL] = {
+                Quality(q): VideoURL(u) for q, u in findall_qualities(clear_trash(data))}
+        elif isinstance(data, dict):
+            self.raw_data = data
+        else:
+            raise TypeError(f'got {data!r} (type {type(data)}) but expected type {str | dict}')
         self.qualities: tuple[Quality] = *sorted(self.raw_data),
         self.min = int(self.qualities[0]) if self.qualities else 1
 

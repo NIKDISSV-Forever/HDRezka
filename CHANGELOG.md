@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.0.2
+
+- ### post.urls.kind.VideoURLs
+  - `__init__(self, data: str | dict)` now raises `TypeError`
+    if `data` isn't of type `str | dict` (see [this issue](https://github.com/NIKDISSV-Forever/HDRezka/issues/1))
+
 ## 3.0.1
 
 - Now `__await__` method (need `await ...` expression) instead `ainit` method

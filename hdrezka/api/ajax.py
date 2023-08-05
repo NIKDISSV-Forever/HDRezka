@@ -29,7 +29,7 @@ class AJAX:
              'translator_id': translator_id})
 
     @classmethod
-    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID) -> dict[str]:
         return await cls.get_cdn_series(
             {'action': 'get_stream',
              'id': id,

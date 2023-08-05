@@ -14,4 +14,4 @@ _sub_trash = re.compile(
 
 
 def clear_trash(trash_string: str) -> str:
-    return a2b_base64(b'%b==' % _sub_trash('', trash_string).encode('ASCII')).decode('ASCII')
+    return a2b_base64(_sub_trash('', trash_string).encode('ASCII') + b'==').decode('ASCII')
