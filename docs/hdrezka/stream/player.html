@@ -26,8 +26,7 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import sys
-from collections import defaultdict
+    <pre><code class="python">from collections import defaultdict
 from typing import Any, SupportsInt, TypeVar
 
 from .._bs4 import BeautifulSoup
@@ -41,7 +40,7 @@ __all__ = (&#39;Player&#39;, &#39;PlayerType&#39;, &#39;PlayerBase&#39;, &#39;Pl
 class _CacheStorage:
     __slots__ = (&#39;max_size&#39;, &#39;__storage&#39;)
 
-    def __init__(self, max_size: int = 256):
+    def __init__(self, max_size: int = 10):
         self.max_size = max_size
         self.__storage = {}
 
@@ -50,8 +49,8 @@ class _CacheStorage:
 
     def set(self, key, value):
         self.__storage[key] = value
-        for k in self.__storage.keys():
-            if sys.getsizeof(self.__storage) &lt;= self.max_size:
+        for k in (*self.__storage.keys(),):
+            if len(self.__storage) &lt;= self.max_size:
                 break
             del self.__storage[k]
 

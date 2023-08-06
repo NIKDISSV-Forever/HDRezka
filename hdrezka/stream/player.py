@@ -1,4 +1,3 @@
-import sys
 from collections import defaultdict
 from typing import Any, SupportsInt, TypeVar
 
@@ -13,7 +12,7 @@ __all__ = ('Player', 'PlayerType', 'PlayerBase', 'PlayerMovie', 'PlayerSeries')
 class _CacheStorage:
     __slots__ = ('max_size', '__storage')
 
-    def __init__(self, max_size: int = 256):
+    def __init__(self, max_size: int = 10):
         self.max_size = max_size
         self.__storage = {}
 
@@ -22,8 +21,8 @@ class _CacheStorage:
 
     def set(self, key, value):
         self.__storage[key] = value
-        for k in self.__storage.keys():
-            if sys.getsizeof(self.__storage) <= self.max_size:
+        for k in (*self.__storage.keys(),):
+            if len(self.__storage) <= self.max_size:
                 break
             del self.__storage[k]
 

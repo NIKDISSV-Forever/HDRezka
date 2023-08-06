@@ -46,9 +46,13 @@ class VideoURLs:
     __slots__ = (&#39;raw_data&#39;, &#39;qualities&#39;, &#39;min&#39;)
 
     def __init__(self, data: str | dict):
-        self.raw_data: dict[Quality, VideoURL] = (
-            {Quality(q): VideoURL(u) for q, u in findall_qualities(clear_trash(data))}
-            if isinstance(data, str) else data)
+        if isinstance(data, str):
+            self.raw_data: dict[Quality, VideoURL] = {
+                Quality(q): VideoURL(u) for q, u in findall_qualities(clear_trash(data))}
+        elif isinstance(data, dict):
+            self.raw_data = data
+        else:
+            raise TypeError(f&#39;got {data!r} (type {type(data)}) but expected type {str | dict}&#39;)
         self.qualities: tuple[Quality] = *sorted(self.raw_data),
         self.min = int(self.qualities[0]) if self.qualities else 1
 
@@ -144,9 +148,13 @@ errors defaults to 'strict'.</p></div>
     __slots__ = (&#39;raw_data&#39;, &#39;qualities&#39;, &#39;min&#39;)
 
     def __init__(self, data: str | dict):
-        self.raw_data: dict[Quality, VideoURL] = (
-            {Quality(q): VideoURL(u) for q, u in findall_qualities(clear_trash(data))}
-            if isinstance(data, str) else data)
+        if isinstance(data, str):
+            self.raw_data: dict[Quality, VideoURL] = {
+                Quality(q): VideoURL(u) for q, u in findall_qualities(clear_trash(data))}
+        elif isinstance(data, dict):
+            self.raw_data = data
+        else:
+            raise TypeError(f&#39;got {data!r} (type {type(data)}) but expected type {str | dict}&#39;)
         self.qualities: tuple[Quality] = *sorted(self.raw_data),
         self.min = int(self.qualities[0]) if self.qualities else 1
 

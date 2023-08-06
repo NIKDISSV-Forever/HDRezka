@@ -57,7 +57,7 @@ class AJAX:
              &#39;translator_id&#39;: translator_id})
 
     @classmethod
-    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID) -&gt; dict[str]:
         return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_stream&#39;,
              &#39;id&#39;: id,
@@ -116,7 +116,7 @@ class AJAX:
              &#39;translator_id&#39;: translator_id})
 
     @classmethod
-    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+    async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID) -&gt; dict[str]:
         return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_stream&#39;,
              &#39;id&#39;: id,
@@ -185,7 +185,7 @@ async def get_movie(cls, id: AnyID, translator_id: AnyID):
 </details>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_stream"><code class="name flex">
-<span>async def <span class="ident">get_stream</span></span>(<span>id: int | str, translator_id: int | str, season: int | str, episode: int | str)</span>
+    <span>async def <span class="ident">get_stream</span></span>(<span>id: int | str, translator_id: int | str, season: int | str, episode: int | str) ‑> dict[str]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -194,7 +194,7 @@ async def get_movie(cls, id: AnyID, translator_id: AnyID):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID):
+async def get_stream(cls, id: AnyID, translator_id: AnyID, season: AnyID, episode: AnyID) -&gt; dict[str]:
     return await cls.get_cdn_series(
         {&#39;action&#39;: &#39;get_stream&#39;,
          &#39;id&#39;: id,

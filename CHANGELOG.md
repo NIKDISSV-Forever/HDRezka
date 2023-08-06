@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 3.0.3
+
+- ### stream.player
+    - #### Player Caching
+        - fixed `RuntimeError: dictionary changed size during iteration`
+        - removed `sys.getsizeof` (for compatibility with PyPy), used `len` instead
+
 ## 3.0.2
 
 - ### post.urls.kind.VideoURLs
