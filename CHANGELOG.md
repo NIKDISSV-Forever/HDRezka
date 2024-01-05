@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 3.1.2
+
+- ### post.urls
+    - Fixed [issue 2](https://github.com/NIKDISSV-Forever/HDRezka/issues/2). _rezka.ag stopped redirecting from links of
+      this type:"https://rezka.ag/1-1.html". now returns a 500
+      error._
+
+## 3.1.1
+
+- Documentation updated
+
+## 3.1.0
+
+- ### requirements.txt
+    - `bs4` replaced with `beautifulsoup4`
+    - `lxml` now installs on versions < 3.13 (instead of < 3.12)
+- ### api.http
+    - Added `DEFAULT_REQUEST_KWARGS`
+
 ## 3.0.3
 
 - ### stream.player
@@ -10,8 +29,8 @@
 ## 3.0.2
 
 - ### post.urls.kind.VideoURLs
-  - `__init__(self, data: str | dict)` now raises `TypeError`
-    if `data` isn't of type `str | dict` (see [this issue](https://github.com/NIKDISSV-Forever/HDRezka/issues/1))
+    - `__init__(self, data: str | dict)` now raises `TypeError`
+      if `data` isn't of type `str | dict` (see [this issue](https://github.com/NIKDISSV-Forever/HDRezka/issues/1))
 
 ## 3.0.1
 

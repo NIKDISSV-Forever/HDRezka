@@ -1,5 +1,4 @@
 from .info import PostInfo
-from .urls import long_url, short_url
 from .._bs4 import BeautifulSoup
 from ..api.http import get_response
 from ..translators import Translators
@@ -14,13 +13,10 @@ class Post:
 
     def __init__(self, url: str):
         """Need await"""
-        url = long_url(url)
         self.url = url
 
     def __await__(self):
         _response = yield from get_response('GET', self.url).__await__()
-        if _response.status_code in {301, 302}:  # redirect
-            _response = yield from get_response('GET', _response.url.join(_response.headers['location'])).__await__()
         _response = _response.text
         self._soup_inst = BeautifulSoup(_response)
         self.type = self._get_type()
@@ -60,7 +56,7 @@ class Post:
         self.other_parts_urls = *(
             i.attrs['data-url'] for i in
             self._soup_inst.select('.b-post__partcontent_item[data-url]')),
-        return *map(short_url, self.other_parts_urls),
+        return self.other_parts_urls
 
     def __repr__(self):
         return f'{self.__class__.__qualname__}<{self.name!r}; {self.type!r}>'

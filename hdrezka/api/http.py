@@ -1,12 +1,11 @@
 import httpx
 
-__all__ = ('get_response', 'DEFAULT_REQUEST_KWARGS')
+__all__ = ('get_response', 'DEFAULT_CLIENT_KWARGS', 'DEFAULT_REQUEST_KWARGS')
 
-DEFAULT_REQUEST_KWARGS = {'headers': {'user-agent': 'Mozilla/5.0'}}
+DEFAULT_CLIENT_KWARGS = {'headers': {'user-agent': 'Mozilla/5.0'}, 'follow_redirects': True}
+DEFAULT_REQUEST_KWARGS = {}
 
 
 async def get_response(*args, **kwargs):
-    for k, v in DEFAULT_REQUEST_KWARGS.items():
-        kwargs.setdefault(k, v)
-    async with httpx.AsyncClient() as client:
-        return await client.request(*args, **kwargs)
+    async with httpx.AsyncClient(**DEFAULT_CLIENT_KWARGS) as client:
+        return await client.request(*args, **kwargs, **DEFAULT_REQUEST_KWARGS)
