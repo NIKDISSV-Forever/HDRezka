@@ -29,4 +29,4 @@ async def main():
 if __name__ == '__main__': asyncio.run(main())
 ```
 
-# [Documentation](https://nikdissv-forever.github.io/HDRezka/hdrezka)
+# [Documentation](https://nikdissv-forever.github.io/HDRezka/)
