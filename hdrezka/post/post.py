@@ -1,5 +1,7 @@
+from bs4 import BeautifulSoup
+
+from ._bs4 import _BUILDER
 from .info import PostInfo
-from .._bs4 import BeautifulSoup
 from ..api.http import get_response
 from ..translators import Translators
 
@@ -16,9 +18,13 @@ class Post:
         self.url = url
 
     def __await__(self):
+        """
+        Async initialize, prepare attributes.
+        Do not call twice!
+        """
         _response = yield from get_response('GET', self.url).__await__()
         _response = _response.text
-        self._soup_inst = BeautifulSoup(_response)
+        self._soup_inst = BeautifulSoup(_response, builder=_BUILDER)
         self.type = self._get_type()
 
         self.translator_id = int(i) if (i := _response.split(

@@ -1,14 +1,20 @@
+"""All urls for one video"""
+from dataclasses import dataclass
+
 from .kind import SubtitleURLs, VideoURLs
-from .._dataclass import frozen_slots_dataclass
+from ...api.types import APIResponse
 
 
-@frozen_slots_dataclass
+@dataclass(frozen=True, slots=True)
 class URLs:
+    """All urls for one video class"""
     video: VideoURLs
     subtitles: SubtitleURLs
 
 
-def urls_from_ajax_response(response: dict[str]) -> URLs:
+def urls_from_ajax_response(response: APIResponse) -> URLs:
+    """Parse response and return urls"""
     return URLs(VideoURLs(response.get('url', '')),
-                SubtitleURLs(response.get('subtitle', False),
-                             response.get('subtitle_lns', False), response.get('subtitle_def', False)))
+                SubtitleURLs(response.get('subtitle', ''),
+                             response.get('subtitle_lns', {'off': ''}),
+                             response.get('subtitle_def', '')))

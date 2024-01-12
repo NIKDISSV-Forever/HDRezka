@@ -139,51 +139,64 @@
                     <h1 class="modulename">
 <a href="./../../../hdrezka.html">hdrezka</a><wbr>.<a href="./../../post.html">post</a><wbr>.<a href="./../info.html">info</a><wbr>.fields    </h1>
 
-                
+                        <div class="docstring"><p>high-level structures for representing title data</p>
+</div>
+
                         <input id="mod-fields-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
                         <label class="view-source-button" for="mod-fields-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">.._dataclass</span> <span class="kn">import</span> <span class="n">frozen_slots_dataclass</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Rating&#39;</span><span class="p">,</span> <span class="s1">&#39;Place&#39;</span><span class="p">,</span> <span class="s1">&#39;Release&#39;</span><span class="p">,</span> <span class="s1">&#39;AgeRating&#39;</span><span class="p">,</span> <span class="s1">&#39;Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Poster&#39;</span><span class="p">)</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;high-level structures for representing title data&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Rating&#39;</span><span class="p">,</span> <span class="s1">&#39;Place&#39;</span><span class="p">,</span> <span class="s1">&#39;Release&#39;</span><span class="p">,</span> <span class="s1">&#39;AgeRating&#39;</span><span class="p">,</span> <span class="s1">&#39;Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Poster&#39;</span><span class="p">)</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="k">class</span> <span class="nc">Rating</span><span class="p">:</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">service</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">votes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="k">class</span> <span class="nc">Place</span><span class="p">:</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">place</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="k">class</span> <span class="nc">Release</span><span class="p">:</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">day</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="k">class</span> <span class="nc">AgeRating</span><span class="p">:</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="k">class</span> <span class="nc">Duration</span><span class="p">:</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">units</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="k">class</span> <span class="nc">Rating</span><span class="p">:</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rating for service&quot;&quot;&quot;</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">service</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">votes</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="k">class</span> <span class="nc">Place</span><span class="p">:</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Place of title&quot;&quot;&quot;</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">place</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="k">class</span> <span class="nc">Release</span><span class="p">:</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Release date&quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">day</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="k">class</span> <span class="nc">AgeRating</span><span class="p">:</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Age restricts&quot;&quot;&quot;</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
 </span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="k">class</span> <span class="nc">Poster</span><span class="p">:</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="n">full</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="n">preview</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="k">class</span> <span class="nc">Duration</span><span class="p">:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Duration of title&quot;&quot;&quot;</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="n">units</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="k">class</span> <span class="nc">Poster</span><span class="p">:</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Poster of title&quot;&quot;&quot;</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="n">full</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="n">preview</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Is any poster&quot;&quot;&quot;</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        <span class="k">return</span> <span class="ow">not</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">preview</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -191,7 +204,7 @@
                 <section id="Rating">
                             <input id="Rating-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">Rating</span>:
@@ -200,20 +213,23 @@
 
     </div>
     <a class="headerlink" href="#Rating"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Rating-7"><a href="#Rating-7"><span class="linenos"> 7</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="Rating-8"><a href="#Rating-8"><span class="linenos"> 8</span></a><span class="k">class</span> <span class="nc">Rating</span><span class="p">:</span>
-</span><span id="Rating-9"><a href="#Rating-9"><span class="linenos"> 9</span></a>    <span class="n">service</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Rating-10"><a href="#Rating-10"><span class="linenos">10</span></a>    <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span>
-</span><span id="Rating-11"><a href="#Rating-11"><span class="linenos">11</span></a>    <span class="n">votes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Rating-8"><a href="#Rating-8"><span class="linenos"> 8</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="Rating-9"><a href="#Rating-9"><span class="linenos"> 9</span></a><span class="k">class</span> <span class="nc">Rating</span><span class="p">:</span>
+</span><span id="Rating-10"><a href="#Rating-10"><span class="linenos">10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Rating for service&quot;&quot;&quot;</span>
+</span><span id="Rating-11"><a href="#Rating-11"><span class="linenos">11</span></a>    <span class="n">service</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Rating-12"><a href="#Rating-12"><span class="linenos">12</span></a>    <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span>
+</span><span id="Rating-13"><a href="#Rating-13"><span class="linenos">13</span></a>    <span class="n">votes</span><span class="p">:</span> <span class="nb">int</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Rating for service</p>
+</div>
+
 
                             <div id="Rating.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">Rating</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">service</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">rating</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span>, </span><span class="param"><span class="n">votes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>)</span>
+        <span class="name">Rating</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">service</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">rating</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span>, </span><span class="param"><span class="n">votes</span><span class="p">:</span> <span class="nb">int</span></span>)</span>
 
         
     </div>
@@ -259,7 +275,7 @@
                 <section id="Place">
                             <input id="Place-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">Place</span>:
@@ -268,14 +284,17 @@
 
     </div>
     <a class="headerlink" href="#Place"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Place-14"><a href="#Place-14"><span class="linenos">14</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="Place-15"><a href="#Place-15"><span class="linenos">15</span></a><span class="k">class</span> <span class="nc">Place</span><span class="p">:</span>
-</span><span id="Place-16"><a href="#Place-16"><span class="linenos">16</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Place-17"><a href="#Place-17"><span class="linenos">17</span></a>    <span class="n">place</span><span class="p">:</span> <span class="nb">int</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Place-16"><a href="#Place-16"><span class="linenos">16</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="Place-17"><a href="#Place-17"><span class="linenos">17</span></a><span class="k">class</span> <span class="nc">Place</span><span class="p">:</span>
+</span><span id="Place-18"><a href="#Place-18"><span class="linenos">18</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Place of title&quot;&quot;&quot;</span>
+</span><span id="Place-19"><a href="#Place-19"><span class="linenos">19</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Place-20"><a href="#Place-20"><span class="linenos">20</span></a>    <span class="n">place</span><span class="p">:</span> <span class="nb">int</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Place of title</p>
+</div>
+
 
                             <div id="Place.__init__" class="classattr">
                                 <div class="attr function">
@@ -315,7 +334,7 @@
                 <section id="Release">
                             <input id="Release-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">Release</span>:
@@ -324,14 +343,17 @@
 
     </div>
     <a class="headerlink" href="#Release"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Release-20"><a href="#Release-20"><span class="linenos">20</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="Release-21"><a href="#Release-21"><span class="linenos">21</span></a><span class="k">class</span> <span class="nc">Release</span><span class="p">:</span>
-</span><span id="Release-22"><a href="#Release-22"><span class="linenos">22</span></a>    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="Release-23"><a href="#Release-23"><span class="linenos">23</span></a>    <span class="n">day</span><span class="p">:</span> <span class="nb">str</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Release-23"><a href="#Release-23"><span class="linenos">23</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="Release-24"><a href="#Release-24"><span class="linenos">24</span></a><span class="k">class</span> <span class="nc">Release</span><span class="p">:</span>
+</span><span id="Release-25"><a href="#Release-25"><span class="linenos">25</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Release date&quot;&quot;&quot;</span>
+</span><span id="Release-26"><a href="#Release-26"><span class="linenos">26</span></a>    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="Release-27"><a href="#Release-27"><span class="linenos">27</span></a>    <span class="n">day</span><span class="p">:</span> <span class="nb">str</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Release date</p>
+</div>
+
 
                             <div id="Release.__init__" class="classattr">
                                 <div class="attr function">
@@ -371,7 +393,7 @@
                 <section id="AgeRating">
                             <input id="AgeRating-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">AgeRating</span>:
@@ -380,19 +402,22 @@
 
     </div>
     <a class="headerlink" href="#AgeRating"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="AgeRating-26"><a href="#AgeRating-26"><span class="linenos">26</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="AgeRating-27"><a href="#AgeRating-27"><span class="linenos">27</span></a><span class="k">class</span> <span class="nc">AgeRating</span><span class="p">:</span>
-</span><span id="AgeRating-28"><a href="#AgeRating-28"><span class="linenos">28</span></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="AgeRating-29"><a href="#AgeRating-29"><span class="linenos">29</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="AgeRating-30"><a href="#AgeRating-30"><span class="linenos">30</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="AgeRating-31"><a href="#AgeRating-31"><span class="linenos">31</span></a><span class="k">class</span> <span class="nc">AgeRating</span><span class="p">:</span>
+</span><span id="AgeRating-32"><a href="#AgeRating-32"><span class="linenos">32</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Age restricts&quot;&quot;&quot;</span>
+</span><span id="AgeRating-33"><a href="#AgeRating-33"><span class="linenos">33</span></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="AgeRating-34"><a href="#AgeRating-34"><span class="linenos">34</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Age restricts</p>
+</div>
+
 
                             <div id="AgeRating.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">AgeRating</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">age</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">description</span><span class="p">:</span> <span class="nb">str</span></span>)</span>
+        <span class="name">AgeRating</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">age</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></span>)</span>
 
         
     </div>
@@ -427,7 +452,7 @@
                 <section id="Duration">
                             <input id="Duration-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">Duration</span>:
@@ -436,14 +461,17 @@
 
     </div>
     <a class="headerlink" href="#Duration"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Duration-32"><a href="#Duration-32"><span class="linenos">32</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="Duration-33"><a href="#Duration-33"><span class="linenos">33</span></a><span class="k">class</span> <span class="nc">Duration</span><span class="p">:</span>
-</span><span id="Duration-34"><a href="#Duration-34"><span class="linenos">34</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">int</span>
-</span><span id="Duration-35"><a href="#Duration-35"><span class="linenos">35</span></a>    <span class="n">units</span><span class="p">:</span> <span class="nb">str</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Duration-37"><a href="#Duration-37"><span class="linenos">37</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="Duration-38"><a href="#Duration-38"><span class="linenos">38</span></a><span class="k">class</span> <span class="nc">Duration</span><span class="p">:</span>
+</span><span id="Duration-39"><a href="#Duration-39"><span class="linenos">39</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Duration of title&quot;&quot;&quot;</span>
+</span><span id="Duration-40"><a href="#Duration-40"><span class="linenos">40</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="Duration-41"><a href="#Duration-41"><span class="linenos">41</span></a>    <span class="n">units</span><span class="p">:</span> <span class="nb">str</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Duration of title</p>
+</div>
+
 
                             <div id="Duration.__init__" class="classattr">
                                 <div class="attr function">
@@ -483,7 +511,7 @@
                 <section id="Poster">
                             <input id="Poster-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">Poster</span>:
@@ -492,19 +520,26 @@
 
     </div>
     <a class="headerlink" href="#Poster"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Poster-38"><a href="#Poster-38"><span class="linenos">38</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="Poster-39"><a href="#Poster-39"><span class="linenos">39</span></a><span class="k">class</span> <span class="nc">Poster</span><span class="p">:</span>
-</span><span id="Poster-40"><a href="#Poster-40"><span class="linenos">40</span></a>    <span class="n">full</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Poster-41"><a href="#Poster-41"><span class="linenos">41</span></a>    <span class="n">preview</span><span class="p">:</span> <span class="nb">str</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Poster-44"><a href="#Poster-44"><span class="linenos">44</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="Poster-45"><a href="#Poster-45"><span class="linenos">45</span></a><span class="k">class</span> <span class="nc">Poster</span><span class="p">:</span>
+</span><span id="Poster-46"><a href="#Poster-46"><span class="linenos">46</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Poster of title&quot;&quot;&quot;</span>
+</span><span id="Poster-47"><a href="#Poster-47"><span class="linenos">47</span></a>    <span class="n">full</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span><span id="Poster-48"><a href="#Poster-48"><span class="linenos">48</span></a>    <span class="n">preview</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span><span id="Poster-49"><a href="#Poster-49"><span class="linenos">49</span></a>
+</span><span id="Poster-50"><a href="#Poster-50"><span class="linenos">50</span></a>    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Poster-51"><a href="#Poster-51"><span class="linenos">51</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Is any poster&quot;&quot;&quot;</span>
+</span><span id="Poster-52"><a href="#Poster-52"><span class="linenos">52</span></a>        <span class="k">return</span> <span class="ow">not</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">preview</span><span class="p">)</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Poster of title</p>
+</div>
+
 
                             <div id="Poster.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">Poster</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">full</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">preview</span><span class="p">:</span> <span class="nb">str</span></span>)</span>
+        <span class="name">Poster</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">full</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>, </span><span class="param"><span class="n">preview</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></span>)</span>
 
         
     </div>

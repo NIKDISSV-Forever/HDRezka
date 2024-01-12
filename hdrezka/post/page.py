@@ -1,7 +1,10 @@
+"""Any HDRezka page"""
+from dataclasses import dataclass
 from typing import Iterable, TypeVar
 
-from ._dataclass import frozen_slots_dataclass
-from .._bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
+
+from ._bs4 import _BUILDER
 from ..api.http import get_response
 from ..errors import EmptyPage
 from ..stream.player import *
@@ -18,7 +21,7 @@ def _range_from_slice(obj: slice | T) -> range | T:
     return obj
 
 
-@frozen_slots_dataclass
+@dataclass(frozen=True, slots=True)
 class InlineItem:
     """Content Inline Item view"""
     url: str
@@ -28,7 +31,7 @@ class InlineItem:
     'Image url'
 
     @property
-    async def player(self) -> PlayerType:
+    async def player(self):
         """Return a Player Instance"""
         return await Player(self.url)
 
@@ -38,7 +41,7 @@ class Page:
     __slots__ = ('_page', '_page_format', '__yields', '__yields_page')
 
     def __init__(self, url: str = 'https://rezka.ag/'):
-        self.__yields = []
+        self.__yields: list[InlineItem] = []
         self.__yields_page = 0
         self.page = url
 
@@ -48,6 +51,7 @@ class Page:
 
     @page.setter
     def page(self, value):
+        """Cast value to str and sets"""
         if not isinstance(value, str):
             value = str(value)
         # noinspection HttpUrlsUsage
@@ -61,11 +65,13 @@ class Page:
         return f'{url}/page/{{0}}'
 
     def __aiter__(self):
+        """Async iterator by pages"""
         self.__yields_page = 0
         self.__yields.clear()
         return self
 
     async def __anext__(self) -> InlineItem:
+        """Returns `InlineItem` object for every title in page"""
         if not self.__yields:
             try:
                 self.__yields_page += 1
@@ -79,7 +85,7 @@ class Page:
         Get items from pages range.
         None for all elements of all pages
         """
-        items = BeautifulSoup((await get_response('GET', self._page_format(page))).text
+        items = BeautifulSoup((await get_response('GET', self._page_format(page))).text, builder=_BUILDER
                               ).find_all(class_='b-content__inline_item')
         if not items:
             raise EmptyPage(page)

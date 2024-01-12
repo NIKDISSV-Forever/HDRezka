@@ -1,3 +1,4 @@
+"""Implementation of search on HDRezka pages (see ..post.page.Page class)"""
 from ..post.page import *
 
 __all__ = ('Search',)
@@ -10,6 +11,7 @@ class Search(Page):
     __slots__ = ('_query',)
 
     def __init__(self, query: str = ''):
+        """Preparing query for search"""
         self.query = query.strip()
         super().__init__(_SEARCH_TEMPLATE % self.query)
 
@@ -19,6 +21,7 @@ class Search(Page):
 
     @query.setter
     def query(self, value):
+        """Cast value to str and sets"""
         self._query = value if isinstance(value, str) else str(value)
         self.page = _SEARCH_TEMPLATE % self.query
 

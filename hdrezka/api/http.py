@@ -1,11 +1,29 @@
+"""Basic wrapper for all http requests of the package"""
+from typing import Any, Optional, TypedDict
+
 import httpx
 
-__all__ = ('get_response', 'DEFAULT_CLIENT_KWARGS', 'DEFAULT_REQUEST_KWARGS')
-
-DEFAULT_CLIENT_KWARGS = {'headers': {'user-agent': 'Mozilla/5.0'}, 'follow_redirects': True}
-DEFAULT_REQUEST_KWARGS = {}
+__all__ = ('get_response', 'DEFAULT_CLIENT', 'DEFAULT_REQUEST_KWARGS')
 
 
-async def get_response(*args, **kwargs):
-    async with httpx.AsyncClient(**DEFAULT_CLIENT_KWARGS) as client:
-        return await client.request(*args, **kwargs, **DEFAULT_REQUEST_KWARGS)
+class RequestKwargs(TypedDict):
+    content: Optional[Any]
+    data: Optional[Any]
+    files: Optional[Any]
+    json: Optional[Any]
+    params: Optional[Any]
+    headers: Optional[Any]
+    cookies: Optional[Any]
+    auth: Optional[Any]
+    follow_redirects: Optional[bool | Any]
+    timeout: Optional[Any]
+    extensions: Optional[Any]
+
+
+DEFAULT_CLIENT = httpx.AsyncClient(headers={'user-agent': 'Mozilla/5.0'}, follow_redirects=True)
+DEFAULT_REQUEST_KWARGS: RequestKwargs | dict = {}
+
+
+async def get_response(method: str, url: str, **kwargs) -> httpx.Response:
+    """Returns DEFAULT_CLIENT.request(method, url, **kwargs, **DEFAULT_REQUEST_KWARGS)"""
+    return await DEFAULT_CLIENT.request(method, url, **kwargs, **DEFAULT_REQUEST_KWARGS)

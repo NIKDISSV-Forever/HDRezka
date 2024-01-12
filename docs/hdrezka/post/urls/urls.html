@@ -64,25 +64,33 @@
                     <h1 class="modulename">
 <a href="./../../../hdrezka.html">hdrezka</a><wbr>.<a href="./../../post.html">post</a><wbr>.<a href="./../urls.html">urls</a><wbr>.urls    </h1>
 
-                
+                        <div class="docstring"><p>All urls for one video</p>
+</div>
+
                         <input id="mod-urls-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
                         <label class="view-source-button" for="mod-urls-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">.kind</span> <span class="kn">import</span> <span class="n">SubtitleURLs</span><span class="p">,</span> <span class="n">VideoURLs</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">.._dataclass</span> <span class="kn">import</span> <span class="n">frozen_slots_dataclass</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;All urls for one video&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="k">class</span> <span class="nc">URLs</span><span class="p">:</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">video</span><span class="p">:</span> <span class="n">VideoURLs</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">subtitles</span><span class="p">:</span> <span class="n">SubtitleURLs</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="k">def</span> <span class="nf">urls_from_ajax_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">URLs</span><span class="p">:</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="k">return</span> <span class="n">URLs</span><span class="p">(</span><span class="n">VideoURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)),</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>                <span class="n">SubtitleURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>                             <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_lns&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_def&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)))</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">.kind</span> <span class="kn">import</span> <span class="n">SubtitleURLs</span><span class="p">,</span> <span class="n">VideoURLs</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">...api.types</span> <span class="kn">import</span> <span class="n">APIResponse</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="k">class</span> <span class="nc">URLs</span><span class="p">:</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;All urls for one video class&quot;&quot;&quot;</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">video</span><span class="p">:</span> <span class="n">VideoURLs</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">subtitles</span><span class="p">:</span> <span class="n">SubtitleURLs</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="k">def</span> <span class="nf">urls_from_ajax_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">APIResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">URLs</span><span class="p">:</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse response and return urls&quot;&quot;&quot;</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="k">return</span> <span class="n">URLs</span><span class="p">(</span><span class="n">VideoURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)),</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>                <span class="n">SubtitleURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>                             <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_lns&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;off&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}),</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>                             <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_def&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
 </span></pre></div>
 
 
@@ -90,7 +98,7 @@
                 <section id="URLs">
                             <input id="URLs-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-                    <div class="decorator">@frozen_slots_dataclass</div>
+                    <div class="decorator">@dataclass(frozen=True, slots=True)</div>
 
     <span class="def">class</span>
     <span class="name">URLs</span>:
@@ -99,14 +107,17 @@
 
     </div>
     <a class="headerlink" href="#URLs"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="URLs-6"><a href="#URLs-6"><span class="linenos">6</span></a><span class="nd">@frozen_slots_dataclass</span>
-</span><span id="URLs-7"><a href="#URLs-7"><span class="linenos">7</span></a><span class="k">class</span> <span class="nc">URLs</span><span class="p">:</span>
-</span><span id="URLs-8"><a href="#URLs-8"><span class="linenos">8</span></a>    <span class="n">video</span><span class="p">:</span> <span class="n">VideoURLs</span>
-</span><span id="URLs-9"><a href="#URLs-9"><span class="linenos">9</span></a>    <span class="n">subtitles</span><span class="p">:</span> <span class="n">SubtitleURLs</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="URLs-9"><a href="#URLs-9"><span class="linenos"> 9</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="URLs-10"><a href="#URLs-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">URLs</span><span class="p">:</span>
+</span><span id="URLs-11"><a href="#URLs-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;All urls for one video class&quot;&quot;&quot;</span>
+</span><span id="URLs-12"><a href="#URLs-12"><span class="linenos">12</span></a>    <span class="n">video</span><span class="p">:</span> <span class="n">VideoURLs</span>
+</span><span id="URLs-13"><a href="#URLs-13"><span class="linenos">13</span></a>    <span class="n">subtitles</span><span class="p">:</span> <span class="n">SubtitleURLs</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>All urls for one video class</p>
+</div>
+
 
                             <div id="URLs.__init__" class="classattr">
                                 <div class="attr function">
@@ -148,20 +159,24 @@
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">urls_from_ajax_response</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">response</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n"><a href="#URLs">URLs</a></span>:</span></span>
+        <span class="name">urls_from_ajax_response</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">response</span><span class="p">:</span> <span class="n"><a href="../../api/types.html#APIResponse">hdrezka.api.types.APIResponse</a></span></span><span class="return-annotation">) -> <span class="n"><a href="#URLs">URLs</a></span>:</span></span>
 
                 <label class="view-source-button" for="urls_from_ajax_response-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#urls_from_ajax_response"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="urls_from_ajax_response-12"><a href="#urls_from_ajax_response-12"><span class="linenos">12</span></a><span class="k">def</span> <span class="nf">urls_from_ajax_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">URLs</span><span class="p">:</span>
-</span><span id="urls_from_ajax_response-13"><a href="#urls_from_ajax_response-13"><span class="linenos">13</span></a>    <span class="k">return</span> <span class="n">URLs</span><span class="p">(</span><span class="n">VideoURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)),</span>
-</span><span id="urls_from_ajax_response-14"><a href="#urls_from_ajax_response-14"><span class="linenos">14</span></a>                <span class="n">SubtitleURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-</span><span id="urls_from_ajax_response-15"><a href="#urls_from_ajax_response-15"><span class="linenos">15</span></a>                             <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_lns&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_def&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)))</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="urls_from_ajax_response-16"><a href="#urls_from_ajax_response-16"><span class="linenos">16</span></a><span class="k">def</span> <span class="nf">urls_from_ajax_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">APIResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">URLs</span><span class="p">:</span>
+</span><span id="urls_from_ajax_response-17"><a href="#urls_from_ajax_response-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse response and return urls&quot;&quot;&quot;</span>
+</span><span id="urls_from_ajax_response-18"><a href="#urls_from_ajax_response-18"><span class="linenos">18</span></a>    <span class="k">return</span> <span class="n">URLs</span><span class="p">(</span><span class="n">VideoURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)),</span>
+</span><span id="urls_from_ajax_response-19"><a href="#urls_from_ajax_response-19"><span class="linenos">19</span></a>                <span class="n">SubtitleURLs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+</span><span id="urls_from_ajax_response-20"><a href="#urls_from_ajax_response-20"><span class="linenos">20</span></a>                             <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_lns&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;off&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}),</span>
+</span><span id="urls_from_ajax_response-21"><a href="#urls_from_ajax_response-21"><span class="linenos">21</span></a>                             <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtitle_def&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Parse response and return urls</p>
+</div>
+
 
                 </section>
     </main>
