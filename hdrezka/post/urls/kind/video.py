@@ -4,17 +4,23 @@ from typing import Iterable, SupportsInt
 from .quality import Quality
 from .._regexes import findall_qualities
 from ...._deobfuscation import clear_trash
+from ....api.http import get_response
 
 __all__ = ('VideoURL', 'VideoURLs')
 
 
 class VideoURL(str):
     """str type add-on to represent video"""
-    __slots__ = ('mp4',)
+    __slots__ = ()
 
-    def __init__(self, *_, **__):
-        """Sets mp4 attribute (url without ":hls:manifest.m3u")"""
-        self.mp4 = str(self.removesuffix('8').removesuffix(':hls:manifest.m3u'))
+    def __await__(self):
+        """Follow redirects in url and return correct video url"""
+        return self.__class__((yield from get_response("GET", self, follow_redirects=True).__await__()).url)
+
+    @property
+    def mp4(self) -> str:
+        """url without ':hls:manifest.m3u8'"""
+        return str(self.removesuffix('8').removesuffix(':hls:manifest.m3u'))
 
 
 class VideoURLs:

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 3.2.1
+
+- ### post.kind.video
+    - if **await** `VideoURL` instance, it's follow url redirects and return correct download url.
+      _See [issue 5](https://github.com/NIKDISSV-Forever/HDRezka/issues/5)_.
+    - Now `VideoURL.mp4` is `property`.
+- ### api.http
+    - passed `get_response(..., **kwargs)` have more weight than `DEFAULT_REQUEST_KWARGS`.
+
 ## 3.2.0
 
 - **Documentation and doc-strings improved.**

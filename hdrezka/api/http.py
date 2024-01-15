@@ -25,5 +25,11 @@ DEFAULT_REQUEST_KWARGS: RequestKwargs | dict = {}
 
 
 async def get_response(method: str, url: str, **kwargs) -> httpx.Response:
-    """Returns DEFAULT_CLIENT.request(method, url, **kwargs, **DEFAULT_REQUEST_KWARGS)"""
-    return await DEFAULT_CLIENT.request(method, url, **kwargs, **DEFAULT_REQUEST_KWARGS)
+    """
+    passed **kwargs have more weight than DEFAULT_REQUEST_KWARGS.
+    Returns DEFAULT_CLIENT.request(method, url, **kwargs, **DEFAULT_REQUEST_KWARGS)
+    """
+    for k, v in DEFAULT_REQUEST_KWARGS.items():
+        if k not in kwargs:
+            kwargs[k] = v
+    return await DEFAULT_CLIENT.request(method, url, **kwargs)

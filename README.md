@@ -10,6 +10,7 @@
 import asyncio
 from hdrezka import Search
 
+
 async def main():
     player = await (await Search('Breaking Bad').get_page(1))[0].player
     print(player.post.info, end='\n\n')
@@ -20,11 +21,12 @@ async def main():
 
     stream = await player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
     video = stream.video
-    print(video.last_url)  # best quality (.m3u8)
-    print(video[video.min].last_url.mp4, end='\n\n')  # worst quality (.mp4)
+    print(await video.last_url)  # best quality (.m3u8)
+    print((await video[video.min].last_url).mp4, end='\n\n')  # worst quality (.mp4)
 
     subtitles = stream.subtitles
     print(subtitles.default.url)  # subtitles.ru.url or subtitles['Русский'].url
+
 
 if __name__ == '__main__': asyncio.run(main())
 ```
