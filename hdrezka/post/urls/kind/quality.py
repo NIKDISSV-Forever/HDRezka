@@ -6,17 +6,21 @@ __all__ = ('Quality',)
 
 class Quality(str):
     """str type add-on to represent video quality"""
-    __slots__ = ('_i', 'addon')
+    __slots__ = ('_i', 'addon', 'units')
     addon: str
 
     def __init__(self, *_, **__):
         """Sets addon attribute (can contain 'ultra')"""
         _i = match_quality_int(self)
         if not _i:
-            raise ValueError(f'{self!r} is not quality.')
-        _i, self.addon = _i.groups()
+            raise ValueError(f'{self!r} is unknown quality.')
+        _i, units, self.addon = _i.groups()
+        if units == 'K':
+            _i += '000'
+            units = 'p'
         self.addon = self.addon.casefold()
         self._i = int(_i)
+        self.units = units
 
     def __int__(self):
         """

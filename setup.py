@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import setuptools
 
 with open('requirements.txt', encoding='UTF-8') as f:
@@ -11,7 +9,7 @@ with open('CHANGELOG.md', encoding='UTF-8') as f:
 
 setuptools.setup(
     name='HDRezka',
-    version='3.2.1',
+    version='3.2.2',
 
     author='Nikita (NIKDISSV)',
     author_email='nikdissv@proton.me',

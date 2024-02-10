@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.2.2
+
+- ### post.urls
+    - Added supports of added support for quality in the format `2K`, `4K`, ...
+  
 ## 3.2.1
 
 - ### post.kind.video
