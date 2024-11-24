@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.2.3
+- New `url` module and `url.Request` class for changing the HDRezka host url
+- `stream.player.Player` now connects the url to the default host if only the url path is passed.
+- Used Poetry to replace setup.py and requirements.txt.
+
 ## 3.2.2
 
 - ### post.urls

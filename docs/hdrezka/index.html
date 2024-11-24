@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.1">
-<title>hdrezka.api.http API documentation</title>
-<meta name="description" content="Basic wrapper for all http requests of the package">
+<title>hdrezka API documentation</title>
+<meta name="description" content="[HDRezka](https://gdrezka.ag/) site API …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -22,43 +22,90 @@ hljs.highlightAll();
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>hdrezka.api.http</code></h1>
+<h1 class="title">Package <code>hdrezka</code></h1>
 </header>
 <section id="section-intro">
-<p>Basic wrapper for all http requests of the package</p>
+<h1 id="hdrezka-site-api"><a href="https://gdrezka.ag/">HDRezka</a> site API.</h1>
+<h1 id="install">Install</h1>
+<p><code>pip install HDRezka</code></p>
+<h1 id="example">Example</h1>
+<pre><code class="language-python">import asyncio
+from hdrezka import Search
+
+async def main():
+    player = await (await Search('Breaking Bad').get_page(1))[0].player  # or use url (await Player('series/thriller/646-vo-vse-tyazhkie-2008.html'))
+    print(player.post.info, end='\n\n')
+
+    translator_id = None  # default
+    for name, id_ in player.post.translators.name_id.items():
+        if 'субтитры' in name.casefold(): translator_id = id_; break
+
+    stream = await player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
+    video = stream.video
+    print(video.last_url)  # best quality (.m3u8)
+    print(video[video.min].last_url.mp4, end='\n\n')  # worst quality (.mp4)
+
+    subtitles = stream.subtitles
+    print(subtitles.default.url)  # subtitles.ru.url or subtitles['Русский'].url
+
+if __name__ == '__main__': asyncio.run(main())
+</code></pre>
+<h1 id="github"><a href="https://github.com/NIKDISSV-Forever/HDRezka">GitHub</a></h1>
 </section>
 <section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-functions">Functions</h2>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt id="hdrezka.api.http.get_response"><code class="name flex">
-<span>async def <span class="ident">get_response</span></span>(<span>method: str, url: str, **kwargs) ‑> httpx.Response</span>
-</code></dt>
+<dt><code class="name"><a title="hdrezka.api" href="api/index.html">hdrezka.api</a></code></dt>
 <dd>
-<div class="desc"><p>passed <strong>kwargs have more weight than DEFAULT_REQUEST_KWARGS.
-Returns DEFAULT_CLIENT.request(method, url, </strong>kwargs, **DEFAULT_REQUEST_KWARGS)</p></div>
+<div class="desc"><p>HDRezka API call functions</p></div>
+</dd>
+<dt><code class="name"><a title="hdrezka.errors" href="errors.html">hdrezka.errors</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="hdrezka.post" href="post/index.html">hdrezka.post</a></code></dt>
+<dd>
+<div class="desc"><p>Module of HDRezka urls view</p></div>
+</dd>
+<dt><code class="name"><a title="hdrezka.stream" href="stream/index.html">hdrezka.stream</a></code></dt>
+<dd>
+<div class="desc"><p>HDRezka stream module</p></div>
+</dd>
+<dt><code class="name"><a title="hdrezka.translators" href="translators.html">hdrezka.translators</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="hdrezka.url" href="url.html">hdrezka.url</a></code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 </dl>
+</section>
+<section>
+</section>
+<section>
 </section>
 <section>
 </section>
 </article>
 <nav id="sidebar">
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#hdrezka-site-api">HDRezka site API.</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#github">GitHub</a></li>
+</ul>
 </div>
 <ul id="index">
-<li><h3>Super-module</h3>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li><code><a title="hdrezka.api" href="index.html">hdrezka.api</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="hdrezka.api.http.get_response" href="#hdrezka.api.http.get_response">get_response</a></code></li>
+<li><code><a title="hdrezka.api" href="api/index.html">hdrezka.api</a></code></li>
+<li><code><a title="hdrezka.errors" href="errors.html">hdrezka.errors</a></code></li>
+<li><code><a title="hdrezka.post" href="post/index.html">hdrezka.post</a></code></li>
+<li><code><a title="hdrezka.stream" href="stream/index.html">hdrezka.stream</a></code></li>
+<li><code><a title="hdrezka.translators" href="translators.html">hdrezka.translators</a></code></li>
+<li><code><a title="hdrezka.url" href="url.html">hdrezka.url</a></code></li>
 </ul>
 </li>
 </ul>

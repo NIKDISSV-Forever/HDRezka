@@ -1,3 +1,5 @@
+import urllib.parse
+
 from bs4 import BeautifulSoup
 
 from ._bs4 import _BUILDER
@@ -7,6 +9,8 @@ from ..translators import Translators
 
 __all__ = ('Post',)
 
+from ..url import Request
+
 
 class Post:
     """Stores information about the post"""
@@ -15,6 +19,8 @@ class Post:
 
     def __init__(self, url: str):
         """Need await"""
+        if not urllib.parse.urlparse(url).hostname:
+            url = Request.host_join(url)
         self.url = url
 
     def __await__(self):

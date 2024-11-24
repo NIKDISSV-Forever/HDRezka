@@ -4,7 +4,7 @@ from binascii import a2b_base64
 __all__ = ('clear_trash',)
 
 _sub_trash = re.compile(
-    '#h|//_//|'
+    '^#h|//_//|'
     '(?:I[01UV]|[JQ][EF]|X[kl])(?:[A4][=hjk]|[B5][Ae])|'
     '(?:I[Sy]|[JQ]C|Xi)(?:[EMQ][=hjk]|[FNR][Ae])'
 ).sub

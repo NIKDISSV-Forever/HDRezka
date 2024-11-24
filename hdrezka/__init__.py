@@ -1,5 +1,5 @@
 r"""
-# [HDRezka](https://rezka.ag/) site API.
+# [HDRezka](https://gdrezka.ag/) site API.
 
 # Install
 
@@ -12,7 +12,7 @@ import asyncio
 from hdrezka import Search
 
 async def main():
-    player = await (await Search('Breaking Bad').get_page(1))[0].player  # or use url (await Player('https://rezka.ag/series/thriller/646-vo-vse-tyazhkie-2008.html'))
+    player = await (await Search('Breaking Bad').get_page(1))[0].player  # or use url (await Player('series/thriller/646-vo-vse-tyazhkie-2008.html'))
     print(player.post.info, end='\n\n')
 
     translator_id = None  # default

@@ -1,9 +1,10 @@
 """Implementation of search on HDRezka pages (see ..post.page.Page class)"""
+from typing import override
+
 from ..post.page import *
+from ..url import Request
 
 __all__ = ('Search',)
-
-_SEARCH_TEMPLATE = 'https://rezka.ag/search/?do=search&subaction=search&q=%s'
 
 
 class Search(Page):
@@ -13,7 +14,11 @@ class Search(Page):
     def __init__(self, query: str = ''):
         """Preparing query for search"""
         self.query = query.strip()
-        super().__init__(_SEARCH_TEMPLATE % self.query)
+        super().__init__(self.search_url(self.query))
+
+    @staticmethod
+    def search_url(query: str):
+        return Request.host_join(f'search/?do=search&subaction=search&q={query}')
 
     @property
     def query(self) -> str:
@@ -23,9 +28,10 @@ class Search(Page):
     def query(self, value):
         """Cast value to str and sets"""
         self._query = value if isinstance(value, str) else str(value)
-        self.page = _SEARCH_TEMPLATE % self.query
+        self.page = self.search_url(self.query)
 
     @staticmethod
+    @override
     def _concat_paginator(url: str) -> str:
         return f'{url}&page={{0}}'
 

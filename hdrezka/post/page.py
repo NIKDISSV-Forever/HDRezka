@@ -8,6 +8,7 @@ from ._bs4 import _BUILDER
 from ..api.http import get_response
 from ..errors import EmptyPage
 from ..stream.player import *
+from ..url import Request
 
 __all__ = ('Page', 'PageNumber', 'InlineItem')
 
@@ -40,7 +41,7 @@ class Page:
     """AJAX class for HDRezka search"""
     __slots__ = ('_page', '_page_format', '__yields', '__yields_page')
 
-    def __init__(self, url: str = 'https://rezka.ag/'):
+    def __init__(self, url: str = Request.HOST):
         self.__yields: list[InlineItem] = []
         self.__yields_page = 0
         self.page = url
