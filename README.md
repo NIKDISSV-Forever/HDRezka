@@ -1,4 +1,4 @@
-# [HDRezka](https://rezka.ag/) site API.
+# [HDRezka](https://hdrezka.ag/) site API.
 
 # Install
 
