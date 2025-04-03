@@ -1,35 +1,16 @@
 """General user-friendly interface to HDRezka"""
+__all__ = ('Player', 'PlayerBase', 'PlayerMovie', 'PlayerSeries')
+
 from collections import defaultdict
 from typing import Any, SupportsInt, Optional
 
 from bs4 import BeautifulSoup
 
+from ._cache import CACHE
+from .._bs4 import BUILDER
 from ..api.ajax import AJAX
 from ..errors import UnknownContentType
-from ..post import *
-
-__all__ = ('Player', 'PlayerBase', 'PlayerMovie', 'PlayerSeries')
-
-
-class _CacheStorage:
-    __slots__ = ('max_size', '__storage')
-
-    def __init__(self, max_size: int = 10):
-        self.max_size = max_size
-        self.__storage: dict[str, PlayerMovie | PlayerSeries] = {}
-
-    def get(self, key):
-        return self.__storage.get(key)
-
-    def set(self, key, value):
-        self.__storage[key] = value
-        for k in (*self.__storage.keys(),):
-            if len(self.__storage) <= self.max_size:
-                break
-            del self.__storage[k]
-
-
-__CACHE = _CacheStorage()
+from ..post import Post, urls_from_ajax_response, URLs
 
 
 class PlayerBase:
@@ -77,10 +58,10 @@ class PlayerSeries(PlayerBase):
     async def get_episodes(self, translator_id: Optional[SupportsInt] = None) -> defaultdict[int, tuple[int, ...]]:
         """Returns available episodes"""
         episodes = BeautifulSoup((await AJAX.get_episodes(self.post.id, self._translator(translator_id)))['episodes'],
-                                 features=['html', 'fast'])
+                                 builder=BUILDER)
         result: defaultdict[int, tuple[int, ...]] = defaultdict(tuple)
         for i in episodes.find_all(class_='b-simple_episode__item', attrs=('data-season_id', 'data-episode_id')):
-            result[int(i.get('data-season_id'))] += int(i.get('data-episode_id')),
+            result[int(i.attrs.get('data-season_id'))] += int(i.attrs.get('data-episode_id')),
         return result
 
     async def get_stream(self, season: int, episode: int, translator_id: Optional[SupportsInt] = None) -> URLs:
@@ -94,20 +75,19 @@ async def player(url_or_path: Any) -> PlayerMovie | PlayerSeries:
     Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType
     """
     cast = PlayerBase(url_or_path)
-    cached = __CACHE.get(cast.post.url)
+    cached = CACHE.get(cast.post.url)
     if cached is not None:
         return cached
     await cast
-    type = cast.post.type
     value: PlayerMovie | PlayerSeries
-    match type:
+    match cast.post.type:
         case 'tv_series':
             value = PlayerSeries(cast)
         case 'movie':
             value = PlayerMovie(cast)
-        case _:
-            raise UnknownContentType(type)
-    __CACHE.set(cast.post.url, value)
+        case _ as e:
+            raise UnknownContentType(e)
+    CACHE.set(cast.post.url, value)
     return value
 
 

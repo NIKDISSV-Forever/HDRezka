@@ -1,3 +1,6 @@
+"""Error definitions"""
+
+
 class HDRezkaError(Exception):
     """Any HDRezka exception"""
     __slots__ = ()

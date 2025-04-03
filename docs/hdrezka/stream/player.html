@@ -3,19 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-<meta name="generator" content="pdoc3 0.11.1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>hdrezka.stream.player API documentation</title>
 <meta name="description" content="General user-friendly interface to HDRezka">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
 <style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
 <script>window.addEventListener('DOMContentLoaded', () => {
 hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
 hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
 })</script>
 </head>
 <body>
@@ -38,6 +49,30 @@ hljs.highlightAll();
 <span>async def <span class="ident">Player</span></span>(<span>url_or_path: Any) ‑> <a title="hdrezka.stream.player.PlayerMovie" href="#hdrezka.stream.player.PlayerMovie">PlayerMovie</a> | <a title="hdrezka.stream.player.PlayerSeries" href="#hdrezka.stream.player.PlayerSeries">PlayerSeries</a></span>
 </code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def player(url_or_path: Any) -&gt; PlayerMovie | PlayerSeries:
+    &#34;&#34;&#34;
+    Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType
+    &#34;&#34;&#34;
+    cast = PlayerBase(url_or_path)
+    cached = CACHE.get(cast.post.url)
+    if cached is not None:
+        return cached
+    await cast
+    value: PlayerMovie | PlayerSeries
+    match cast.post.type:
+        case &#39;tv_series&#39;:
+            value = PlayerSeries(cast)
+        case &#39;movie&#39;:
+            value = PlayerMovie(cast)
+        case _ as e:
+            raise UnknownContentType(e)
+    CACHE.set(cast.post.url, value)
+    return value</code></pre>
+</details>
 <div class="desc"><p>Returns either Player Series if series, or PlayerMovie if movie, otherwise raises UnknownContentType</p></div>
 </dd>
 </dl>
@@ -50,8 +85,6 @@ hljs.highlightAll();
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Base type of Player</p>
-<p>Need await</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -85,6 +118,8 @@ hljs.highlightAll();
     def __repr__(self):
         return f&#34;{self.__class__.__qualname__}({self.post.url!r})&#34;</code></pre>
 </details>
+<div class="desc"><p>Base type of Player</p>
+<p>Need await</p></div>
 <h3>Subclasses</h3>
 <ul class="hlist">
 <li><a title="hdrezka.stream.player.PlayerMovie" href="#hdrezka.stream.player.PlayerMovie">PlayerMovie</a></li>
@@ -94,6 +129,39 @@ hljs.highlightAll();
 <dl>
 <dt id="hdrezka.stream.player.PlayerBase.post"><code class="name">var <span class="ident">post</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PlayerBase:
+    &#34;&#34;&#34;Base type of Player&#34;&#34;&#34;
+    __slots__ = (&#39;post&#39;,)
+
+    def __init__(self, url_or_cast: Any):
+        &#34;&#34;&#34;Need await&#34;&#34;&#34;
+        if isinstance(url_or_cast, PlayerBase):
+            self.post: Post = url_or_cast.post
+            return
+        elif not isinstance(url_or_cast, str):
+            url_or_cast = str(url_or_cast)
+        self.post = Post(url_or_cast)
+
+    def __await__(self):
+        &#34;&#34;&#34;
+        Initialize `self.post`
+        Do not call twice!
+        &#34;&#34;&#34;
+        yield from self.post.__await__()
+
+    def _translator(self, translator_id: Optional[SupportsInt] = None) -&gt; int:
+        if translator_id is None:
+            return self.post.translator_id
+        translator_id = int(translator_id)
+        return self.post.translators.ids[abs(translator_id)] if translator_id &lt;= 0 else translator_id
+
+    def __repr__(self):
+        return f&#34;{self.__class__.__qualname__}({self.post.url!r})&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 </dl>
@@ -103,8 +171,6 @@ hljs.highlightAll();
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Movies Player Type</p>
-<p>Need await</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -117,6 +183,8 @@ hljs.highlightAll();
         &#34;&#34;&#34;Returns movie stream `URLs`&#34;&#34;&#34;
         return urls_from_ajax_response(await AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
 </details>
+<div class="desc"><p>Movies Player Type</p>
+<p>Need await</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></li>
@@ -124,9 +192,17 @@ hljs.highlightAll();
 <h3>Methods</h3>
 <dl>
 <dt id="hdrezka.stream.player.PlayerMovie.get_stream"><code class="name flex">
-<span>async def <span class="ident">get_stream</span></span>(<span>self, translator_id: Optional[<class 'SupportsInt'>] = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
+<span>async def <span class="ident">get_stream</span></span>(<span>self, translator_id: <class 'SupportsInt'> | None = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
 </code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_stream(self, translator_id: Optional[SupportsInt] = None) -&gt; URLs:
+    &#34;&#34;&#34;Returns movie stream `URLs`&#34;&#34;&#34;
+    return urls_from_ajax_response(await AJAX.get_movie(self.post.id, self._translator(translator_id)))</code></pre>
+</details>
 <div class="desc"><p>Returns movie stream <code>URLs</code></p></div>
 </dd>
 </dl>
@@ -136,8 +212,6 @@ hljs.highlightAll();
 <span>(</span><span>url_or_cast: Any)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Base type of Player</p>
-<p>Need await</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -148,10 +222,10 @@ hljs.highlightAll();
     async def get_episodes(self, translator_id: Optional[SupportsInt] = None) -&gt; defaultdict[int, tuple[int, ...]]:
         &#34;&#34;&#34;Returns available episodes&#34;&#34;&#34;
         episodes = BeautifulSoup((await AJAX.get_episodes(self.post.id, self._translator(translator_id)))[&#39;episodes&#39;],
-                                 features=[&#39;html&#39;, &#39;fast&#39;])
+                                 builder=BUILDER)
         result: defaultdict[int, tuple[int, ...]] = defaultdict(tuple)
         for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
-            result[int(i.get(&#39;data-season_id&#39;))] += int(i.get(&#39;data-episode_id&#39;)),
+            result[int(i.attrs.get(&#39;data-season_id&#39;))] += int(i.attrs.get(&#39;data-episode_id&#39;)),
         return result
 
     async def get_stream(self, season: int, episode: int, translator_id: Optional[SupportsInt] = None) -&gt; URLs:
@@ -159,6 +233,8 @@ hljs.highlightAll();
         return urls_from_ajax_response(
             await AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
 </details>
+<div class="desc"><p>Base type of Player</p>
+<p>Need await</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></li>
@@ -166,15 +242,37 @@ hljs.highlightAll();
 <h3>Methods</h3>
 <dl>
 <dt id="hdrezka.stream.player.PlayerSeries.get_episodes"><code class="name flex">
-<span>async def <span class="ident">get_episodes</span></span>(<span>self, translator_id: Optional[<class 'SupportsInt'>] = None) ‑> collections.defaultdict[int, tuple[int, ...]]</span>
+<span>async def <span class="ident">get_episodes</span></span>(<span>self, translator_id: <class 'SupportsInt'> | None = None) ‑> collections.defaultdict[int, tuple[int, ...]]</span>
 </code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_episodes(self, translator_id: Optional[SupportsInt] = None) -&gt; defaultdict[int, tuple[int, ...]]:
+    &#34;&#34;&#34;Returns available episodes&#34;&#34;&#34;
+    episodes = BeautifulSoup((await AJAX.get_episodes(self.post.id, self._translator(translator_id)))[&#39;episodes&#39;],
+                             builder=BUILDER)
+    result: defaultdict[int, tuple[int, ...]] = defaultdict(tuple)
+    for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
+        result[int(i.attrs.get(&#39;data-season_id&#39;))] += int(i.attrs.get(&#39;data-episode_id&#39;)),
+    return result</code></pre>
+</details>
 <div class="desc"><p>Returns available episodes</p></div>
 </dd>
 <dt id="hdrezka.stream.player.PlayerSeries.get_stream"><code class="name flex">
-<span>async def <span class="ident">get_stream</span></span>(<span>self, season: int, episode: int, translator_id: Optional[<class 'SupportsInt'>] = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
+<span>async def <span class="ident">get_stream</span></span>(<span>self,<br>season: int,<br>episode: int,<br>translator_id: <class 'SupportsInt'> | None = None) ‑> <a title="hdrezka.post.urls.urls.URLs" href="../post/urls/urls.html#hdrezka.post.urls.urls.URLs">URLs</a></span>
 </code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_stream(self, season: int, episode: int, translator_id: Optional[SupportsInt] = None) -&gt; URLs:
+    &#34;&#34;&#34;Returns episode stream `URLs`&#34;&#34;&#34;
+    return urls_from_ajax_response(
+        await AJAX.get_stream(self.post.id, self._translator(translator_id), season, episode))</code></pre>
+</details>
 <div class="desc"><p>Returns episode stream <code>URLs</code></p></div>
 </dd>
 </dl>
@@ -224,7 +322,7 @@ hljs.highlightAll();
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

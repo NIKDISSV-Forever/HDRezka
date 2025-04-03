@@ -1,47 +1,42 @@
-"""high-level structures for representing title data"""
-from dataclasses import dataclass
-
+"""High-level structures for representing title data"""
 __all__ = ('Rating', 'Place', 'Release', 'AgeRating', 'Duration', 'Poster')
 
+from typing import NamedTuple
 
-@dataclass(frozen=True, slots=True)
-class Rating:
+
+class Rating(NamedTuple):
     """Rating for service"""
     service: str
     rating: int | float
     votes: int
+    url: str
 
 
-@dataclass(frozen=True, slots=True)
-class Place:
+class Place(NamedTuple):
     """Place of title"""
     name: str
     place: int
 
 
-@dataclass(frozen=True, slots=True)
-class Release:
+class Release(NamedTuple):
     """Release date"""
     year: int
     day: str
 
 
-@dataclass(frozen=True, slots=True)
-class AgeRating:
+class AgeRating(NamedTuple):
     """Age restricts"""
     age: int
     description: str = ''
 
 
-@dataclass(frozen=True, slots=True)
-class Duration:
+class Duration(NamedTuple):
     """Duration of title"""
     number: int
     units: str
 
 
-@dataclass(frozen=True, slots=True)
-class Poster:
+class Poster(NamedTuple):
     """Poster of title"""
     full: str = ''
     preview: str = ''

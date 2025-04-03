@@ -1,7 +1,8 @@
+"""HDRezka deobfuscation process"""
+__all__ = ('clear_trash',)
+
 import re
 from binascii import a2b_base64
-
-__all__ = ('clear_trash',)
 
 _sub_trash = re.compile(
     '^#h|//_//|'
@@ -11,4 +12,5 @@ _sub_trash = re.compile(
 
 
 def clear_trash(trash_string: str) -> str:
+    """removes base64 trash from string"""
     return a2b_base64(_sub_trash('', trash_string).encode('ASCII') + b'==').decode('ASCII')
