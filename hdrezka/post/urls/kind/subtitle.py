@@ -1,12 +1,10 @@
-from dataclasses import dataclass
-
-from .._regexes import findall_subtitles
-
+"""Subtitles module"""
 __all__ = ('SubtitleURL', 'SubtitleURLs')
 
+from typing import NamedTuple
 
-@dataclass(frozen=True, slots=True)
-class SubtitleURL:
+
+class SubtitleURL(NamedTuple):
     """
     url: str
         .vtt file url
@@ -16,7 +14,6 @@ class SubtitleURL:
     code: str
     """
     url: str
-    # language:
     name: str
     code: str
 
@@ -33,7 +30,8 @@ class SubtitleURLs:
         """
         self.has_subtitles = not subtitle
         self.subtitles: tuple[SubtitleURL, ...] = *(
-            SubtitleURL(url, name, subtitle_lns[name]) for name, url in findall_subtitles(subtitle or '')),
+            SubtitleURL(url, name, subtitle_lns[name]) for name, url in
+            (v.removeprefix('[').split(']', 1) for v in (subtitle or '').split(','))),
         self.subtitles += SubtitleURL('', '', 'off'),
         self.subtitle_names = {}
         self.subtitle_codes = {}

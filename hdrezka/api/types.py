@@ -1,7 +1,7 @@
 """API response types"""
-from typing import TypedDict
-
 __all__ = ('APIResponse',)
+
+from typing import TypedDict
 
 
 class APIResponse(TypedDict):

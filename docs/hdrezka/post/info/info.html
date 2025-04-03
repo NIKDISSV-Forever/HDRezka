@@ -3,19 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-<meta name="generator" content="pdoc3 0.11.1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>hdrezka.post.info.info API documentation</title>
-<meta name="description" content="title page parsing operations">
+<meta name="description" content="Title page parsing operations">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
 <style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
 <script>window.addEventListener('DOMContentLoaded', () => {
 hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
 hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
 })</script>
 </head>
 <body>
@@ -25,7 +36,7 @@ hljs.highlightAll();
 <h1 class="title">Module <code>hdrezka.post.info.info</code></h1>
 </header>
 <section id="section-intro">
-<p>title page parsing operations</p>
+<p>Title page parsing operations</p>
 </section>
 <section>
 </section>
@@ -41,69 +52,52 @@ hljs.highlightAll();
 <span>(</span><span>soup: bs4.BeautifulSoup)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class with all available data</p>
-<p>Initialize class from title page BeautifulSoup</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class PostInfo:
     &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
-    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;,
-                 &#39;quality&#39;, &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;,
-                 &#39;_view&#39;, &#39;fields&#39;, &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;)
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
     FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
 
     def __init__(self, soup: BeautifulSoup):
         &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
-        title = soup.find(class_=&#39;b-post__title&#39;)
-        if title is None:
-            self.title = &#39;&#39;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
         else:
-            self.title = title.text.strip()
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
         orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
         self.orig_title = orig_title.text.strip() if orig_title else self.title
-        poster: Tag | None | dict[str, str] = soup.select_one(&#39;.b-sidecover&gt;a img&#39;)
-        if poster is None:
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
             poster_href = poster_src = &#39;&#39;
-        else:
-            match m := poster.get(&#39;href&#39;, &#39;&#39;):
-                case None:
-                    poster_href = &#39;&#39;
-                case [poster_href, *_]:
-                    pass
-                case str(poster_href):
-                    pass
-                case _:
-                    poster_href = str(m)
-            match m := poster.get(&#39;src&#39;, &#39;&#39;):
-                case None:
-                    poster_src = &#39;&#39;
-                case [poster_src, *_]:
-                    pass
-                case str(poster_src):
-                    pass
-                case _:
-                    poster_src = str(m)
+
         self.poster = Poster(poster_href, poster_src)
-        description = soup.find(class_=&#39;b-post__description_text&#39;)
-        if description is None:
-            self.description = &#39;&#39;
-        else:
-            self.description = description.text.strip()
-        post_info: Tag | None = soup.find(class_=&#39;b-post__info&#39;)
-        if post_info is None:
-            raw_fields: list[Tag] = []
-        else:
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
             self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
             raw_fields = post_info.select(&#39;tr&gt;td&#39;)
             if len(raw_fields) % 2:
                 raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
 
         fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
                   for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
         for field in self.FILL_FIELDS:
-            meth = getattr(self, f&#39;_get_field_{field}&#39;, None)
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
             field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
             item = fields.get(field_name)
             if not item:
@@ -115,100 +109,16 @@ hljs.highlightAll();
                 processed = meth(item)
             fields[field_name] = processed
             setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
         self.fields = fields
-
-    @staticmethod
-    def _get_field_rating(tag: Tag) -&gt; dict[str, Rating]:
-        &#34;&#34;&#34;Рейтинги&#34;&#34;&#34;
-        result = {}
-        for span in tag.select(&#39;span.b-post__info_rates&#39;):
-            classes = span.get(&#39;class&#39;)
-            if classes is None:
-                classes = []
-            elif isinstance(classes, str):
-                classes = [classes]
-            classes.remove(&#39;b-post__info_rates&#39;)
-            a = span.find(&#39;a&#39;)
-            service = &#39;&#39; if a is None else a.text
-            votes_i = span.find(&#39;i&#39;)
-            if votes_i:
-                votes = _get_int(votes_i.text)
-            else:
-                votes = -1
-            rating_span = span.find(&#39;span&#39;)
-            if rating_span is None:
-                rating = 0.
-            else:
-                rating = float(rating_span.text)
-            result[classes[0] if classes else service] = Rating(
-                service=service, rating=rating, votes=votes)
-        return result
-
-    @staticmethod
-    def _get_field_places(tag: Tag) -&gt; tuple[Place, ...]:
-        &#34;&#34;&#34;Входит в списки&#34;&#34;&#34;
-        return *(Place(a.text, _get_int(a.next_element.next_element)) for a in tag.find_all(&#39;a&#39;)),
-
-    @staticmethod
-    def _get_field_slogan(tag: Tag) -&gt; str:
-        &#34;&#34;&#34;Слоган&#34;&#34;&#34;
-        return tag.get_text(strip=True)
-
-    @staticmethod
-    def _get_field_release(tag: Tag) -&gt; Release:
-        &#34;&#34;&#34;Дата выхода&#34;&#34;&#34;
-        return Release(day=&#39;&#39; if tag.next_element is None else tag.next_element.text.strip(),
-                       year=0 if (a := tag.find(&#39;a&#39;)) is None else _get_int(a.text))
-
-    @staticmethod
-    def _get_field_country(tag: Tag) -&gt; tuple[str, ...]:
-        &#34;&#34;&#34;Страна&#34;&#34;&#34;
-        return *map(str.strip, tag.text.split(&#39;,&#39;)),
-
-    @staticmethod
-    def _get_field_director(tag: Tag) -&gt; str:
-        &#34;&#34;&#34;Режиссер&#34;&#34;&#34;
-        return tag.get_text(strip=True)
-
-    @staticmethod
-    def _get_field_genre(tag: Tag) -&gt; tuple[str, ...]:
-        &#34;&#34;&#34;Жанр&#34;&#34;&#34;
-        return *map(str.strip, tag.text.split(&#39;,&#39;)),
-
-    @staticmethod
-    def _get_field_quality(tag: Tag):
-        &#34;&#34;&#34;В качестве&#34;&#34;&#34;
-        return Quality(tag.text.strip())
-
-    @staticmethod
-    def _get_field_translator(tag: Tag) -&gt; str:
-        &#34;&#34;&#34;В переводе&#34;&#34;&#34;
-        return tag.get_text(strip=True)
-
-    @staticmethod
-    def _get_field_age_rating(tag: Tag) -&gt; AgeRating:
-        &#34;&#34;&#34;Возраст&#34;&#34;&#34;
-        span = tag.find(&#39;span&#39;)
-        if span is None:
-            return AgeRating(-1)
-        return AgeRating(_get_int(span.text),
-                         &#39;&#39; if span.next_element is None else span.next_element.get_text(strip=True))
-
-    @staticmethod
-    def _get_field_duration(tag: Tag) -&gt; Duration:
-        &#34;&#34;&#34;Время&#34;&#34;&#34;
-        d, u = tag.text.split(&#39; &#39;, 1)
-        return Duration(int(d), u)
-
-    @staticmethod
-    def _get_field_from_(tag: Tag) -&gt; tuple[str]:
-        &#34;&#34;&#34;Из серии&#34;&#34;&#34;
-        return *(a.text for a in tag.find_all(&#39;a&#39;)),
-
-    @staticmethod
-    def _get_field_characters(tag: Tag) -&gt; tuple[str, ...]:
-        &#34;&#34;&#34;В ролях актеры&#34;&#34;&#34;
-        return *(span.text for span in tag.select(&#39;span[itemprop=&#34;name&#34;]&#39;)),
 
     def _form_view(self, table: list[Tag]) -&gt; str:
         return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
@@ -226,85 +136,1775 @@ hljs.highlightAll();
             f&#39;{name}={attr!r}&#39; for name in self.__slots__
             if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
 </details>
+<div class="desc"><p>Class with all available data</p>
+<p>Initialize class from title page BeautifulSoup</p></div>
 <h3>Class variables</h3>
 <dl>
 <dt id="hdrezka.post.info.info.PostInfo.FILL_FIELDS"><code class="name">var <span class="ident">FILL_FIELDS</span> : tuple[str, ...]</code></dt>
 <dd>
-<div class="desc"><p>The type of the None singleton.</p></div>
+<div class="desc"><p>indicate autofilled fields</p></div>
 </dd>
 </dl>
 <h3>Instance variables</h3>
 <dl>
 <dt id="hdrezka.post.info.info.PostInfo.age_rating"><code class="name">var <span class="ident">age_rating</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.characters"><code class="name">var <span class="ident">characters</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.country"><code class="name">var <span class="ident">country</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.description"><code class="name">var <span class="ident">description</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.director"><code class="name">var <span class="ident">director</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.duration"><code class="name">var <span class="ident">duration</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="hdrezka.post.info.info.PostInfo.duration_s"><code class="name">var <span class="ident">duration_s</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.fields"><code class="name">var <span class="ident">fields</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.from_"><code class="name">var <span class="ident">from_</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.genre"><code class="name">var <span class="ident">genre</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.orig_title"><code class="name">var <span class="ident">orig_title</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.places"><code class="name">var <span class="ident">places</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.poster"><code class="name">var <span class="ident">poster</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.quality"><code class="name">var <span class="ident">quality</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.rating"><code class="name">var <span class="ident">rating</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.release"><code class="name">var <span class="ident">release</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.slogan"><code class="name">var <span class="ident">slogan</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.title"><code class="name">var <span class="ident">title</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 <dt id="hdrezka.post.info.info.PostInfo.translator"><code class="name">var <span class="ident">translator</span></code></dt>
 <dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="hdrezka.post.info.info.PostInfo.updated_time"><code class="name">var <span class="ident">updated_time</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PostInfo:
+    &#34;&#34;&#34;Class with all available data&#34;&#34;&#34;
+    __slots__ = (&#39;rating&#39;, &#39;places&#39;, &#39;slogan&#39;, &#39;release&#39;, &#39;country&#39;, &#39;director&#39;, &#39;genre&#39;, &#39;quality&#39;,
+                 &#39;translator&#39;, &#39;age_rating&#39;, &#39;duration&#39;, &#39;from_&#39;, &#39;characters&#39;, &#39;_view&#39;, &#39;fields&#39;,
+                 &#39;title&#39;, &#39;orig_title&#39;, &#39;poster&#39;, &#39;description&#39;, &#39;duration_s&#39;, &#39;updated_time&#39;)
+    FILL_FIELDS: tuple[str, ...] = __slots__[:13]
+    &#39;indicate autofilled fields&#39;
+
+    def __init__(self, soup: BeautifulSoup):
+        &#34;&#34;&#34;Initialize class from title page BeautifulSoup&#34;&#34;&#34;
+        self.title = title.text.strip() if (title := soup.find(class_=&#39;b-post__title&#39;)) else &#39;&#39;
+        if duration_s := soup.find(&#39;meta&#39;, property=&#39;og:duration&#39;):
+            self.duration_s = int(duration_s.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.duration = 0
+        if upload_time := soup.find(&#39;meta&#39;, property=&#39;og:updated_time&#39;):
+            self.updated_time = int(upload_time.attrs.get(&#39;content&#39;, 0))
+        else:
+            self.updated_time = 0
+        orig_title = soup.find(class_=&#39;b-post__origtitle&#39;)
+        self.orig_title = orig_title.text.strip() if orig_title else self.title
+        poster: Tag | dict[str, str] | None
+        if poster := soup.select_one(&#39;.b-sidecover&gt;a&#39;):
+            poster_href = poster.attrs.get(&#39;href&#39;, &#39;&#39;)
+            poster_src = poster.find(&#39;img&#39;).attrs.get(&#39;src&#39;, &#39;&#39;)
+        else:
+            poster_href = poster_src = &#39;&#39;
+
+        self.poster = Poster(poster_href, poster_src)
+        self.description = desc.text.strip() if (desc := soup.find(class_=&#39;b-post__description_text&#39;)) else &#39;&#39;
+        if post_info := soup.find(class_=&#39;b-post__info&#39;):
+            self._view = self._form_view(post_info.find_all(&#39;tr&#39;))
+            raw_fields = post_info.select(&#39;tr&gt;td&#39;)
+            if len(raw_fields) % 2:
+                raw_fields.append(raw_fields[-1])
+        else:
+            raw_fields: list[Tag] = []
+
+        fields = {h2.text.strip().removesuffix(&#39;:&#39;): raw_fields[i + 1]
+                  for i in range(0, len(raw_fields), 2) if (h2 := raw_fields[i].find(&#39;h2&#39;)) is not None}
+        for field in self.FILL_FIELDS:
+            meth = getattr(FieldsParse, f&#39;get_field_{field}&#39;, None)
+            field_name = &#39;&#39; if meth is None else (getdoc(meth) or &#39;&#39;).strip()
+            item = fields.get(field_name)
+            if not item:
+                setattr(self, field, None)
+                continue
+            if meth is None:
+                processed = item
+            else:
+                processed = meth(item)
+            fields[field_name] = processed
+            setattr(self, field.removeprefix(&#39;_get_field_&#39;), processed)
+
+        rating_b = soup.find(class_=&#39;b-post__rating&#39;)
+        post_rating = Rating(service=&#39;HDRezka&#39;,
+                             rating=float(rating_b.select_one(&#39;[itemprop=&#34;average&#34;]&#39;).text),
+                             votes=get_any_int(rating_b.select_one(&#39;[itemprop=&#34;votes&#34;]&#39;).text),
+                             url=soup.find(&#39;meta&#39;, property=&#39;og:video&#39;).attrs.get(&#39;content&#39;, -1))
+        if self.rating is None:
+            self.rating = {}
+        self.rating[&#39;hdrezka&#39;] = post_rating
+        self.fields = fields
+
+    def _form_view(self, table: list[Tag]) -&gt; str:
+        return &#39;{0}\n\n{1}\n\n{2}&#39;.format(
+            self.title if self.orig_title == self.title else f&#39;{self.title} ({self.orig_title})&#39;,
+            &#39;\n&#39;.join(tr.text.replace(&#39;)&#39;, &#39;) &#39;).strip() for tr in table),
+            self.description
+        )
+
+    def __str__(self):
+        &#34;&#34;&#34;Returns user-friendly string&#34;&#34;&#34;
+        return self._view
+
+    def __repr__(self):
+        return f&#34;&#34;&#34;{self.__class__.__qualname__}&lt;{&#39;, &#39;.join(
+            f&#39;{name}={attr!r}&#39; for name in self.__slots__
+            if not name.startswith(&#39;_&#39;) and (attr := getattr(self, name)))}&gt;&#34;&#34;&#34;</code></pre>
+</details>
 <div class="desc"></div>
 </dd>
 </dl>
@@ -334,6 +1934,7 @@ hljs.highlightAll();
 <li><code><a title="hdrezka.post.info.info.PostInfo.description" href="#hdrezka.post.info.info.PostInfo.description">description</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.director" href="#hdrezka.post.info.info.PostInfo.director">director</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.duration" href="#hdrezka.post.info.info.PostInfo.duration">duration</a></code></li>
+<li><code><a title="hdrezka.post.info.info.PostInfo.duration_s" href="#hdrezka.post.info.info.PostInfo.duration_s">duration_s</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.fields" href="#hdrezka.post.info.info.PostInfo.fields">fields</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.from_" href="#hdrezka.post.info.info.PostInfo.from_">from_</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.genre" href="#hdrezka.post.info.info.PostInfo.genre">genre</a></code></li>
@@ -346,6 +1947,7 @@ hljs.highlightAll();
 <li><code><a title="hdrezka.post.info.info.PostInfo.slogan" href="#hdrezka.post.info.info.PostInfo.slogan">slogan</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.title" href="#hdrezka.post.info.info.PostInfo.title">title</a></code></li>
 <li><code><a title="hdrezka.post.info.info.PostInfo.translator" href="#hdrezka.post.info.info.PostInfo.translator">translator</a></code></li>
+<li><code><a title="hdrezka.post.info.info.PostInfo.updated_time" href="#hdrezka.post.info.info.PostInfo.updated_time">updated_time</a></code></li>
 </ul>
 </li>
 </ul>
@@ -354,7 +1956,7 @@ hljs.highlightAll();
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

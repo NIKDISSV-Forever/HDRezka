@@ -1,4 +1,8 @@
+"""Translators definition module"""
+
+
 class Translators:
+    """Translators info"""
     __slots__ = ('names', 'ids', 'name_id', 'id_name')
 
     def __init__(self, name_id: dict[str, int]):

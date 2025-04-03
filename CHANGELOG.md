@@ -1,7 +1,32 @@
 # CHANGELOG
 
+## 3.3.0
+
+- ### api.http
+    - Added the `login_global(name: str, password: str)` function.
+- ### url
+    - Added `Request.REDIRECT_URL`, required for `api.http.login_global`.
+    - Updated `Request.HOST`.
+- ### post.info.PostInfo
+    - Added the `duration_s` attribute – duration in seconds.
+    - Added the `updated_time` attribute – last modification date (int).
+    - Fixed retrieval of the `poster.full` link.
+    - Added the 'hdrezka' key to the `rating` dictionary, containing the rating directly from the site.
+    - The keys in the `rating` dictionary are now guaranteed to be in lowercase (e.g., `imdb` instead of `IMDb`).
+- ### post.fields
+    - Added the `Rating.url` field – a link to the rating page (IMDB, KP, WA, etc.).
+- ### post.urls.kind
+    - Simplified parsing of video and subtitle links, now without regex.
+- ### post.urls.kind.video
+    - Each video link (m3u8) in `VideoURLs` is now represented as a tuple with available sources,  
+      in case one of them is unavailable.
+- Replaced all `dataclasses` with `NamedTuple`.
+- Minor documentation improvements.
+- Minor optimizations and enhancements.
+
 ## 3.2.3
-- New `url` module and `url.Request` class for changing the HDRezka host url
+
+- New `url` module and `url.Request` class for changing the HDRezka host url.
 - `stream.player.Player` now connects the url to the default host if only the url path is passed.
 - Used Poetry to replace setup.py and requirements.txt.
 
@@ -9,7 +34,7 @@
 
 - ### post.urls
     - Added supports of added support for quality in the format `2K`, `4K`, ...
-  
+
 ## 3.2.1
 
 - ### post.kind.video

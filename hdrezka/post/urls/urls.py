@@ -1,12 +1,13 @@
 """All urls for one video"""
-from dataclasses import dataclass
+__all__ = ('URLs', 'urls_from_ajax_response')
+
+from typing import NamedTuple
 
 from .kind import SubtitleURLs, VideoURLs
 from ...api.types import APIResponse
 
 
-@dataclass(frozen=True, slots=True)
-class URLs:
+class URLs(NamedTuple):
     """All urls for one video class"""
     video: VideoURLs
     subtitles: SubtitleURLs

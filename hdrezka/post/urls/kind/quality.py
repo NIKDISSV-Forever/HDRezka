@@ -1,7 +1,9 @@
-"""high-level representation of video quality"""
-from .._regexes import match_quality_int
-
+"""High-level representation of video quality"""
 __all__ = ('Quality',)
+
+import re
+
+_match_quality_int = re.compile(r'(\d+)([piK])\s*($|\w+)').match
 
 
 class Quality(str):
@@ -11,7 +13,7 @@ class Quality(str):
 
     def __init__(self, *_, **__):
         """Sets addon attribute (can contain 'ultra')"""
-        _i = match_quality_int(self)
+        _i = _match_quality_int(self)
         if not _i:
             raise ValueError(f'{self!r} is unknown quality.')
         _i, units, self.addon = _i.groups()
