@@ -42,6 +42,7 @@ httpx = { version = "^0.28.1" }
 [tool.poetry.group.dev.dependencies]
 pdoc3 = "^0.11.6"
 python-dotenv = "^1.1.0"
+twine = "^6.1.0"
 
 [build-system]
 requires = ["poetry-core"]
