@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hdrezka"
-version = "3.3.1"
+version = "3.4.0"
 description = "HDRezka Python API"
 authors = ["nikdissv <nikdissv@proton.me>"]
 readme = "README.md"

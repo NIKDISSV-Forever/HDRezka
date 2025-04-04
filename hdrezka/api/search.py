@@ -7,7 +7,6 @@ from ..post.page import *
 from ..url import Request
 
 
-
 class Search(Page):
     """AJAX class for HDRezka search"""
     __slots__ = ('_query',)
@@ -39,4 +38,4 @@ class Search(Page):
         return f'{url}&page={{0}}'
 
     def __repr__(self):
-        return f"{self.__class__.__qualname__}({f'{self.query!r}' if self.query else ''})"
+        return f"{self.__class__.__qualname__}({repr(self.query) if self.query else ''})"

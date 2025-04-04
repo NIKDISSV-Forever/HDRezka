@@ -6,6 +6,7 @@ import urllib.parse
 from bs4 import BeautifulSoup
 
 from .info import PostInfo
+from .info.franchises import FranchiseInfo
 from .._bs4 import BUILDER
 from ..api.http import get_response
 from ..translators import Translators
@@ -14,7 +15,7 @@ from ..url import Request
 
 class Post:
     """Stores information about the post"""
-    __slots__ = ('url', 'translator_id', 'id', 'name', 'type', 'info', 'translators', 'other_parts_urls')
+    __slots__ = ('url', 'translator_id', 'id', 'name', 'type', 'info', 'translators', 'franchises')
 
     def __init__(self, url: str):
         """Need await"""
@@ -31,12 +32,13 @@ class Post:
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find('meta', property='og:type')['content'].removeprefix('video.')
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = PostInfo(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id='post_id')['value'])
         self.name = soup.find(class_='b-post__title').text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_='b-post__franchise_link_title')
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get('href'), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -> int | None:
         """self.type must exist"""
@@ -58,11 +60,11 @@ class Post:
             arr[self.info.translator] = self.translator_id
         return Translators(arr)
 
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -> tuple[str]:
-        self.other_parts_urls = *(
+    def _get_franchises(self, _soup_inst: BeautifulSoup) -> tuple[str]:
+        franchises = *(
             i.attrs['data-url'] for i in
             _soup_inst.select('.b-post__partcontent_item[data-url]')),
-        return self.other_parts_urls
+        return franchises
 
     def __repr__(self):
         return f'{self.__class__.__qualname__}<{self.name!r}; {self.type!r}>'

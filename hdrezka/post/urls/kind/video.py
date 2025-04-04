@@ -14,8 +14,8 @@ class VideoURL(str):
 
     def __await__(self):
         """Follow redirects in url and return correct video url"""
-        return self.__class__(
-            (yield from get_response('GET', self, follow_redirects=False).__await__()).headers.get('Location'))
+        return self.__class__((yield from get_response('GET', self, follow_redirects=False).__await__()
+                               ).headers.get('Location', str(self)))
 
     @property
     def mp4(self) -> str:

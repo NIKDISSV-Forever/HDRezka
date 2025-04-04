@@ -38,7 +38,7 @@ async def get_response(method: str, url: str | httpx.URL, **kwargs) -> httpx.Res
     return await DEFAULT_CLIENT.request(method, url, **kwargs)
 
 
-async def login_global(name: str, password: str):
+async def login_global(email: str, password: str):
     """
     It enters the site using `DEFAULT_CLIENT`.
     Updates the global `HOST` to bypass the blocking, and `DEFAULT_CLIENT` cookies.
@@ -52,5 +52,5 @@ async def login_global(name: str, password: str):
 
     await get_response(
         'POST', ajax_login_url,
-        data={'login_name': name, 'login_password': password, 'login_not_save': '0', 'login': 'submit'})
+        data={'login_name': email, 'login_password': password, 'login_not_save': '0', 'login': 'submit'})
     Request.HOST = f'https://{url.host}'

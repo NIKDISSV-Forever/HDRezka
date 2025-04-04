@@ -1,39 +1,41 @@
 """High-level structures for representing title data"""
-__all__ = ('Rating', 'Place', 'Release', 'AgeRating', 'Duration', 'Poster')
+__all__ = ('Hyperlink', 'Rating', 'Rank', 'Release', 'AgeRating', 'Poster')
 
 from typing import NamedTuple
 
 
-class Rating(NamedTuple):
-    """Rating for service"""
-    service: str
-    rating: int | float
-    votes: int
+class Hyperlink(NamedTuple):
+    """Hyperlink representation"""
+    name: str
     url: str
 
+    def __str__(self):
+        return self.name
 
-class Place(NamedTuple):
-    """Place of title"""
-    name: str
-    place: int
+
+class Rating(NamedTuple):
+    """Rating for service"""
+    service: Hyperlink
+    rating: int | float
+    votes: int
+
+
+class Rank(NamedTuple):
+    """Rank of title"""
+    name: Hyperlink
+    rank: int
 
 
 class Release(NamedTuple):
     """Release date"""
-    year: int
     day: str
+    year: int
 
 
 class AgeRating(NamedTuple):
     """Age restricts"""
     age: int
     description: str = ''
-
-
-class Duration(NamedTuple):
-    """Duration of title"""
-    number: int
-    units: str
 
 
 class Poster(NamedTuple):
