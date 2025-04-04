@@ -40,7 +40,7 @@ class PlayerBase:
         return self.post.translators.ids[abs(translator_id)] if translator_id <= 0 else translator_id
 
     def __repr__(self):
-        return f"{self.__class__.__qualname__}({self.post.url!r})"
+        return f'{self.__class__.__qualname__}({self.post.url!r})'
 
 
 class PlayerMovie(PlayerBase):

@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 3.3.1
+
+- Removed the `follow_redirect=True` argument from `api.http.DEFAULT_CLIENT`;  
+  instead of following redirects automatically, the URL is now extracted from the `Location` header where necessary.
+- ### post.url.kind.subtitle.SubtitleURLs
+    - Fixed a bug in `__init__` that caused incorrect handling when no subtitles were available.
+    - Added the method `get(self, item: str) -> SubtitleURL | None`.
+    - The `__getitem__(self, item: str)` method now raises a `KeyError` if `item` is not a valid code or name  
+      (mirroring dictionary behavior). Use `get` to safely return `None`.
+- Minor documentation improvements.
+
 ## 3.3.0
 
 - ### api.http

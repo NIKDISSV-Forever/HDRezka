@@ -23,7 +23,7 @@ class RequestKwargs(TypedDict):
     extensions: Optional[Any]
 
 
-DEFAULT_CLIENT = httpx.AsyncClient(headers={'User-Agent': 'Mozilla/5.0'}, follow_redirects=True)
+DEFAULT_CLIENT = httpx.AsyncClient(headers={'User-Agent': 'Mozilla/5.0'})
 DEFAULT_REQUEST_KWARGS: RequestKwargs | dict = {}
 
 

@@ -63,7 +63,7 @@ el.replaceWith(d);
     def __await__(self):
         &#34;&#34;&#34;Follow redirects in url and return correct video url&#34;&#34;&#34;
         return self.__class__(
-            (yield from get_response(&#34;GET&#34;, self, follow_redirects=False).__await__()).headers.get(&#39;Location&#39;))
+            (yield from get_response(&#39;GET&#39;, self, follow_redirects=False).__await__()).headers.get(&#39;Location&#39;))
 
     @property
     def mp4(self) -&gt; str:
@@ -125,7 +125,7 @@ def mp4(self) -&gt; str:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self):
+    def last_url(self) -&gt; tuple[VideoURL]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -160,7 +160,7 @@ def mp4(self) -&gt; str:
         return self.__class__(result)
 
     def __repr__(self):
-        return f&#34;{self.__class__.__qualname__}({self.raw_data})&#34;</code></pre>
+        return f&#39;{self.__class__.__qualname__}({self.raw_data!r})&#39;</code></pre>
 </details>
 <div class="desc"><p>Class representing video urls</p>
 <p>:param data:
@@ -169,14 +169,14 @@ else type dict[Quality, VideoURLs]
 if not str and not dict raises TypeError</p></div>
 <h3>Instance variables</h3>
 <dl>
-<dt id="hdrezka.post.urls.kind.video.VideoURLs.last_url"><code class="name">prop <span class="ident">last_url</span></code></dt>
+<dt id="hdrezka.post.urls.kind.video.VideoURLs.last_url"><code class="name">prop <span class="ident">last_url</span> : tuple[<a title="hdrezka.post.urls.kind.video.VideoURL" href="#hdrezka.post.urls.kind.video.VideoURL">VideoURL</a>]</code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def last_url(self):
+def last_url(self) -&gt; tuple[VideoURL]:
     &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
     return self[-1].raw_data.popitem()[1]</code></pre>
 </details>
@@ -212,7 +212,7 @@ def last_url(self):
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self):
+    def last_url(self) -&gt; tuple[VideoURL]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -247,7 +247,7 @@ def last_url(self):
         return self.__class__(result)
 
     def __repr__(self):
-        return f&#34;{self.__class__.__qualname__}({self.raw_data})&#34;</code></pre>
+        return f&#39;{self.__class__.__qualname__}({self.raw_data!r})&#39;</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -281,7 +281,7 @@ def last_url(self):
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self):
+    def last_url(self) -&gt; tuple[VideoURL]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -316,7 +316,7 @@ def last_url(self):
         return self.__class__(result)
 
     def __repr__(self):
-        return f&#34;{self.__class__.__qualname__}({self.raw_data})&#34;</code></pre>
+        return f&#39;{self.__class__.__qualname__}({self.raw_data!r})&#39;</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -350,7 +350,7 @@ def last_url(self):
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self):
+    def last_url(self) -&gt; tuple[VideoURL]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -385,7 +385,7 @@ def last_url(self):
         return self.__class__(result)
 
     def __repr__(self):
-        return f&#34;{self.__class__.__qualname__}({self.raw_data})&#34;</code></pre>
+        return f&#39;{self.__class__.__qualname__}({self.raw_data!r})&#39;</code></pre>
 </details>
 <div class="desc"></div>
 </dd>

@@ -12,4 +12,4 @@ class Translators:
         self.name_id = name_id
 
     def __repr__(self):
-        return f'{self.__class__.__qualname__}({self.name_id})'
+        return f'{self.__class__.__qualname__}({self.name_id!r})'

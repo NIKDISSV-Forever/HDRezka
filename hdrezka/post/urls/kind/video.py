@@ -15,7 +15,7 @@ class VideoURL(str):
     def __await__(self):
         """Follow redirects in url and return correct video url"""
         return self.__class__(
-            (yield from get_response("GET", self, follow_redirects=False).__await__()).headers.get('Location'))
+            (yield from get_response('GET', self, follow_redirects=False).__await__()).headers.get('Location'))
 
     @property
     def mp4(self) -> str:
@@ -47,7 +47,7 @@ class VideoURLs:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self):
+    def last_url(self) -> tuple[VideoURL]:
         """Best quality url"""
         return self[-1].raw_data.popitem()[1]
 
@@ -82,4 +82,4 @@ class VideoURLs:
         return self.__class__(result)
 
     def __repr__(self):
-        return f"{self.__class__.__qualname__}({self.raw_data})"
+        return f'{self.__class__.__qualname__}({self.raw_data!r})'

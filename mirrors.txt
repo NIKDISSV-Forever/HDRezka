@@ -2,6 +2,7 @@ hdrezka.club
 hdrezka.me
 
 cloudflare:
+rezka.ag
 hdrezka.tv
 hdrezka.co
 hdrezka.ink
