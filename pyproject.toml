@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hdrezka"
-version = "3.3.0"
+version = "3.3.1"
 description = "HDRezka Python API"
 authors = ["nikdissv <nikdissv@proton.me>"]
 readme = "README.md"
@@ -8,7 +8,7 @@ license = "MIT"
 homepage = "https://github.com/NIKDISSV-Forever/HDRezka"
 repository = "https://github.com/NIKDISSV-Forever/HDRezka"
 documentation = "https://nikdissv-forever.github.io/HDRezka/hdrezka"
-keywords = ["HDRezka", "hdrezka.ag", "watch online", "api", "stream"]
+keywords = ["HDRezka", "watch online", "api", "stream", "m3u8", "hls"]
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -35,9 +35,9 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+httpx = "^0.28.1"
 beautifulsoup4 = "^4.13.3"
-lxml = { markers = "python_version < \"3.14\"", version = "^5.3.1" }
-httpx = { version = "^0.28.1" }
+lxml = { markers = "python_version < '3.14'", version = "^5.3.1" }
 
 [tool.poetry.group.dev.dependencies]
 pdoc3 = "^0.11.6"
