@@ -181,15 +181,15 @@ code: str</p></div>
 
     def __getitem__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
-        if item in self.subtitle_codes:
-            return self.subtitle_codes[item]
-        return self.subtitle_names[item]
+        if item in self.subtitle_names:
+            return self.subtitle_names[item]
+        return self.subtitle_code[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_codes.get(item) or self.subtitle_names.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -241,15 +241,15 @@ code: str</p></div>
 
     def __getitem__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
-        if item in self.subtitle_codes:
-            return self.subtitle_codes[item]
-        return self.subtitle_names[item]
+        if item in self.subtitle_names:
+            return self.subtitle_names[item]
+        return self.subtitle_code[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_codes.get(item) or self.subtitle_names.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -297,15 +297,15 @@ code: str</p></div>
 
     def __getitem__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
-        if item in self.subtitle_codes:
-            return self.subtitle_codes[item]
-        return self.subtitle_names[item]
+        if item in self.subtitle_names:
+            return self.subtitle_names[item]
+        return self.subtitle_code[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_codes.get(item) or self.subtitle_names.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -353,15 +353,15 @@ code: str</p></div>
 
     def __getitem__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
-        if item in self.subtitle_codes:
-            return self.subtitle_codes[item]
-        return self.subtitle_names[item]
+        if item in self.subtitle_names:
+            return self.subtitle_names[item]
+        return self.subtitle_code[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_codes.get(item) or self.subtitle_names.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -409,15 +409,15 @@ code: str</p></div>
 
     def __getitem__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
-        if item in self.subtitle_codes:
-            return self.subtitle_codes[item]
-        return self.subtitle_names[item]
+        if item in self.subtitle_names:
+            return self.subtitle_names[item]
+        return self.subtitle_code[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_codes.get(item) or self.subtitle_names.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -465,15 +465,15 @@ code: str</p></div>
 
     def __getitem__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
-        if item in self.subtitle_codes:
-            return self.subtitle_codes[item]
-        return self.subtitle_names[item]
+        if item in self.subtitle_names:
+            return self.subtitle_names[item]
+        return self.subtitle_code[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_codes.get(item) or self.subtitle_names.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -503,7 +503,7 @@ code: str</p></div>
     &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
     if not self.has_subtitles:
         return None
-    return self.subtitle_codes.get(item) or self.subtitle_names.get(item)</code></pre>
+    return self.subtitle_names.get(item) or self.subtitle_code.get(item)</code></pre>
 </details>
 <div class="desc"><p>Returns subtitle by name or code, if not found returns None</p></div>
 </dd>

@@ -1,5 +1,5 @@
 r"""
-# HDRezka site API.
+# HDRezka site API
 
 # Install
 
@@ -27,8 +27,9 @@ async def main():
 
     stream = await player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
     video = stream.video
-    print(video.last_url[-1])  # best quality (.m3u8) (last source)
-    print(video[video.min].last_url[0].mp4, end='\n\n')  # worst quality (.mp4) (first source)
+    print(await video.last_url[-1])  # best quality (.m3u8) (last source)
+    # source - is not a finished link, await will return the link after the redirect
+    print(await video[video.min].last_url[0].mp4, end='\n\n')  # worst quality (.mp4) (first source)
 
     subtitles = stream.subtitles
     print(subtitles.default.url)  # subtitles.ru.url or subtitles['Русский'].url
@@ -48,7 +49,7 @@ Request.HOST = 'https://hdrezka.club/'
 ```
 
 > If the specified domain is protected by Cloudflare, successful response retrieval from the server cannot be guaranteed
-> and may be inconsistent.
+> and may be inconsistent. See [this file](https://github.com/NIKDISSV-Forever/HDRezka/blob/main/mirrors.txt).
 
 # Proxies
 
@@ -91,9 +92,6 @@ async def main():
 
 This method will also help if HDRezka considers your IP suspicious, suggests changing your VPN (proxy),
 and returns a 403 error.
-
-
-# [GitHub](https://github.com/NIKDISSV-Forever/HDRezka)
 """
 __author__ = 'nikdissv'
 
