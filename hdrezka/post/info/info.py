@@ -21,10 +21,7 @@ class PostInfo:
     def __init__(self, soup: BeautifulSoup, *, url: str = None):
         """Initialize class from title page BeautifulSoup"""
         self.title = title.text.strip() if (title := soup.find(class_='b-post__title')) else ''
-        if duration := soup.find('meta', property='og:duration'):
-            self.duration = int(duration.attrs.get('content', 0))  # duration is seconds
-        else:
-            self.duration = 0
+        self.duration = int(d.attrs.get('content', 0)) if (d := soup.select_one('meta[property="og:duration"]')) else 0
         if upload_time := soup.find('meta', property='og:updated_time'):
             self.updated_time = int(upload_time.attrs.get('content', 0))
         else:

@@ -1,5 +1,5 @@
 """High-level structures for representing title data"""
-__all__ = ('Hyperlink', 'Rating', 'Rank', 'Release', 'AgeRating', 'Poster')
+__all__ = ('Hyperlink', 'Rating', 'Rank', 'Release', 'AgeRating', 'Poster', 'Birthplace')
 
 from typing import NamedTuple
 
@@ -46,3 +46,11 @@ class Poster(NamedTuple):
     def __bool__(self):
         """Is any poster"""
         return not not (self.full or self.preview)
+
+
+class Birthplace(NamedTuple):
+    """Birthplace information"""
+    country: str
+    city: str = None
+    subcountry: str = None
+    state: str = None

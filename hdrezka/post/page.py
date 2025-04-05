@@ -6,7 +6,7 @@ from typing import Iterable, TypeVar, NamedTuple
 
 from bs4 import BeautifulSoup
 
-from hdrezka._bs4 import BUILDER
+from .._bs4 import BUILDER
 from ..api.http import get_response
 from ..errors import EmptyPage
 from ..stream.player import *

@@ -5,6 +5,7 @@ from bs4 import Tag
 
 from ._utils import *
 from .fields import *
+from .person import Person
 from ..urls import Quality
 
 
@@ -88,6 +89,6 @@ def collections(tag: Tag) -> tuple[Hyperlink, ...]:
     return *map(hyperlink, tag.find_all('a')),
 
 
-def persons(tag: Tag) -> tuple[Hyperlink, ...]:
+def persons(tag: Tag) -> tuple[Person, ...]:
     """В ролях актеры"""
-    return *map(hyperlink, tag.find_all('a')),
+    return *(Person(a.attrs.get('href', ''), name=a.text) for a in tag.find_all('a')),
