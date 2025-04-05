@@ -147,7 +147,7 @@ code: str</p></div>
 </dd>
 <dt id="hdrezka.post.urls.kind.subtitle.SubtitleURLs"><code class="flex name class">
 <span>class <span class="ident">SubtitleURLs</span></span>
-<span>(</span><span>subtitle: str | Literal[False],<br>subtitle_lns: dict[str, str] | Literal[False],<br>subtitle_def: str | Literal[False])</span>
+<span>(</span><span>subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str)</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -158,7 +158,7 @@ code: str</p></div>
     &#34;&#34;&#34;Class representing subtitle urls&#34;&#34;&#34;
     __slots__ = (&#39;subtitles&#39;, &#39;has_subtitles&#39;, &#39;subtitle_names&#39;, &#39;subtitle_codes&#39;, &#39;default&#39;)
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         &#34;&#34;&#34;
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -183,13 +183,13 @@ code: str</p></div>
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -218,7 +218,7 @@ code: str</p></div>
     &#34;&#34;&#34;Class representing subtitle urls&#34;&#34;&#34;
     __slots__ = (&#39;subtitles&#39;, &#39;has_subtitles&#39;, &#39;subtitle_names&#39;, &#39;subtitle_codes&#39;, &#39;default&#39;)
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         &#34;&#34;&#34;
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -243,13 +243,13 @@ code: str</p></div>
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -274,7 +274,7 @@ code: str</p></div>
     &#34;&#34;&#34;Class representing subtitle urls&#34;&#34;&#34;
     __slots__ = (&#39;subtitles&#39;, &#39;has_subtitles&#39;, &#39;subtitle_names&#39;, &#39;subtitle_codes&#39;, &#39;default&#39;)
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         &#34;&#34;&#34;
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -299,13 +299,13 @@ code: str</p></div>
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -330,7 +330,7 @@ code: str</p></div>
     &#34;&#34;&#34;Class representing subtitle urls&#34;&#34;&#34;
     __slots__ = (&#39;subtitles&#39;, &#39;has_subtitles&#39;, &#39;subtitle_names&#39;, &#39;subtitle_codes&#39;, &#39;default&#39;)
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         &#34;&#34;&#34;
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -355,13 +355,13 @@ code: str</p></div>
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -386,7 +386,7 @@ code: str</p></div>
     &#34;&#34;&#34;Class representing subtitle urls&#34;&#34;&#34;
     __slots__ = (&#39;subtitles&#39;, &#39;has_subtitles&#39;, &#39;subtitle_names&#39;, &#39;subtitle_codes&#39;, &#39;default&#39;)
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         &#34;&#34;&#34;
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -411,13 +411,13 @@ code: str</p></div>
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -442,7 +442,7 @@ code: str</p></div>
     &#34;&#34;&#34;Class representing subtitle urls&#34;&#34;&#34;
     __slots__ = (&#39;subtitles&#39;, &#39;has_subtitles&#39;, &#39;subtitle_names&#39;, &#39;subtitle_codes&#39;, &#39;default&#39;)
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         &#34;&#34;&#34;
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -467,13 +467,13 @@ code: str</p></div>
         &#34;&#34;&#34;Returns subtitle by name or code&#34;&#34;&#34;
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -&gt; SubtitleURL | None:
         &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -&gt; SubtitleURL:
         &#34;&#34;&#34;Returns subtitle by code&#34;&#34;&#34;
@@ -503,7 +503,7 @@ code: str</p></div>
     &#34;&#34;&#34;Returns subtitle by name or code, if not found returns None&#34;&#34;&#34;
     if not self.has_subtitles:
         return None
-    return self.subtitle_names.get(item) or self.subtitle_code.get(item)</code></pre>
+    return self.subtitle_names.get(item) or self.subtitle_codes.get(item)</code></pre>
 </details>
 <div class="desc"><p>Returns subtitle by name or code, if not found returns None</p></div>
 </dd>

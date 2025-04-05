@@ -47,224 +47,6 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="hdrezka.post.page.InlineInfo"><code class="flex name class">
-<span>class <span class="ident">InlineInfo</span></span>
-<span>(</span><span>year: int, year_final: int | ellipsis | None, country: str, genre: str)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineInfo(NamedTuple):
-    &#34;&#34;&#34;Info about inline item (bottom)&#34;&#34;&#34;
-    year: int
-    year_final: int | EllipsisType | None
-    &#39;If the film is equal to None, if ongoing, equal `...`&#39;
-    country: str
-    genre: str</code></pre>
-</details>
-<div class="desc"><p>Info about inline item (bottom)</p></div>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li>builtins.tuple</li>
-</ul>
-<h3>Instance variables</h3>
-<dl>
-<dt id="hdrezka.post.page.InlineInfo.country"><code class="name">var <span class="ident">country</span> : str</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineInfo(NamedTuple):
-    &#34;&#34;&#34;Info about inline item (bottom)&#34;&#34;&#34;
-    year: int
-    year_final: int | EllipsisType | None
-    &#39;If the film is equal to None, if ongoing, equal `...`&#39;
-    country: str
-    genre: str</code></pre>
-</details>
-<div class="desc"><p>Alias for field number 2</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineInfo.genre"><code class="name">var <span class="ident">genre</span> : str</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineInfo(NamedTuple):
-    &#34;&#34;&#34;Info about inline item (bottom)&#34;&#34;&#34;
-    year: int
-    year_final: int | EllipsisType | None
-    &#39;If the film is equal to None, if ongoing, equal `...`&#39;
-    country: str
-    genre: str</code></pre>
-</details>
-<div class="desc"><p>Alias for field number 3</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineInfo.year"><code class="name">var <span class="ident">year</span> : int</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineInfo(NamedTuple):
-    &#34;&#34;&#34;Info about inline item (bottom)&#34;&#34;&#34;
-    year: int
-    year_final: int | EllipsisType | None
-    &#39;If the film is equal to None, if ongoing, equal `...`&#39;
-    country: str
-    genre: str</code></pre>
-</details>
-<div class="desc"><p>Alias for field number 0</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineInfo.year_final"><code class="name">var <span class="ident">year_final</span> : int | ellipsis | None</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineInfo(NamedTuple):
-    &#34;&#34;&#34;Info about inline item (bottom)&#34;&#34;&#34;
-    year: int
-    year_final: int | EllipsisType | None
-    &#39;If the film is equal to None, if ongoing, equal `...`&#39;
-    country: str
-    genre: str</code></pre>
-</details>
-<div class="desc"><p>If the film is equal to None, if ongoing, equal <code>&hellip;</code></p></div>
-</dd>
-</dl>
-</dd>
-<dt id="hdrezka.post.page.InlineItem"><code class="flex name class">
-<span>class <span class="ident">InlineItem</span></span>
-<span>(</span><span>url: str,<br>name: str,<br>info: <a title="hdrezka.post.page.InlineInfo" href="#hdrezka.post.page.InlineInfo">InlineInfo</a>,<br>poster: str)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineItem(NamedTuple):
-    &#34;&#34;&#34;Content Inline Item view&#34;&#34;&#34;
-    url: str
-    name: str
-    info: InlineInfo
-    poster: str
-    &#39;Image url&#39;
-
-    @property
-    async def player(self):
-        &#34;&#34;&#34;Return a Player Instance&#34;&#34;&#34;
-        return await Player(self.url)</code></pre>
-</details>
-<div class="desc"><p>Content Inline Item view</p></div>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li>builtins.tuple</li>
-</ul>
-<h3>Instance variables</h3>
-<dl>
-<dt id="hdrezka.post.page.InlineItem.info"><code class="name">var <span class="ident">info</span> : <a title="hdrezka.post.page.InlineInfo" href="#hdrezka.post.page.InlineInfo">InlineInfo</a></code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineItem(NamedTuple):
-    &#34;&#34;&#34;Content Inline Item view&#34;&#34;&#34;
-    url: str
-    name: str
-    info: InlineInfo
-    poster: str
-    &#39;Image url&#39;
-
-    @property
-    async def player(self):
-        &#34;&#34;&#34;Return a Player Instance&#34;&#34;&#34;
-        return await Player(self.url)</code></pre>
-</details>
-<div class="desc"><p>Alias for field number 2</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineItem.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineItem(NamedTuple):
-    &#34;&#34;&#34;Content Inline Item view&#34;&#34;&#34;
-    url: str
-    name: str
-    info: InlineInfo
-    poster: str
-    &#39;Image url&#39;
-
-    @property
-    async def player(self):
-        &#34;&#34;&#34;Return a Player Instance&#34;&#34;&#34;
-        return await Player(self.url)</code></pre>
-</details>
-<div class="desc"><p>Alias for field number 1</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineItem.player"><code class="name">prop <span class="ident">player</span></code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@property
-async def player(self):
-    &#34;&#34;&#34;Return a Player Instance&#34;&#34;&#34;
-    return await Player(self.url)</code></pre>
-</details>
-<div class="desc"><p>Return a Player Instance</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineItem.poster"><code class="name">var <span class="ident">poster</span> : str</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineItem(NamedTuple):
-    &#34;&#34;&#34;Content Inline Item view&#34;&#34;&#34;
-    url: str
-    name: str
-    info: InlineInfo
-    poster: str
-    &#39;Image url&#39;
-
-    @property
-    async def player(self):
-        &#34;&#34;&#34;Return a Player Instance&#34;&#34;&#34;
-        return await Player(self.url)</code></pre>
-</details>
-<div class="desc"><p>Image url</p></div>
-</dd>
-<dt id="hdrezka.post.page.InlineItem.url"><code class="name">var <span class="ident">url</span> : str</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class InlineItem(NamedTuple):
-    &#34;&#34;&#34;Content Inline Item view&#34;&#34;&#34;
-    url: str
-    name: str
-    info: InlineInfo
-    poster: str
-    &#39;Image url&#39;
-
-    @property
-    async def player(self):
-        &#34;&#34;&#34;Return a Player Instance&#34;&#34;&#34;
-        return await Player(self.url)</code></pre>
-</details>
-<div class="desc"><p>Alias for field number 0</p></div>
-</dd>
-</dl>
-</dd>
 <dt id="hdrezka.post.page.Page"><code class="flex name class">
 <span>class <span class="ident">Page</span></span>
 <span>(</span><span>url: str = 'https://hdrezka.me/')</span>
@@ -305,15 +87,15 @@ async def player(self):
 
     @staticmethod
     def _inline_info(years: str, country: str, genre: str):
-        year, *final = years.split(&#39;-&#39;)
-        if final:
-            final, = final
+        year, *finals = years.split(&#39;-&#39;)
+        if finals:
+            final, = finals
             year_final = ... if final.strip() == &#39;...&#39; else int(final)
         else:
             year_final = None
         return InlineInfo(int(year), year_final, country.strip(), genre.strip())
 
-    async def get_page(self, page: PageNumber) -&gt; list[InlineItem]:
+    async def get_page(self, page: int | slice | Iterable[int]) -&gt; list[InlineItem]:
         &#34;&#34;&#34;
         Get items from pages range.
         None for all elements of all pages
@@ -373,14 +155,14 @@ def page(self) -&gt; str:
 <h3>Methods</h3>
 <dl>
 <dt id="hdrezka.post.page.Page.get_page"><code class="name flex">
-<span>async def <span class="ident">get_page</span></span>(<span>self, page: ~PageNumber) ‑> list[<a title="hdrezka.post.page.InlineItem" href="#hdrezka.post.page.InlineItem">InlineItem</a>]</span>
+<span>async def <span class="ident">get_page</span></span>(<span>self, page: int | slice | Iterable[int]) ‑> list[<a title="hdrezka.post.inline.InlineItem" href="inline.html#hdrezka.post.inline.InlineItem">InlineItem</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">async def get_page(self, page: PageNumber) -&gt; list[InlineItem]:
+<pre><code class="python">async def get_page(self, page: int | slice | Iterable[int]) -&gt; list[InlineItem]:
     &#34;&#34;&#34;
     Get items from pages range.
     None for all elements of all pages
@@ -417,25 +199,6 @@ None for all elements of all pages</p></div>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
-<li>
-<h4><code><a title="hdrezka.post.page.InlineInfo" href="#hdrezka.post.page.InlineInfo">InlineInfo</a></code></h4>
-<ul class="">
-<li><code><a title="hdrezka.post.page.InlineInfo.country" href="#hdrezka.post.page.InlineInfo.country">country</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineInfo.genre" href="#hdrezka.post.page.InlineInfo.genre">genre</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineInfo.year" href="#hdrezka.post.page.InlineInfo.year">year</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineInfo.year_final" href="#hdrezka.post.page.InlineInfo.year_final">year_final</a></code></li>
-</ul>
-</li>
-<li>
-<h4><code><a title="hdrezka.post.page.InlineItem" href="#hdrezka.post.page.InlineItem">InlineItem</a></code></h4>
-<ul class="">
-<li><code><a title="hdrezka.post.page.InlineItem.info" href="#hdrezka.post.page.InlineItem.info">info</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineItem.name" href="#hdrezka.post.page.InlineItem.name">name</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineItem.player" href="#hdrezka.post.page.InlineItem.player">player</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineItem.poster" href="#hdrezka.post.page.InlineItem.poster">poster</a></code></li>
-<li><code><a title="hdrezka.post.page.InlineItem.url" href="#hdrezka.post.page.InlineItem.url">url</a></code></li>
-</ul>
-</li>
 <li>
 <h4><code><a title="hdrezka.post.page.Page" href="#hdrezka.post.page.Page">Page</a></code></h4>
 <ul class="">

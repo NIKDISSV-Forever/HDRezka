@@ -67,14 +67,14 @@ el.replaceWith(d);
 Returns DEFAULT_CLIENT.request(method, url, </strong>kwargs, **DEFAULT_REQUEST_KWARGS)</p></div>
 </dd>
 <dt id="hdrezka.api.http.login_global"><code class="name flex">
-<span>async def <span class="ident">login_global</span></span>(<span>name: str, password: str)</span>
+<span>async def <span class="ident">login_global</span></span>(<span>email: str, password: str)</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">async def login_global(name: str, password: str):
+<pre><code class="python">async def login_global(email: str, password: str):
     &#34;&#34;&#34;
     It enters the site using `DEFAULT_CLIENT`.
     Updates the global `HOST` to bypass the blocking, and `DEFAULT_CLIENT` cookies.
@@ -88,7 +88,7 @@ Returns DEFAULT_CLIENT.request(method, url, </strong>kwargs, **DEFAULT_REQUEST_K
 
     await get_response(
         &#39;POST&#39;, ajax_login_url,
-        data={&#39;login_name&#39;: name, &#39;login_password&#39;: password, &#39;login_not_save&#39;: &#39;0&#39;, &#39;login&#39;: &#39;submit&#39;})
+        data={&#39;login_name&#39;: email, &#39;login_password&#39;: password, &#39;login_not_save&#39;: &#39;0&#39;, &#39;login&#39;: &#39;submit&#39;})
     Request.HOST = f&#39;https://{url.host}&#39;</code></pre>
 </details>
 <div class="desc"><p>It enters the site using <code>DEFAULT_CLIENT</code>.

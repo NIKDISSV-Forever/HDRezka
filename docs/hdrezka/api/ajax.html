@@ -60,11 +60,15 @@ el.replaceWith(d);
     __slots__ = ()
 
     @classmethod
-    async def _send_data(cls, action: str, **kwargs):
-        answer = (await get_response(&#39;POST&#39;, Request.host_join(f&#39;ajax/{action}/&#39;), **kwargs)).json()
+    def _check(cls, resp: httpx.Response):
+        answer = resp.json()
         if not answer.get(&#39;success&#39;, True):
             raise AJAXFail(answer.get(&#39;message&#39;, answer))
         return answer
+
+    @classmethod
+    async def _send_data(cls, action: str, **kwargs):
+        return cls._check(await get_response(&#39;POST&#39;, Request.host_join(f&#39;ajax/{action}/&#39;), **kwargs))
 
     @classmethod
     async def get_cdn_series(cls, data: dict[str, SupportsInt | str]):
@@ -72,33 +76,39 @@ el.replaceWith(d);
         return await cls._send_data(&#39;get_cdn_series&#39;, data=data)
 
     @classmethod
-    async def get_episodes(cls, id: SupportsInt | str, translator_id: SupportsInt | str):
+    async def get_episodes(cls, id_: SupportsInt | str, translator_id: SupportsInt | str):
         &#34;&#34;&#34;Request episodes&#34;&#34;&#34;
         return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_episodes&#39;,
-             &#39;id&#39;: id,
+             &#39;id&#39;: id_,
              &#39;translator_id&#39;: translator_id}
         )
 
     @classmethod
-    async def get_stream(cls, id: SupportsInt | str, translator_id: SupportsInt | str,
+    async def get_stream(cls, id_: SupportsInt | str, translator_id: SupportsInt | str,
                          season: SupportsInt | str, episode: SupportsInt | str) -&gt; APIResponse:
         &#34;&#34;&#34;Request stream urls&#34;&#34;&#34;
         return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_stream&#39;,
-             &#39;id&#39;: id,
+             &#39;id&#39;: id_,
              &#39;translator_id&#39;: translator_id,
              &#39;season&#39;: season,
              &#39;episode&#39;: episode}
         )
 
     @classmethod
-    async def get_movie(cls, id: SupportsInt | str, translator_id: SupportsInt | str):
+    async def get_movie(cls, id_: SupportsInt | str, translator_id: SupportsInt | str):
         &#34;&#34;&#34;Request movie urls&#34;&#34;&#34;
         return await cls.get_cdn_series(
             {&#39;action&#39;: &#39;get_movie&#39;,
-             &#39;id&#39;: id, &#39;translator_id&#39;: translator_id}
-        )</code></pre>
+             &#39;id&#39;: id_, &#39;translator_id&#39;: translator_id}
+        )
+
+    @classmethod
+    async def get_trailer_video(cls, id_: SupportsInt | str) -&gt; TrailerResponse:
+        &#34;&#34;&#34;Request trailer video iframe&#34;&#34;&#34;
+        return cls._check(await get_response(&#39;POST&#39;, Request.host_join(&#39;engine/ajax/gettrailervideo.php&#39;),
+                                             data={&#39;id&#39;: id_}))</code></pre>
 </details>
 <div class="desc"><p>Class with methods for sending AJAX requests to the API</p></div>
 <h3>Static methods</h3>
@@ -110,22 +120,28 @@ el.replaceWith(d);
 <div class="desc"><p>Request series for one translation</p></div>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_episodes"><code class="name flex">
-<span>async def <span class="ident">get_episodes</span></span>(<span>id: typing.SupportsInt | str, translator_id: typing.SupportsInt | str)</span>
+<span>async def <span class="ident">get_episodes</span></span>(<span>id_: typing.SupportsInt | str, translator_id: typing.SupportsInt | str)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Request episodes</p></div>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_movie"><code class="name flex">
-<span>async def <span class="ident">get_movie</span></span>(<span>id: typing.SupportsInt | str, translator_id: typing.SupportsInt | str)</span>
+<span>async def <span class="ident">get_movie</span></span>(<span>id_: typing.SupportsInt | str, translator_id: typing.SupportsInt | str)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Request movie urls</p></div>
 </dd>
 <dt id="hdrezka.api.ajax.AJAX.get_stream"><code class="name flex">
-<span>async def <span class="ident">get_stream</span></span>(<span>id: typing.SupportsInt | str,<br>translator_id: typing.SupportsInt | str,<br>season: typing.SupportsInt | str,<br>episode: typing.SupportsInt | str) ‑> <a title="hdrezka.api.types.APIResponse" href="types.html#hdrezka.api.types.APIResponse">APIResponse</a></span>
+<span>async def <span class="ident">get_stream</span></span>(<span>id_: typing.SupportsInt | str,<br>translator_id: typing.SupportsInt | str,<br>season: typing.SupportsInt | str,<br>episode: typing.SupportsInt | str) ‑> <a title="hdrezka.api.types.APIResponse" href="types.html#hdrezka.api.types.APIResponse">APIResponse</a></span>
 </code></dt>
 <dd>
 <div class="desc"><p>Request stream urls</p></div>
+</dd>
+<dt id="hdrezka.api.ajax.AJAX.get_trailer_video"><code class="name flex">
+<span>async def <span class="ident">get_trailer_video</span></span>(<span>id_: typing.SupportsInt | str) ‑> <a title="hdrezka.api.types.TrailerResponse" href="types.html#hdrezka.api.types.TrailerResponse">TrailerResponse</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Request trailer video iframe</p></div>
 </dd>
 </dl>
 </dd>
@@ -151,6 +167,7 @@ el.replaceWith(d);
 <li><code><a title="hdrezka.api.ajax.AJAX.get_episodes" href="#hdrezka.api.ajax.AJAX.get_episodes">get_episodes</a></code></li>
 <li><code><a title="hdrezka.api.ajax.AJAX.get_movie" href="#hdrezka.api.ajax.AJAX.get_movie">get_movie</a></code></li>
 <li><code><a title="hdrezka.api.ajax.AJAX.get_stream" href="#hdrezka.api.ajax.AJAX.get_stream">get_stream</a></code></li>
+<li><code><a title="hdrezka.api.ajax.AJAX.get_trailer_video" href="#hdrezka.api.ajax.AJAX.get_trailer_video">get_trailer_video</a></code></li>
 </ul>
 </li>
 </ul>

@@ -56,23 +56,19 @@ el.replaceWith(d);
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class VideoURL(str):
+<pre><code class="python">class VideoURL(_AwaitableStr):
     &#34;&#34;&#34;str type add-on to represent video&#34;&#34;&#34;
     __slots__ = ()
-
-    def __await__(self):
-        &#34;&#34;&#34;Follow redirects in url and return correct video url&#34;&#34;&#34;
-        return self.__class__(
-            (yield from get_response(&#39;GET&#39;, self, follow_redirects=False).__await__()).headers.get(&#39;Location&#39;))
 
     @property
     def mp4(self) -&gt; str:
         &#34;&#34;&#34;URL without &#39;:hls:manifest.m3u8&#39;&#34;&#34;&#34;
-        return str(self.removesuffix(&#39;:hls:manifest.m3u8&#39;))</code></pre>
+        return _AwaitableStr(self.removesuffix(&#39;:hls:manifest.m3u8&#39;))</code></pre>
 </details>
 <div class="desc"><p>str type add-on to represent video</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
+<li>hdrezka.post.urls.kind.video._AwaitableStr</li>
 <li>builtins.str</li>
 </ul>
 <h3>Instance variables</h3>
@@ -86,7 +82,7 @@ el.replaceWith(d);
 <pre><code class="python">@property
 def mp4(self) -&gt; str:
     &#34;&#34;&#34;URL without &#39;:hls:manifest.m3u8&#39;&#34;&#34;&#34;
-    return str(self.removesuffix(&#39;:hls:manifest.m3u8&#39;))</code></pre>
+    return _AwaitableStr(self.removesuffix(&#39;:hls:manifest.m3u8&#39;))</code></pre>
 </details>
 <div class="desc"><p>URL without ':hls:manifest.m3u8'</p></div>
 </dd>
@@ -113,7 +109,7 @@ def mp4(self) -&gt; str:
             if not str and not dict raises TypeError
         &#34;&#34;&#34;
         if isinstance(data, str):
-            self.raw_data: dict[Quality, tuple[VideoURL]] = {
+            self.raw_data: dict[Quality, tuple[VideoURL, ...]] = {
                 Quality(q): (*(VideoURL(i) for i in u.split(&#39; or &#39;) if i.endswith(&#39;.m3u8&#39;)),)
                 for q, u in (i.removeprefix(&#39;[&#39;).split(&#39;]&#39;, 1) for i in clear_trash(data).split(&#39;,&#39;))
             }
@@ -125,7 +121,7 @@ def mp4(self) -&gt; str:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self) -&gt; tuple[VideoURL]:
+    def last_url(self) -&gt; tuple[VideoURL, ...]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -169,14 +165,14 @@ else type dict[Quality, VideoURLs]
 if not str and not dict raises TypeError</p></div>
 <h3>Instance variables</h3>
 <dl>
-<dt id="hdrezka.post.urls.kind.video.VideoURLs.last_url"><code class="name">prop <span class="ident">last_url</span> : tuple[<a title="hdrezka.post.urls.kind.video.VideoURL" href="#hdrezka.post.urls.kind.video.VideoURL">VideoURL</a>]</code></dt>
+<dt id="hdrezka.post.urls.kind.video.VideoURLs.last_url"><code class="name">prop <span class="ident">last_url</span> : tuple[<a title="hdrezka.post.urls.kind.video.VideoURL" href="#hdrezka.post.urls.kind.video.VideoURL">VideoURL</a>, ...]</code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def last_url(self) -&gt; tuple[VideoURL]:
+def last_url(self) -&gt; tuple[VideoURL, ...]:
     &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
     return self[-1].raw_data.popitem()[1]</code></pre>
 </details>
@@ -200,7 +196,7 @@ def last_url(self) -&gt; tuple[VideoURL]:
             if not str and not dict raises TypeError
         &#34;&#34;&#34;
         if isinstance(data, str):
-            self.raw_data: dict[Quality, tuple[VideoURL]] = {
+            self.raw_data: dict[Quality, tuple[VideoURL, ...]] = {
                 Quality(q): (*(VideoURL(i) for i in u.split(&#39; or &#39;) if i.endswith(&#39;.m3u8&#39;)),)
                 for q, u in (i.removeprefix(&#39;[&#39;).split(&#39;]&#39;, 1) for i in clear_trash(data).split(&#39;,&#39;))
             }
@@ -212,7 +208,7 @@ def last_url(self) -&gt; tuple[VideoURL]:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self) -&gt; tuple[VideoURL]:
+    def last_url(self) -&gt; tuple[VideoURL, ...]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -269,7 +265,7 @@ def last_url(self) -&gt; tuple[VideoURL]:
             if not str and not dict raises TypeError
         &#34;&#34;&#34;
         if isinstance(data, str):
-            self.raw_data: dict[Quality, tuple[VideoURL]] = {
+            self.raw_data: dict[Quality, tuple[VideoURL, ...]] = {
                 Quality(q): (*(VideoURL(i) for i in u.split(&#39; or &#39;) if i.endswith(&#39;.m3u8&#39;)),)
                 for q, u in (i.removeprefix(&#39;[&#39;).split(&#39;]&#39;, 1) for i in clear_trash(data).split(&#39;,&#39;))
             }
@@ -281,7 +277,7 @@ def last_url(self) -&gt; tuple[VideoURL]:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self) -&gt; tuple[VideoURL]:
+    def last_url(self) -&gt; tuple[VideoURL, ...]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 
@@ -338,7 +334,7 @@ def last_url(self) -&gt; tuple[VideoURL]:
             if not str and not dict raises TypeError
         &#34;&#34;&#34;
         if isinstance(data, str):
-            self.raw_data: dict[Quality, tuple[VideoURL]] = {
+            self.raw_data: dict[Quality, tuple[VideoURL, ...]] = {
                 Quality(q): (*(VideoURL(i) for i in u.split(&#39; or &#39;) if i.endswith(&#39;.m3u8&#39;)),)
                 for q, u in (i.removeprefix(&#39;[&#39;).split(&#39;]&#39;, 1) for i in clear_trash(data).split(&#39;,&#39;))
             }
@@ -350,7 +346,7 @@ def last_url(self) -&gt; tuple[VideoURL]:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self) -&gt; tuple[VideoURL]:
+    def last_url(self) -&gt; tuple[VideoURL, ...]:
         &#34;&#34;&#34;Best quality url&#34;&#34;&#34;
         return self[-1].raw_data.popitem()[1]
 

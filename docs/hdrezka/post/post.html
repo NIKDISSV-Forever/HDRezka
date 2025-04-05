@@ -58,7 +58,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -75,18 +75,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -95,18 +97,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -115,7 +110,7 @@ el.replaceWith(d);
 <p>Need await</p></div>
 <h3>Instance variables</h3>
 <dl>
-<dt id="hdrezka.post.post.Post.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dt id="hdrezka.post.post.Post.franchises"><code class="name">var <span class="ident">franchises</span></code></dt>
 <dd>
 <details class="source">
 <summary>
@@ -123,7 +118,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -140,18 +135,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -160,18 +157,69 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
 
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
+    def __repr__(self):
+        return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="hdrezka.post.post.Post.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Post:
+    &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
+
+    def __init__(self, url: str):
+        &#34;&#34;&#34;Need await&#34;&#34;&#34;
+        if not urllib.parse.urlparse(url).hostname:
+            url = Request.host_join(url)
+        self.url = url
+
+    def __await__(self):
+        &#34;&#34;&#34;
+        Async initialize, prepare attributes.
+        Do not call twice!
+        &#34;&#34;&#34;
+        response = yield from get_response(&#39;GET&#39;, self.url).__await__()
+        soup = BeautifulSoup(response.text, builder=BUILDER)
+        self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
+        self.translator_id = self._get_translator_id(soup)
+        self.info = get_post_info(soup, url=self.url)
+        self.translators = self._get_translators(soup)
+
+        self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
+        self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
+
+    def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
+        &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
+        init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
+        for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
+            if not (s := script.string):
+                continue
+            obj_i = s.find(init_cdn_obj)
+            if obj_i != -1:
+                s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
+                if s.isnumeric():
+                    return int(s)
+        return None
+
+    def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
+        if not arr:
+            arr[self.info.translators[0]] = self.translator_id
+        return Translators(arr)
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -186,7 +234,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -203,18 +251,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -223,18 +273,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -249,7 +292,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -266,18 +309,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -286,81 +331,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
-
-    def __repr__(self):
-        return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
-</details>
-<div class="desc"></div>
-</dd>
-<dt id="hdrezka.post.post.Post.other_parts_urls"><code class="name">var <span class="ident">other_parts_urls</span></code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class Post:
-    &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
-
-    def __init__(self, url: str):
-        &#34;&#34;&#34;Need await&#34;&#34;&#34;
-        if not urllib.parse.urlparse(url).hostname:
-            url = Request.host_join(url)
-        self.url = url
-
-    def __await__(self):
-        &#34;&#34;&#34;
-        Async initialize, prepare attributes.
-        Do not call twice!
-        &#34;&#34;&#34;
-        response = yield from get_response(&#39;GET&#39;, self.url).__await__()
-        soup = BeautifulSoup(response.text, builder=BUILDER)
-        self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
-        self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
-        self.translators = self._get_translators(soup)
-
-        self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
-        self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
-
-    def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
-        &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
-        init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
-        for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
-            obj_i = s.find(init_cdn_obj)
-            if obj_i != -1:
-                s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
-                if s.isnumeric():
-                    return int(s)
-        return None
-
-    def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
-        if not arr:
-            arr[self.info.translator] = self.translator_id
-        return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -375,7 +350,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -392,18 +367,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -412,18 +389,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -438,7 +408,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -455,18 +425,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -475,18 +447,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -501,7 +466,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -518,18 +483,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -538,18 +505,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -564,7 +524,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class Post:
     &#34;&#34;&#34;Stores information about the post&#34;&#34;&#34;
-    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;other_parts_urls&#39;)
+    __slots__ = (&#39;url&#39;, &#39;translator_id&#39;, &#39;id&#39;, &#39;name&#39;, &#39;type&#39;, &#39;info&#39;, &#39;translators&#39;, &#39;franchises&#39;)
 
     def __init__(self, url: str):
         &#34;&#34;&#34;Need await&#34;&#34;&#34;
@@ -581,18 +541,20 @@ el.replaceWith(d);
         soup = BeautifulSoup(response.text, builder=BUILDER)
         self.type = soup.find(&#39;meta&#39;, property=&#39;og:type&#39;)[&#39;content&#39;].removeprefix(&#39;video.&#39;)
         self.translator_id = self._get_translator_id(soup)
-        self.info = PostInfo(soup)
+        self.info = get_post_info(soup, url=self.url)
         self.translators = self._get_translators(soup)
 
         self.id = int(soup.find(id=&#39;post_id&#39;)[&#39;value&#39;])
         self.name = soup.find(class_=&#39;b-post__title&#39;).text.strip()
-        self.other_parts_urls = self._parts_urls
+        franchises_url = soup.find(class_=&#39;b-post__franchise_link_title&#39;)
+        self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get(&#39;href&#39;), soup=soup)
 
     def _get_translator_id(self, soup: BeautifulSoup) -&gt; int | None:
         &#34;&#34;&#34;self.type must exist&#34;&#34;&#34;
         init_cdn_obj = &#39;sof.tv.%s&#39; % {&#39;tv_series&#39;: &#39;initCDNSeriesEvents&#39;, &#39;movie&#39;: &#39;initCDNMoviesEvents&#39;}[self.type]
         for script in soup.find_all(lambda tag: tag.name == &#39;script&#39; and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(&#39;,&#39;, 2)[1].strip()
@@ -601,18 +563,11 @@ el.replaceWith(d);
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -&gt; Translators:
-        translators_list = soup.find(id=&#39;translators-list&#39;)
-        arr = {child.text.strip(): int(child[&#39;data-translator_id&#39;]) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i[&#39;data-translator_id&#39;]) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id=&#39;translators-list&#39;)) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
-
-    def _parts_urls(self, _soup_inst: BeautifulSoup) -&gt; tuple[str]:
-        self.other_parts_urls = *(
-            i.attrs[&#39;data-url&#39;] for i in
-            _soup_inst.select(&#39;.b-post__partcontent_item[data-url]&#39;)),
-        return self.other_parts_urls
 
     def __repr__(self):
         return f&#39;{self.__class__.__qualname__}&lt;{self.name!r}; {self.type!r}&gt;&#39;</code></pre>
@@ -639,10 +594,10 @@ el.replaceWith(d);
 <li>
 <h4><code><a title="hdrezka.post.post.Post" href="#hdrezka.post.post.Post">Post</a></code></h4>
 <ul class="two-column">
+<li><code><a title="hdrezka.post.post.Post.franchises" href="#hdrezka.post.post.Post.franchises">franchises</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.id" href="#hdrezka.post.post.Post.id">id</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.info" href="#hdrezka.post.post.Post.info">info</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.name" href="#hdrezka.post.post.Post.name">name</a></code></li>
-<li><code><a title="hdrezka.post.post.Post.other_parts_urls" href="#hdrezka.post.post.Post.other_parts_urls">other_parts_urls</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.translator_id" href="#hdrezka.post.post.Post.translator_id">translator_id</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.translators" href="#hdrezka.post.post.Post.translators">translators</a></code></li>
 <li><code><a title="hdrezka.post.post.Post.type" href="#hdrezka.post.post.Post.type">type</a></code></li>

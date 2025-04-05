@@ -109,6 +109,10 @@ el.replaceWith(d);
         &#34;&#34;&#34;
         yield from self.post.__await__()
 
+    async def get_trailer_iframe(self) -&gt; str:
+        &#34;&#34;&#34;Get trailer &lt;iframe&gt; HTML&#34;&#34;&#34;
+        return (await AJAX.get_trailer_video(self.post.id)).get(&#39;code&#39;, &#39;&#39;)
+
     def _translator(self, translator_id: Optional[SupportsInt] = None) -&gt; int:
         if translator_id is None:
             return self.post.translator_id
@@ -153,6 +157,10 @@ el.replaceWith(d);
         &#34;&#34;&#34;
         yield from self.post.__await__()
 
+    async def get_trailer_iframe(self) -&gt; str:
+        &#34;&#34;&#34;Get trailer &lt;iframe&gt; HTML&#34;&#34;&#34;
+        return (await AJAX.get_trailer_video(self.post.id)).get(&#39;code&#39;, &#39;&#39;)
+
     def _translator(self, translator_id: Optional[SupportsInt] = None) -&gt; int:
         if translator_id is None:
             return self.post.translator_id
@@ -163,6 +171,23 @@ el.replaceWith(d);
         return f&#39;{self.__class__.__qualname__}({self.post.url!r})&#39;</code></pre>
 </details>
 <div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="hdrezka.stream.player.PlayerBase.get_trailer_iframe"><code class="name flex">
+<span>async def <span class="ident">get_trailer_iframe</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_trailer_iframe(self) -&gt; str:
+    &#34;&#34;&#34;Get trailer &lt;iframe&gt; HTML&#34;&#34;&#34;
+    return (await AJAX.get_trailer_video(self.post.id)).get(&#39;code&#39;, &#39;&#39;)</code></pre>
+</details>
+<div class="desc"><p>Get trailer <iframe> HTML</p></div>
 </dd>
 </dl>
 </dd>
@@ -206,6 +231,14 @@ el.replaceWith(d);
 <div class="desc"><p>Returns movie stream <code>URLs</code></p></div>
 </dd>
 </dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></b></code>:
+<ul class="hlist">
+<li><code><a title="hdrezka.stream.player.PlayerBase.get_trailer_iframe" href="#hdrezka.stream.player.PlayerBase.get_trailer_iframe">get_trailer_iframe</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 <dt id="hdrezka.stream.player.PlayerSeries"><code class="flex name class">
 <span>class <span class="ident">PlayerSeries</span></span>
@@ -225,7 +258,7 @@ el.replaceWith(d);
                                  builder=BUILDER)
         result: defaultdict[int, tuple[int, ...]] = defaultdict(tuple)
         for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
-            result[int(i.attrs.get(&#39;data-season_id&#39;))] += int(i.attrs.get(&#39;data-episode_id&#39;)),
+            result[int(i.attrs.get(&#39;data-season_id&#39;))] += int(i.attrs.get(&#39;data-episode_id&#39;, &#39;0&#39;)),
         return result
 
     async def get_stream(self, season: int, episode: int, translator_id: Optional[SupportsInt] = None) -&gt; URLs:
@@ -255,7 +288,7 @@ el.replaceWith(d);
                              builder=BUILDER)
     result: defaultdict[int, tuple[int, ...]] = defaultdict(tuple)
     for i in episodes.find_all(class_=&#39;b-simple_episode__item&#39;, attrs=(&#39;data-season_id&#39;, &#39;data-episode_id&#39;)):
-        result[int(i.attrs.get(&#39;data-season_id&#39;))] += int(i.attrs.get(&#39;data-episode_id&#39;)),
+        result[int(i.attrs.get(&#39;data-season_id&#39;))] += int(i.attrs.get(&#39;data-episode_id&#39;, &#39;0&#39;)),
     return result</code></pre>
 </details>
 <div class="desc"><p>Returns available episodes</p></div>
@@ -276,6 +309,14 @@ el.replaceWith(d);
 <div class="desc"><p>Returns episode stream <code>URLs</code></p></div>
 </dd>
 </dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></b></code>:
+<ul class="hlist">
+<li><code><a title="hdrezka.stream.player.PlayerBase.get_trailer_iframe" href="#hdrezka.stream.player.PlayerBase.get_trailer_iframe">get_trailer_iframe</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 </dl>
 </section>
@@ -300,6 +341,7 @@ el.replaceWith(d);
 <li>
 <h4><code><a title="hdrezka.stream.player.PlayerBase" href="#hdrezka.stream.player.PlayerBase">PlayerBase</a></code></h4>
 <ul class="">
+<li><code><a title="hdrezka.stream.player.PlayerBase.get_trailer_iframe" href="#hdrezka.stream.player.PlayerBase.get_trailer_iframe">get_trailer_iframe</a></code></li>
 <li><code><a title="hdrezka.stream.player.PlayerBase.post" href="#hdrezka.stream.player.PlayerBase.post">post</a></code></li>
 </ul>
 </li>

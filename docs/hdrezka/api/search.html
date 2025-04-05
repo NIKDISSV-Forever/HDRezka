@@ -87,7 +87,7 @@ el.replaceWith(d);
         return f&#39;{url}&amp;page={{0}}&#39;
 
     def __repr__(self):
-        return f&#34;{self.__class__.__qualname__}({f&#39;{self.query!r}&#39; if self.query else &#39;&#39;})&#34;</code></pre>
+        return f&#34;{self.__class__.__qualname__}({repr(self.query) if self.query else &#39;&#39;})&#34;</code></pre>
 </details>
 <div class="desc"><p>AJAX class for HDRezka search</p>
 <p>Preparing query for search</p></div>
