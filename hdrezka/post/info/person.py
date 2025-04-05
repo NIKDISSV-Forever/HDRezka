@@ -2,12 +2,8 @@
 import re
 from datetime import datetime
 
-from bs4 import BeautifulSoup
-
-from ._utils import page_poster
+from .._utils import poster_and_soup
 from .fields import Birthplace
-from ..._bs4 import BUILDER
-from ...api.http import get_response
 
 _URL_ID_RE = re.compile(r'(?:(?:$|/)person/)?(\d+)-([^-]+)-([^/]+)')
 
@@ -29,11 +25,9 @@ class Person:
             self.id = None
 
     def __await__(self):
-        if not self.url:
+        if not (ps := poster_and_soup(self.url)):
             return
-        response = yield from get_response('GET', self.url).__await__()
-        soup = BeautifulSoup(response.content, builder=BUILDER)
-        self.image = page_poster(soup)
+        soup, self.image = ps
         if name := soup.select_one('[itemprop="name"]'):
             self.name = name.text
         if name := soup.select_one('[itemprop="alternativeHeadline"]'):
@@ -58,4 +52,4 @@ class Person:
                 self.birthplace = Birthplace(country=country)
 
     def __repr__(self):
-        return f"Person({repr(self.url) if self.url else ''}, name={repr(self.name) if self.name else ''})"
+        return f"Person({f'{self.url!r}, ' if self.url else ''}{f'name={self.name!r}' if self.name else ''})"

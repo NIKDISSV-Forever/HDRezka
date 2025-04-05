@@ -5,10 +5,8 @@ from typing import NamedTuple
 
 from bs4 import Tag, BeautifulSoup
 
-from ._utils import page_poster, hyperlink, get_any_int
+from .._utils import hyperlink, get_any_int, poster_and_soup
 from .fields import Hyperlink
-from ..._bs4 import BUILDER
-from ...api.http import get_response
 
 
 class FranchiseEntry(NamedTuple):
@@ -31,11 +29,9 @@ class FranchiseInfo:
         self._setup_from_soup(soup)
 
     def __await__(self):
-        if not self.url:
+        if not (ps := poster_and_soup(self.url)):
             return
-        response = yield from get_response('GET', self.url).__await__()
-        soup = BeautifulSoup(response.content, builder=BUILDER)
-        self._poster = page_poster(soup)
+        soup, self._poster = ps
         if not self.entries:
             self._setup_from_soup(soup)
 

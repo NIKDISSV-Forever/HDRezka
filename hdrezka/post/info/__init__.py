@@ -1,3 +1,30 @@
 """Presentation of title information"""
+__all__ = ('PostInfo',)
+
+from typing import NamedTuple
+
 from .fields import *
-from .info import *
+from ...post.urls.kind.quality import Quality
+
+
+class PostInfo(NamedTuple):
+    """General post information"""
+    title: str
+    orig_title: str
+    poster: Poster
+    duration: int
+    updated_time: int
+    ratings: dict[str, Rating]
+    rankings: tuple[Rank]
+    slogan: str
+    release: Release
+    country: tuple[Hyperlink]
+    director: str
+    genre: tuple[Hyperlink]
+    quality: Quality | None
+    translator: str
+    age_rating: AgeRating | None
+    duration_m: int | None
+    collections: tuple[Hyperlink] | None
+    persons: tuple | None
+    description: str
