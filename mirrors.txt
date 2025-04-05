@@ -2,9 +2,7 @@ hdrezka.club
 hdrezka.me
 
 cloudflare:
-rezka.ag
 hdrezka.tv
-hdrezka.co
 hdrezka.ink
 hdrezka.buzz
 hdrezka.loan
@@ -17,5 +15,8 @@ hdrezka.today
 hdrezka.win
 hdrezka.tips
 hdrezka.vip
-hdrezka.gift
 hdrezka.solutions
+
+restricted:
+rezka.ag
+hdrezka.co
