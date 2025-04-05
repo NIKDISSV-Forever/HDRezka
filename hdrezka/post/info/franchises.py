@@ -5,8 +5,8 @@ from typing import NamedTuple
 
 from bs4 import Tag, BeautifulSoup
 
-from .._utils import hyperlink, get_any_int, poster_and_soup
 from .fields import Hyperlink
+from .._utils import hyperlink, get_any_int, poster_and_soup
 
 
 class FranchiseEntry(NamedTuple):
@@ -20,13 +20,15 @@ class FranchiseInfo:
     """ Franchise information class """
     __slots__ = ('url', '_entries', '_keys', '_current', '_poster')
 
-    def __init__(self, url: str = None, soup: BeautifulSoup | Tag = None):
+    def __init__(self, url: str | None = None, soup: BeautifulSoup | Tag | None = None):
         """await needed"""
-        self._entries = {}
-        self._keys = ()
-        self._poster = self._current = None
+        self._entries: dict[int, FranchiseEntry] = {}
+        self._keys: tuple[int, ...] = ()
+        self._poster: str | None = None
+        self._current: int | None = None
         self.url = url
-        self._setup_from_soup(soup)
+        if soup is not None:
+            self._setup_from_soup(soup)
 
     def __await__(self):
         if not (ps := poster_and_soup(self.url)):
@@ -65,8 +67,8 @@ class FranchiseInfo:
         """Next position"""
         return None if self._current == len(self.entries) - 1 else self.entries[self._current + 1]
 
-    def _setup_from_soup(self, soup: BeautifulSoup | Tag = None):
-        content = soup.find_all(class_='b-post__partcontent_item')[::-1]
+    def _setup_from_soup(self, soup: BeautifulSoup | Tag):
+        content = soup.select('.b-post__partcontent_item')[::-1]
         entries = {}
         for entry in content:
             n = int(entry.find(class_='num').text.strip())

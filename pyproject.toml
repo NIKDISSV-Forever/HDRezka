@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hdrezka"
-version = "3.4.0"
+version = "4.0.0"
 description = "HDRezka Python API"
 authors = ["nikdissv <nikdissv@proton.me>"]
 readme = "README.md"
@@ -43,6 +43,7 @@ lxml = { markers = "python_version < '3.14'", version = "^5.3.1" }
 pdoc3 = "^0.11.6"
 python-dotenv = "^1.1.0"
 twine = "^6.1.0"
+mypy = "^1.15.0"
 
 [build-system]
 requires = ["poetry-core"]

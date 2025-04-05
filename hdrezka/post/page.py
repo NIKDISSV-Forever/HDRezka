@@ -1,48 +1,15 @@
 """Any HDRezka page"""
-__all__ = ('Page', 'PageNumber', 'InlineItem', 'InlineInfo')
+__all__ = ('Page',)
 
-from types import EllipsisType
-from typing import Iterable, TypeVar, NamedTuple
+from typing import Iterable
 
 from bs4 import BeautifulSoup
 
+from .inline import *
 from .._bs4 import BUILDER
 from ..api.http import get_response
 from ..errors import EmptyPage
-from ..stream.player import *
 from ..url import Request
-
-T = TypeVar('T')
-PageNumber = TypeVar('PageNumber', int, slice, Iterable[int])
-
-
-def _range_from_slice(obj: slice | T) -> range | T:
-    if isinstance(obj, slice):
-        return range(*[i for i in (obj.start, obj.stop, obj.step) if i is not None])
-    return obj
-
-
-class InlineInfo(NamedTuple):
-    """Info about inline item (bottom)"""
-    year: int
-    year_final: int | EllipsisType | None
-    'If the film is equal to None, if ongoing, equal `...`'
-    country: str
-    genre: str
-
-
-class InlineItem(NamedTuple):
-    """Content Inline Item view"""
-    url: str
-    name: str
-    info: InlineInfo
-    poster: str
-    'Image url'
-
-    @property
-    async def player(self):
-        """Return a Player Instance"""
-        return await Player(self.url)
 
 
 class Page:
@@ -76,15 +43,15 @@ class Page:
 
     @staticmethod
     def _inline_info(years: str, country: str, genre: str):
-        year, *final = years.split('-')
-        if final:
-            final, = final
+        year, *finals = years.split('-')
+        if finals:
+            final, = finals
             year_final = ... if final.strip() == '...' else int(final)
         else:
             year_final = None
         return InlineInfo(int(year), year_final, country.strip(), genre.strip())
 
-    async def get_page(self, page: PageNumber) -> list[InlineItem]:
+    async def get_page(self, page: int | slice | Iterable[int]) -> list[InlineItem]:
         """
         Get items from pages range.
         None for all elements of all pages

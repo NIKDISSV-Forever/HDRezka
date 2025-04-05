@@ -10,13 +10,13 @@ from ..info.person import Person
 from ..urls import Quality
 
 
-def get_post_info(soup: BeautifulSoup, *, url: str = None) -> PostInfo:
+def get_post_info(soup: BeautifulSoup, *, url: str | None = None) -> PostInfo:
     """Parse post info table from page soup"""
     if url is None:
-        url = soup.find('meta', property='og:video').attrs.get('content', '')
+        url = attr(soup.find('meta', property='og:video'), 'content', default='')
     title = text(soup.find('h1', itemprop='name'))
     tables = {i.find('h2').next_element.text: i.select_one('td:not(:has(h2))') for i in soup.select('tr:has(td>h2)')}
-    get = lambda k: tables.get(k, empty_tag)
+    get = lambda _k: tables.get(_k, empty_tag)
     ratings = {}
     for span in get('Рейтинги').select('span'):
         if a := span.find('a'):
@@ -43,15 +43,14 @@ def get_post_info(soup: BeautifulSoup, *, url: str = None) -> PostInfo:
     return PostInfo(
         title=title,
         orig_title=text(soup.find(itemprop='alternativeHeadline'), title),
-        poster=(Poster(poster.attrs.get('href', ''), poster.find('img').attrs.get('src', ''))
-                if (poster := soup.select_one('.b-sidecover>a')) else Poster()),
+        poster=sidecover(soup),
         description=text(soup.find(class_='b-post__description_text')),
         duration=int(attr(soup.find('meta', property='og:duration'), 'content', default=0)),
         updated_time=int(attr(soup.find('meta', property='og:updated_time'), 'content', default=0)),
         ratings=ratings,
         rankings=(*(Rank(hyperlink(a), get_any_int(a.next_element.next_element))
                     for a in get('Входит в списки').select('a')),),
-        slogan=text(get('Слоган'), None).removeprefix('«').removesuffix('»'),
+        slogan=text(get('Слоган')).removeprefix('«').removesuffix('»'),
         release=Release(day=text(release_tag.next_element),
                         year=int(text(release_tag.find('a'), '0').split(' ', 1)[0])),
         country=hyperlinks(get('Страна')),

@@ -8,8 +8,7 @@ from ...._deobfuscation import clear_trash
 from ....api.http import get_response
 
 
-class VideoURL(str):
-    """str type add-on to represent video"""
+class _AwaitableStr(str):
     __slots__ = ()
 
     def __await__(self):
@@ -17,10 +16,15 @@ class VideoURL(str):
         return self.__class__((yield from get_response('GET', self, follow_redirects=False).__await__()
                                ).headers.get('Location', str(self)))
 
+
+class VideoURL(_AwaitableStr):
+    """str type add-on to represent video"""
+    __slots__ = ()
+
     @property
     def mp4(self) -> str:
         """URL without ':hls:manifest.m3u8'"""
-        return str(self.removesuffix(':hls:manifest.m3u8'))
+        return _AwaitableStr(self.removesuffix(':hls:manifest.m3u8'))
 
 
 class VideoURLs:
@@ -35,7 +39,7 @@ class VideoURLs:
             if not str and not dict raises TypeError
         """
         if isinstance(data, str):
-            self.raw_data: dict[Quality, tuple[VideoURL]] = {
+            self.raw_data: dict[Quality, tuple[VideoURL, ...]] = {
                 Quality(q): (*(VideoURL(i) for i in u.split(' or ') if i.endswith('.m3u8')),)
                 for q, u in (i.removeprefix('[').split(']', 1) for i in clear_trash(data).split(','))
             }
@@ -47,7 +51,7 @@ class VideoURLs:
         self.min = int(self.qualities[0]) if self.qualities else 1
 
     @property
-    def last_url(self) -> tuple[VideoURL]:
+    def last_url(self) -> tuple[VideoURL, ...]:
         """Best quality url"""
         return self[-1].raw_data.popitem()[1]
 

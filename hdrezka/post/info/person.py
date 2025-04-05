@@ -2,7 +2,6 @@
 import re
 from datetime import datetime
 
-from .._utils import poster_and_soup
 from .fields import Birthplace
 
 _URL_ID_RE = re.compile(r'(?:(?:$|/)person/)?(\d+)-([^-]+)-([^/]+)')
@@ -12,12 +11,12 @@ class Person:
     """Person information. Need await object to fetch all else information will extract from url only."""
     __slots__ = ('image', 'name', 'name_transcription', 'id', 'career', 'birthday', 'birthplace', 'height', 'url')
 
-    def __init__(self, url: str, *, name: str = None):
+    def __init__(self, url: str, *, name: str | None = None):
         """need await"""
         self.url = url
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
-            self.id = int(id_)
+            self.id: int | None = int(id_)
             self.name_transcription = f'{first.capitalize()} {last.capitalize()}'
             self.name = name if name is not None else self.name_transcription
         else:
@@ -25,6 +24,7 @@ class Person:
             self.id = None
 
     def __await__(self):
+        from .._utils import poster_and_soup
         if not (ps := poster_and_soup(self.url)):
             return
         soup, self.image = ps
@@ -47,7 +47,7 @@ class Person:
             case [city, state, country]:
                 self.birthplace = Birthplace(country=country, city=city, state=state)
             case [city, country]:
-                self.birthplace: Birthplace = Birthplace(country=country, city=city)
+                self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
 

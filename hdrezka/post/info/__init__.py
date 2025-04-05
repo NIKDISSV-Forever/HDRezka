@@ -4,6 +4,7 @@ __all__ = ('PostInfo',)
 from typing import NamedTuple
 
 from .fields import *
+from .person import Person
 from ...post.urls.kind.quality import Quality
 
 
@@ -15,16 +16,16 @@ class PostInfo(NamedTuple):
     duration: int
     updated_time: int
     ratings: dict[str, Rating]
-    rankings: tuple[Rank]
+    rankings: tuple[Rank, ...]
     slogan: str
     release: Release
-    country: tuple[Hyperlink]
+    country: tuple[Hyperlink, ...]
     director: str
-    genre: tuple[Hyperlink]
+    genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translator: str
-    age_rating: AgeRating | None
-    duration_m: int | None
-    collections: tuple[Hyperlink] | None
-    persons: tuple | None
+    age_rating: AgeRating
+    duration_m: int
+    collections: tuple[Hyperlink, ...]
+    persons: tuple[Person, ...]
     description: str

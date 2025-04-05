@@ -1,9 +1,7 @@
 """Subtitles module"""
 __all__ = ('SubtitleURL', 'SubtitleURLs')
 
-from typing import NamedTuple, Literal
-
-b_false = Literal[False]
+from typing import NamedTuple
 
 
 class SubtitleURL(NamedTuple):
@@ -24,7 +22,7 @@ class SubtitleURLs:
     """Class representing subtitle urls"""
     __slots__ = ('subtitles', 'has_subtitles', 'subtitle_names', 'subtitle_codes', 'default')
 
-    def __init__(self, subtitle: str | b_false, subtitle_lns: dict[str, str] | b_false, subtitle_def: str | b_false):
+    def __init__(self, subtitle: str, subtitle_lns: dict[str, str], subtitle_def: str):
         """
         :param subtitle: is subtitles exists
         :param subtitle_lns: languages {code: name, ...}
@@ -49,13 +47,13 @@ class SubtitleURLs:
         """Returns subtitle by name or code"""
         if item in self.subtitle_names:
             return self.subtitle_names[item]
-        return self.subtitle_code[item]
+        return self.subtitle_codes[item]
 
     def get(self, item: str) -> SubtitleURL | None:
         """Returns subtitle by name or code, if not found returns None"""
         if not self.has_subtitles:
             return None
-        return self.subtitle_names.get(item) or self.subtitle_code.get(item)
+        return self.subtitle_names.get(item) or self.subtitle_codes.get(item)
 
     def __getattr__(self, item: str) -> SubtitleURL:
         """Returns subtitle by code"""

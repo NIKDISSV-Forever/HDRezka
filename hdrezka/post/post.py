@@ -44,7 +44,8 @@ class Post:
         """self.type must exist"""
         init_cdn_obj = 'sof.tv.%s' % {'tv_series': 'initCDNSeriesEvents', 'movie': 'initCDNMoviesEvents'}[self.type]
         for script in soup.find_all(lambda tag: tag.name == 'script' and not tag.attrs and tag.string):
-            s = script.string
+            if not (s := script.string):
+                continue
             obj_i = s.find(init_cdn_obj)
             if obj_i != -1:
                 s = s[obj_i + len(init_cdn_obj):].split(',', 2)[1].strip()
@@ -53,9 +54,8 @@ class Post:
         return None
 
     def _get_translators(self, soup: BeautifulSoup) -> Translators:
-        translators_list = soup.find(id='translators-list')
-        arr = {child.text.strip(): int(child['data-translator_id']) for child in
-               translators_list.find_all(recursive=False) if child.text} if translators_list else {}
+        arr = {i.text.strip(): int(i['data-translator_id']) for i in el.find_all(recursive=False) if i.text
+               } if (el := soup.find(id='translators-list')) else {}
         if not arr:
             arr[self.info.translator] = self.translator_id
         return Translators(arr)

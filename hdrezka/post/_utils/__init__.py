@@ -1,5 +1,6 @@
 """Some internal utils"""
-__all__ = ('get_any_int', 'parse_help_href', 'hyperlink', 'text', 'attr', 'hyperlinks', 'empty_tag', 'poster_and_soup')
+__all__ = ('get_any_int', 'parse_help_href', 'hyperlink', 'text', 'attr', 'hyperlinks', 'empty_tag', 'poster_and_soup',
+           'sidecover')
 
 import re
 from base64 import b64decode
@@ -30,7 +31,7 @@ def attr(tag: Tag | None, name: str, *, default=None):
     return tag.attrs.get(name, default)
 
 
-def hyperlinks(tag: Tag | None) -> tuple[Hyperlink]:
+def hyperlinks(tag: Tag) -> tuple[Hyperlink, ...]:
     """Get tag hyperlinks"""
     return *map(hyperlink, tag.find_all('a')),
 
@@ -51,15 +52,22 @@ def parse_help_href(href: str) -> str:
     return unquote(b64decode(href.removeprefix('/help/').removesuffix('/')).decode())
 
 
-def hyperlink(tag: Tag) -> Hyperlink:
+def hyperlink(tag: Tag | None) -> Hyperlink:
     """Returns Hyperlink from tag"""
+    if not tag:
+        return Hyperlink()
     return Hyperlink(tag.text, tag.attrs.get('href', ''))
 
 
+def sidecover(tag: BeautifulSoup) -> Poster:
+    """Returns sidecover Poster"""
+    return (Poster(attr(poster, 'href', default=''), attr(poster.find('img'), 'src', default=''))
+            if (poster := tag.select_one('.b-sidecover>a')) else Poster())
+
+
 async def poster_and_soup(url: str) -> tuple[BeautifulSoup, Poster] | None:
+    """Returns soup and poster from url"""
     if not url:
         return None
-    response = await get_response('GET', url)
-    return (soup := BeautifulSoup(response.content, builder=BUILDER),
-            (Poster(poster.attrs.get('href', ''), poster.find('img').attrs.get('src', ''))
-             if (poster := soup.select_one('.b-sidecover>a')) else Poster()),)
+    soup = BeautifulSoup((await get_response('GET', url)).content, builder=BUILDER)
+    return soup, sidecover(soup)

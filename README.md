@@ -24,7 +24,7 @@ async def main():
     for name, id_ in player.post.translators.name_id.items():
         if 'субтитры' in name.casefold(): translator_id = id_; break
 
-    stream = await player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
+    stream = await player.get_stream(1, 1, translator_id, )  # raise AJAXFail if invalid episode or translator
     video = stream.video
     print(await video.last_url[-1])  # best quality (.m3u8) (last source)
     # source - is not a finished link, await will return the link after the redirect

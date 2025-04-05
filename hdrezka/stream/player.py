@@ -33,6 +33,10 @@ class PlayerBase:
         """
         yield from self.post.__await__()
 
+    async def get_trailer_iframe(self) -> str:
+        """Get trailer <iframe> HTML"""
+        return (await AJAX.get_trailer_video(self.post.id)).get('code', '')
+
     def _translator(self, translator_id: Optional[SupportsInt] = None) -> int:
         if translator_id is None:
             return self.post.translator_id
@@ -61,7 +65,7 @@ class PlayerSeries(PlayerBase):
                                  builder=BUILDER)
         result: defaultdict[int, tuple[int, ...]] = defaultdict(tuple)
         for i in episodes.find_all(class_='b-simple_episode__item', attrs=('data-season_id', 'data-episode_id')):
-            result[int(i.attrs.get('data-season_id'))] += int(i.attrs.get('data-episode_id')),
+            result[int(i.attrs.get('data-season_id'))] += int(i.attrs.get('data-episode_id', '0')),
         return result
 
     async def get_stream(self, season: int, episode: int, translator_id: Optional[SupportsInt] = None) -> URLs:

@@ -1,7 +1,71 @@
 # CHANGELOG
+
 ## 4.0.0
 
-...
+**Warning:** This release contains backward incompatible changes. Please carefully review the list of changes before
+updating.
+
+- ### Global Changes
+    - The internal logic for parsing content information has been reorganized to improve stability and support future
+      changes.
+    - Added a new type `post.info.fields.Hyperlink` (`NamedTuple` with fields `name: str`, `url: str`), which is now
+      used in many `PostInfo` fields instead of simple strings or tuples of strings, providing both a name and a link.
+- ### New Features
+    - **Franchises:**
+        - Added functionality to retrieve information about franchises (related content parts);
+          The field `post.Post.oter_parts_urls` used for these purposes earlier is removed.
+        - Added the `franchises` field (type `FranchiseInfo`) to the `Post` class, providing access to franchise data (
+          previous, next parts, list of all parts, franchise poster).
+        - Added related types `FranchiseInfo` and `FranchiseEntry` in `post.info.franchises`.
+    - **`post.info.Person`:**
+        - New `Person` type, reflecting information about an actor (name, photo, career, date and place of birth,
+          height).
+    - **Trailers:**
+        - Added method
+          `PlayerBase.get_trailer_iframe(self) -> str`
+          and `api.AJAX.get_trailer_video(cls, id: SupportsInt | str)`
+    - **`PostInfo`:**
+        - Added `duration` field (type `int`) – total duration in seconds, obtained from page metadata.
+        - The `persons` field is now a tuple of `Person` objects.
+- ### Backward Incompatible Changes
+    - **`api.http`:**
+        - The `login_global` function now accepts `email` instead of `name` as the first argument for login.
+    - **`post.info.fields`:**
+        - Removed the `Duration` type. Use `PostInfo.duration` (seconds) or `PostInfo.duration_m` (minutes).
+        - Removed the `Place` type. Use the new `Rank` type.
+        - Added the `Rank` type (`NamedTuple` with fields `name: Hyperlink`, `rank: int`), replacing `Place` for
+          representing positions in lists/rankings.
+        - `Rating` type:
+            - The `service` field is now of type `Hyperlink` (contains the name and URL of the rating service) instead
+              of `str`.
+            - The `url` field has been removed (the information is now contained in `service.url`).
+    - **`post.info.PostInfo`:**
+        - The `rating` field has been renamed to `ratings`. The value type `dict[str, Rating]` remains the same, but the
+          internal structure of `Rating` has changed (see above).
+        - The `places` field has been renamed to `rankings` and now returns a tuple of `Rank` objects (
+          `tuple[Rank]`).
+        - The `duration` field (previously of type `Duration`) has been renamed to `duration_m` and now returns an
+          `int` (duration in minutes, as displayed in the table on the site).
+        - The `duration_s` field has been removed. Use the new `duration` field (total duration in seconds).
+        - The `from_` field has been renamed to `collections` and now returns a tuple of `Hyperlink` objects (
+          `tuple[Hyperlink]`).
+        - The `characters` field has been renamed to `persons` and now returns a tuple of `Hyperlink` objects (
+          `tuple[Hyperlink]`).
+        - The `country` field now returns a tuple of `Hyperlink` objects (`tuple[Hyperlink, ...]`).
+        - The `genre` field now returns a tuple of `Hyperlink` objects (`tuple[Hyperlink, ...]`).
+        - Removed the `fields` field.
+    - **`post.Post`:**
+        - Removed the `other_parts_urls` field. Use the new `franchises` field to get information about other parts.
+    - **`api.AJAX`:**
+        - All arguments `id` are renamed` id_`.
+    - Some classes and functions that are no longer used are removed.
+- ### Improvements
+    - **`post.urls.kind.video.VideoURL`**:
+        - Asynchronous retrieval of video URL (`await video_url`) has become more reliable: it now returns the original
+          URL if the server did not provide a redirect URL.
+    - Type and bug fixes.
+    - Minor decomposition of code.
+    - Other minor improvements and optimizations.
 
 ## 3.3.1
 

@@ -6,8 +6,8 @@ from typing import NamedTuple
 
 class Hyperlink(NamedTuple):
     """Hyperlink representation"""
-    name: str
-    url: str
+    name: str = ''
+    url: str = ''
 
     def __str__(self):
         return self.name
@@ -51,6 +51,6 @@ class Poster(NamedTuple):
 class Birthplace(NamedTuple):
     """Birthplace information"""
     country: str
-    city: str = None
-    subcountry: str = None
-    state: str = None
+    city: str | None = None
+    subcountry: str | None = None
+    state: str | None = None
