@@ -57,7 +57,7 @@ def get_post_info(soup: BeautifulSoup, *, url: str | None = None) -> PostInfo:
         director=text(get('Режиссер')),
         genre=hyperlinks(get('Жанр')),
         quality=Quality(t) if (t := text(get('В качестве'))) else None,
-        translator=text(get('В переводе')),
+        translators=(*map(str.strip, text(get('В переводе')).split(',')),),
         age_rating=(AgeRating(0) if (span := get('Возраст').find('span')) is None else
                     AgeRating(get_any_int(span.text), text(span.next_element.next_element))),
         duration_m=int(text(get('Время')).split(' ', 1)[0]),

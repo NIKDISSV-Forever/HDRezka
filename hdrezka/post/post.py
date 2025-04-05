@@ -57,7 +57,7 @@ class Post:
         arr = {i.text.strip(): int(i['data-translator_id']) for i in el.find_all(recursive=False) if i.text
                } if (el := soup.find(id='translators-list')) else {}
         if not arr:
-            arr[self.info.translator] = self.translator_id
+            arr[self.info.translators[0]] = self.translator_id
         return Translators(arr)
 
     def __repr__(self):

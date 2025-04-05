@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 4.0.1
+
+- Bug fixed: `translator: str` replaced with `translators: tuple[str, ...]` in `post.Post.info`.
+  This is not a one translator but enumeration. It is recommended to use `post.Post.translators` instead.
+
 ## 4.0.0
 
 **Warning:** This release contains backward incompatible changes. Please carefully review the list of changes before

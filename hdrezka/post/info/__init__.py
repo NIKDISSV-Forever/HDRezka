@@ -23,7 +23,7 @@ class PostInfo(NamedTuple):
     director: str
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
-    translator: str
+    translators: tuple[str, ...]
     age_rating: AgeRating
     duration_m: int
     collections: tuple[Hyperlink, ...]
