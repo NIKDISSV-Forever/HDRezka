@@ -32,6 +32,7 @@ class PlayerBase:
         Do not call twice!
         """
         yield from self.post.__await__()
+        return self
 
     async def get_trailer_iframe(self) -> str:
         """Get trailer <iframe> HTML"""

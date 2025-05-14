@@ -4,7 +4,7 @@ __all__ = ('PostInfo',)
 from typing import NamedTuple
 
 from .fields import *
-from .person import Person
+from .person import *
 from ...post.urls.kind.quality import Quality
 
 
@@ -20,7 +20,7 @@ class PostInfo(NamedTuple):
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]

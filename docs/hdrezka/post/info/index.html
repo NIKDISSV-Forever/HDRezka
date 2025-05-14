@@ -64,7 +64,7 @@ el.replaceWith(d);
 <dl>
 <dt id="hdrezka.post.info.PostInfo"><code class="flex name class">
 <span>class <span class="ident">PostInfo</span></span>
-<span>(</span><span>title: str,<br>orig_title: str,<br>poster: <a title="hdrezka.post.info.fields.Poster" href="fields.html#hdrezka.post.info.fields.Poster">Poster</a>,<br>duration: int,<br>updated_time: int,<br>ratings: dict[str, <a title="hdrezka.post.info.fields.Rating" href="fields.html#hdrezka.post.info.fields.Rating">Rating</a>],<br>rankings: tuple[<a title="hdrezka.post.info.fields.Rank" href="fields.html#hdrezka.post.info.fields.Rank">Rank</a>, ...],<br>slogan: str,<br>release: <a title="hdrezka.post.info.fields.Release" href="fields.html#hdrezka.post.info.fields.Release">Release</a>,<br>country: tuple[<a title="hdrezka.post.info.fields.Hyperlink" href="fields.html#hdrezka.post.info.fields.Hyperlink">Hyperlink</a>, ...],<br>director: str,<br>genre: tuple[<a title="hdrezka.post.info.fields.Hyperlink" href="fields.html#hdrezka.post.info.fields.Hyperlink">Hyperlink</a>, ...],<br>quality: <a title="hdrezka.post.urls.kind.quality.Quality" href="../urls/kind/quality.html#hdrezka.post.urls.kind.quality.Quality">Quality</a> | None,<br>translators: tuple[str, ...],<br>age_rating: <a title="hdrezka.post.info.fields.AgeRating" href="fields.html#hdrezka.post.info.fields.AgeRating">AgeRating</a>,<br>duration_m: int,<br>collections: tuple[<a title="hdrezka.post.info.fields.Hyperlink" href="fields.html#hdrezka.post.info.fields.Hyperlink">Hyperlink</a>, ...],<br>persons: tuple[<a title="hdrezka.post.info.person.Person" href="person.html#hdrezka.post.info.person.Person">Person</a>, ...],<br>description: str)</span>
+<span>(</span><span>title: str,<br>orig_title: str,<br>poster: <a title="hdrezka.post.info.fields.Poster" href="fields.html#hdrezka.post.info.fields.Poster">Poster</a>,<br>duration: int,<br>updated_time: int,<br>ratings: dict[str, <a title="hdrezka.post.info.fields.Rating" href="fields.html#hdrezka.post.info.fields.Rating">Rating</a>],<br>rankings: tuple[<a title="hdrezka.post.info.fields.Rank" href="fields.html#hdrezka.post.info.fields.Rank">Rank</a>, ...],<br>slogan: str,<br>release: <a title="hdrezka.post.info.fields.Release" href="fields.html#hdrezka.post.info.fields.Release">Release</a>,<br>country: tuple[<a title="hdrezka.post.info.fields.Hyperlink" href="fields.html#hdrezka.post.info.fields.Hyperlink">Hyperlink</a>, ...],<br>directors: tuple[<a title="hdrezka.post.info.person.Person" href="person.html#hdrezka.post.info.person.Person">Person</a>, ...],<br>genre: tuple[<a title="hdrezka.post.info.fields.Hyperlink" href="fields.html#hdrezka.post.info.fields.Hyperlink">Hyperlink</a>, ...],<br>quality: <a title="hdrezka.post.urls.kind.quality.Quality" href="../urls/kind/quality.html#hdrezka.post.urls.kind.quality.Quality">Quality</a> | None,<br>translators: tuple[str, ...],<br>age_rating: <a title="hdrezka.post.info.fields.AgeRating" href="fields.html#hdrezka.post.info.fields.AgeRating">AgeRating</a>,<br>duration_m: int,<br>collections: tuple[<a title="hdrezka.post.info.fields.Hyperlink" href="fields.html#hdrezka.post.info.fields.Hyperlink">Hyperlink</a>, ...],<br>persons: tuple[<a title="hdrezka.post.info.person.Person" href="person.html#hdrezka.post.info.person.Person">Person</a>, ...],<br>description: str)</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -83,7 +83,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -118,7 +118,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -148,7 +148,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -178,7 +178,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -208,7 +208,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -220,7 +220,7 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>Alias for field number 18</p></div>
 </dd>
-<dt id="hdrezka.post.info.PostInfo.director"><code class="name">var <span class="ident">director</span> : str</code></dt>
+<dt id="hdrezka.post.info.PostInfo.directors"><code class="name">var <span class="ident">directors</span> : tuple[<a title="hdrezka.post.info.person.Person" href="person.html#hdrezka.post.info.person.Person">Person</a>, ...]</code></dt>
 <dd>
 <details class="source">
 <summary>
@@ -238,7 +238,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -268,7 +268,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -298,7 +298,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -328,7 +328,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -358,7 +358,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -388,7 +388,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -418,7 +418,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -448,7 +448,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -478,7 +478,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -508,7 +508,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -538,7 +538,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -568,7 +568,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -598,7 +598,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -628,7 +628,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -658,7 +658,7 @@ el.replaceWith(d);
     slogan: str
     release: Release
     country: tuple[Hyperlink, ...]
-    director: str
+    directors: tuple[Person, ...]
     genre: tuple[Hyperlink, ...]
     quality: Quality | None
     translators: tuple[str, ...]
@@ -701,7 +701,7 @@ el.replaceWith(d);
 <li><code><a title="hdrezka.post.info.PostInfo.collections" href="#hdrezka.post.info.PostInfo.collections">collections</a></code></li>
 <li><code><a title="hdrezka.post.info.PostInfo.country" href="#hdrezka.post.info.PostInfo.country">country</a></code></li>
 <li><code><a title="hdrezka.post.info.PostInfo.description" href="#hdrezka.post.info.PostInfo.description">description</a></code></li>
-<li><code><a title="hdrezka.post.info.PostInfo.director" href="#hdrezka.post.info.PostInfo.director">director</a></code></li>
+<li><code><a title="hdrezka.post.info.PostInfo.directors" href="#hdrezka.post.info.PostInfo.directors">directors</a></code></li>
 <li><code><a title="hdrezka.post.info.PostInfo.duration" href="#hdrezka.post.info.PostInfo.duration">duration</a></code></li>
 <li><code><a title="hdrezka.post.info.PostInfo.duration_m" href="#hdrezka.post.info.PostInfo.duration_m">duration_m</a></code></li>
 <li><code><a title="hdrezka.post.info.PostInfo.genre" href="#hdrezka.post.info.PostInfo.genre">genre</a></code></li>

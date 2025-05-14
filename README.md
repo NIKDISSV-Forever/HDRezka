@@ -73,7 +73,7 @@ hdrezka.api.http.DEFAULT_CLIENT = httpx.AsyncClient(
 Create an account on HDRezka.
 
 If registration is temporarily disabled, try logging in via social media and resetting your password (so that you have
-one at all).
+one completely).
 
 Call `hdrezka.api.http.login_global` - this function will send a request to `hdrezka.api.http.Request.REDIRECT_URL`,  
 which will redirect to an active mirror. The function will then store the retrieved mirror globally in `Request.HOST`  

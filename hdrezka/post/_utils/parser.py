@@ -54,7 +54,7 @@ def get_post_info(soup: BeautifulSoup, *, url: str | None = None) -> PostInfo:
         release=Release(day=text(release_tag.next_element),
                         year=int(text(release_tag.find('a'), '0').split(' ', 1)[0])),
         country=hyperlinks(get('Страна')),
-        director=text(get('Режиссер')),
+        directors=(*(Person(a.attrs.get('href', ''), name=a.text) for a in get('Режиссер').select('a')),),
         genre=hyperlinks(get('Жанр')),
         quality=Quality(t) if (t := text(get('В качестве'))) else None,
         translators=(*map(str.strip, text(get('В переводе')).split(',')),),

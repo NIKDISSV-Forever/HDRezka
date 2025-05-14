@@ -31,11 +31,12 @@ class FranchiseInfo:
             self._setup_from_soup(soup)
 
     def __await__(self):
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self._poster = ps
         if not self.entries:
             self._setup_from_soup(soup)
+        return self
 
     @property
     def entries(self) -> dict[int, FranchiseEntry]:

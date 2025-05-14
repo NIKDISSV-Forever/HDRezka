@@ -1,9 +1,31 @@
 # CHANGELOG
 
+## 4.0.2
+
+**Warning**: If your code accesses `post.Post.info.director`, it will break after this update.
+Please update your code to use `post.Post.directors` and adjust any logic accordingly.
+
+- Bug fixed: `director: str` replaced with `directors: tuple[Person, ...]` in `post.Post.info`.
+  Previously, this field contained a comma-separated string, but it actually represents multiple directors with
+  additional metadata available.
+  Now it's parsed into a tuple of `Person` instances, consistent with similar usage in `persons`.
+  It is recommended to use `post.Post.directors` instead.
+
+-  ### `__await__`
+    - Now the `__await__` method in `post.post.Post`, `post.info.`(`franchises.FranchiseInfo`, `person.Person`) and
+      `stream.player.Player` returns `self`.
+- Minor optimizations
+
 ## 4.0.1
 
+**Warning**: If your code accesses `post.Post.info.translator`, it will break after this update.
+Please update your code to use `post.Post.info.translators` and adjust any logic accordingly.
+
 - Bug fixed: `translator: str` replaced with `translators: tuple[str, ...]` in `post.Post.info`.
-  This is not a one translator but enumeration. It is recommended to use `post.Post.translators` instead.
+  This field was previously interpreted as a single translator name, but it actually represents multiple translators in
+  a comma-separated string.
+  Now it's correctly parsed into a tuple of strings.
+  It is recommended to use `post.Post.translators` (`Translators` type) instead.
 
 ## 4.0.0
 

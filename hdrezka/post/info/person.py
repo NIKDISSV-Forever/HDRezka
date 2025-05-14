@@ -1,4 +1,6 @@
 """Person information module"""
+__all__ = ('Person',)
+
 import re
 from datetime import datetime
 
@@ -14,19 +16,21 @@ class Person:
     def __init__(self, url: str, *, name: str | None = None):
         """need await"""
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f'{first.capitalize()} {last.capitalize()}'
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = '' if name is None else name
+            self.name_transcription = ''
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one('[itemprop="name"]'):
             self.name = name.text
@@ -36,9 +40,9 @@ class Person:
         self.career = *(i.text for i in table.select('[itemprop="jobTitle"]')),
         date = table.select_one('[itemprop="birthDate"]').attrs.get('datetime')
         self.birthday = datetime.strptime(date, '%Y-%m-%d').date()
-        sel = table.select('td.l + td:not(:has(*))')
+        sel = table.select('td.l+td:not(:has(*))')
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix('м')) if height else None
         match [i.strip() for i in birthplace.text.split(',')]:
@@ -50,6 +54,7 @@ class Person:
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f"Person({f'{self.url!r}, ' if self.url else ''}{f'name={self.name!r}' if self.name else ''})"

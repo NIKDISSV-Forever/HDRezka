@@ -1,6 +1,6 @@
 """Some internal utils"""
-__all__ = ('get_any_int', 'parse_help_href', 'hyperlink', 'text', 'attr', 'hyperlinks', 'empty_tag', 'poster_and_soup',
-           'sidecover')
+__all__ = ('get_any_int', 'parse_help_href', 'hyperlink', 'text', 'attr',
+           'hyperlinks', 'empty_tag', 'poster_and_soup', 'sidecover')
 
 import re
 from base64 import b64decode
@@ -15,6 +15,8 @@ from ...api.http import get_response
 
 empty_tag = BeautifulSoup('<div></div>', builder=BUILDER).find('div')
 _find_any_digit = re.compile(r'\d+').findall
+_empty_href = Hyperlink()
+_empty_poster = Poster()
 
 
 def text(tag: Tag | None, default: Any = ''):
@@ -55,14 +57,14 @@ def parse_help_href(href: str) -> str:
 def hyperlink(tag: Tag | None) -> Hyperlink:
     """Returns Hyperlink from tag"""
     if not tag:
-        return Hyperlink()
+        return _empty_href
     return Hyperlink(tag.text, tag.attrs.get('href', ''))
 
 
 def sidecover(tag: BeautifulSoup) -> Poster:
     """Returns sidecover Poster"""
-    return (Poster(attr(poster, 'href', default=''), attr(poster.find('img'), 'src', default=''))
-            if (poster := tag.select_one('.b-sidecover>a')) else Poster())
+    return (Poster(attr(poster.find('a'), 'href', default=''), attr(poster.find('img'), 'src', default=''))
+            if (poster := tag.find(class_='b-sidecover')) else _empty_poster)
 
 
 async def poster_and_soup(url: str) -> tuple[BeautifulSoup, Poster] | None:

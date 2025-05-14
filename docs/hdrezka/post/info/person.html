@@ -63,19 +63,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -85,9 +87,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -99,6 +101,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -120,19 +123,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -142,9 +147,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -156,6 +161,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -175,19 +181,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -197,9 +205,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -211,6 +219,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -230,19 +239,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -252,9 +263,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -266,6 +277,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -285,19 +297,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -307,9 +321,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -321,6 +335,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -340,19 +355,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -362,9 +379,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -376,6 +393,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -395,19 +413,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -417,9 +437,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -431,6 +451,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -450,19 +471,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -472,9 +495,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -486,6 +509,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -505,19 +529,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -527,9 +553,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -541,6 +567,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>
@@ -560,19 +587,21 @@ el.replaceWith(d);
     def __init__(self, url: str, *, name: str | None = None):
         &#34;&#34;&#34;need await&#34;&#34;&#34;
         self.url = url
+        self.height: float | None = None
+        self.birthplace: Birthplace | None = None
         if m := _URL_ID_RE.search(url):
             id_, first, last = m.groups()
             self.id: int | None = int(id_)
             self.name_transcription = f&#39;{first.capitalize()} {last.capitalize()}&#39;
-            self.name = name if name is not None else self.name_transcription
         else:
-            self.name = self.name_transcription = &#39;&#39; if name is None else name
+            self.name_transcription = &#39;&#39;
             self.id = None
+        self.name = self.name_transcription if name is None else name
 
     def __await__(self):
         from .._utils import poster_and_soup
-        if not (ps := poster_and_soup(self.url)):
-            return
+        if not (ps := (yield from poster_and_soup(self.url).__await__())):
+            return self
         soup, self.image = ps
         if name := soup.select_one(&#39;[itemprop=&#34;name&#34;]&#39;):
             self.name = name.text
@@ -582,9 +611,9 @@ el.replaceWith(d);
         self.career = *(i.text for i in table.select(&#39;[itemprop=&#34;jobTitle&#34;]&#39;)),
         date = table.select_one(&#39;[itemprop=&#34;birthDate&#34;]&#39;).attrs.get(&#39;datetime&#39;)
         self.birthday = datetime.strptime(date, &#39;%Y-%m-%d&#39;).date()
-        sel = table.select(&#39;td.l + td:not(:has(*))&#39;)
+        sel = table.select(&#39;td.l+td:not(:has(*))&#39;)
         if not sel:
-            return
+            return self
         birthplace, *height = sel
         self.height = float(height[0].text.strip().removesuffix(&#39;м&#39;)) if height else None
         match [i.strip() for i in birthplace.text.split(&#39;,&#39;)]:
@@ -596,6 +625,7 @@ el.replaceWith(d);
                 self.birthplace = Birthplace(country=country, city=city)
             case [country]:
                 self.birthplace = Birthplace(country=country)
+        return self
 
     def __repr__(self):
         return f&#34;Person({f&#39;{self.url!r}, &#39; if self.url else &#39;&#39;}{f&#39;name={self.name!r}&#39; if self.name else &#39;&#39;})&#34;</code></pre>

@@ -1,4 +1,5 @@
 """Translators definition module"""
+__all__ = ('Translators',)
 
 
 class Translators:

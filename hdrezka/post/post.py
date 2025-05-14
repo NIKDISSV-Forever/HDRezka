@@ -39,6 +39,7 @@ class Post:
         self.name = soup.find(class_='b-post__title').text.strip()
         franchises_url = soup.find(class_='b-post__franchise_link_title')
         self.franchises = FranchiseInfo(url=franchises_url and franchises_url.attrs.get('href'), soup=soup)
+        return self
 
     def _get_translator_id(self, soup: BeautifulSoup) -> int | None:
         """self.type must exist"""
