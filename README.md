@@ -52,7 +52,7 @@ Request.HOST = 'https://hdrezka.club/'
 
 # Proxies
 
-> pip install httpx[socks]
+> pip install hdrezka[socks]
 >
 > tor
 
@@ -63,7 +63,6 @@ import hdrezka.api.http
 
 hdrezka.api.http.DEFAULT_CLIENT = httpx.AsyncClient(
     headers={'User-Agent': 'Mozilla/5.0'},
-    follow_redirects=True,
     proxy='socks5://localhost:9050'
 )
 ```

@@ -1,14 +1,10 @@
-[tool.poetry]
+[project]
 name = "hdrezka"
-version = "4.0.2"
+version = "4.0.3"
 description = "HDRezka Python API"
-authors = ["nikdissv <nikdissv@proton.me>"]
+authors = [{ name = "Nikita Denissov", email = "nikdissv@proton.me" }]
+license = { file = "LICENSE" }
 readme = "README.md"
-license = "MIT"
-homepage = "https://github.com/NIKDISSV-Forever/HDRezka"
-repository = "https://github.com/NIKDISSV-Forever/HDRezka"
-documentation = "https://nikdissv-forever.github.io/HDRezka/hdrezka"
-keywords = ["HDRezka", "watch online", "api", "stream", "m3u8", "hls"]
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -32,19 +28,30 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Multimedia :: Video"
 ]
+keywords = ["HDRezka", "watch online", "api", "stream", "m3u8", "hls"]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-httpx = "^0.28.1"
-beautifulsoup4 = "^4.13.4"
-lxml = { markers = "python_version < '3.14'", version = "^5.4.0" }
+requires-python = ">=3.10"
+dependencies = [
+    "httpx (>=0.28.1,<0.29.0)",
+    "beautifulsoup4 (>=4.13.4,<5.0.0)",
+    "lxml (>=6.0.0,<7.0.0); python_version < '3.14'"
+]
+
+[project.urls]
+homepage = "https://github.com/NIKDISSV-Forever/HDRezka"
+repository = "https://github.com/NIKDISSV-Forever/HDRezka"
+documentation = "https://nikdissv-forever.github.io/HDRezka/hdrezka"
+"Bug Tracker" = "https://github.com/NIKDISSV-Forever/HDRezka/issues"
+
+[project.optional-dependencies]
+socks = ["httpx[socks] (>=0.28.1,<0.29.0)"]
 
 [tool.poetry.group.dev.dependencies]
 pdoc3 = "^0.11.6"
-python-dotenv = "^1.1.0"
+python-dotenv = "^1.1.1"
 twine = "^6.1.0"
-mypy = "^1.15.0"
+mypy = "^1.17.0"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

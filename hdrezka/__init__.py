@@ -25,7 +25,7 @@ async def main():
     for name, id_ in player.post.translators.name_id.items():
         if 'субтитры' in name.casefold(): translator_id = id_; break
 
-    stream = await player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
+    stream = await player.get_stream(1, 1, translator_id, )  # raise AJAXFail if invalid episode or translator
     video = stream.video
     print(await video.last_url[-1])  # best quality (.m3u8) (last source)
     # source - is not a finished link, await will return the link after the redirect
@@ -53,7 +53,7 @@ Request.HOST = 'https://hdrezka.club/'
 
 # Proxies
 
-> pip install httpx[socks]
+> pip install hdrezka[socks]
 >
 > tor
 
@@ -64,7 +64,6 @@ import hdrezka.api.http
 
 hdrezka.api.http.DEFAULT_CLIENT = httpx.AsyncClient(
     headers={'User-Agent': 'Mozilla/5.0'},
-    follow_redirects=True,
     proxy='socks5://localhost:9050'
 )
 ```
@@ -74,7 +73,7 @@ hdrezka.api.http.DEFAULT_CLIENT = httpx.AsyncClient(
 Create an account on HDRezka.
 
 If registration is temporarily disabled, try logging in via social media and resetting your password (so that you have
-one at all).
+one completely).
 
 Call `hdrezka.api.http.login_global` - this function will send a request to `hdrezka.api.http.Request.REDIRECT_URL`,
 which will redirect to an active mirror. The function will then store the retrieved mirror globally in `Request.HOST`

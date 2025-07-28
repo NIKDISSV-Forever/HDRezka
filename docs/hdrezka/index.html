@@ -57,7 +57,7 @@ async def main():
     for name, id_ in player.post.translators.name_id.items():
         if 'субтитры' in name.casefold(): translator_id = id_; break
 
-    stream = await player.get_stream(1, 1, translator_id)  # raise AJAXFail if invalid episode or translator
+    stream = await player.get_stream(1, 1, translator_id, )  # raise AJAXFail if invalid episode or translator
     video = stream.video
     print(await video.last_url[-1])  # best quality (.m3u8) (last source)
     # source - is not a finished link, await will return the link after the redirect
@@ -81,7 +81,7 @@ and may be inconsistent. See <a href="https://github.com/NIKDISSV-Forever/HDRezk
 </blockquote>
 <h1 id="proxies">Proxies</h1>
 <blockquote>
-<p>pip install httpx[socks]</p>
+<p>pip install hdrezka[socks]</p>
 <p>tor</p>
 </blockquote>
 <pre><code class="language-python">import httpx
@@ -90,14 +90,13 @@ import hdrezka.api.http
 
 hdrezka.api.http.DEFAULT_CLIENT = httpx.AsyncClient(
     headers={'User-Agent': 'Mozilla/5.0'},
-    follow_redirects=True,
     proxy='socks5://localhost:9050'
 )
 </code></pre>
 <h2 id="log-in-recommended-for-now">Log In (recommended for now)</h2>
 <p>Create an account on HDRezka.</p>
 <p>If registration is temporarily disabled, try logging in via social media and resetting your password (so that you have
-one at all).</p>
+one completely).</p>
 <p>Call <code><a title="hdrezka.api.http.login_global" href="api/http.html#hdrezka.api.http.login_global">login_global()</a></code> - this function will send a request to <code>hdrezka.api.http.Request.REDIRECT_URL</code>,
 which will redirect to an active mirror. The function will then store the retrieved mirror globally in <code>Request.HOST</code>
 and save the cookies in <code>hdrezka.api.http.DEFAULT_CLIENT</code>.</p>
